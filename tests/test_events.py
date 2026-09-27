@@ -3,6 +3,7 @@ import json
 from ahmad.core.events import DecisionEvent, EventType
 from ahmad.core.types import Mode, Scope
 from ahmad.governance.policy import PolicyEngine
+from ahmad.governance.policy import MOCK_TOOL_BINDING_ID
 
 
 def test_decision_event_from_decision():
@@ -12,11 +13,13 @@ def test_decision_event_from_decision():
         action="demo:mock",
         mode=Mode.GENERAL,
         scope=Scope.PERSONAL,
+        tool_binding_id=MOCK_TOOL_BINDING_ID,
     )
 
     event = DecisionEvent.from_decision(
         decision,
         event_id="event-001",
+        request_id="request-001",
         timestamp_ms=1234567890,
     )
 
@@ -42,6 +45,7 @@ def test_decision_event_is_immutable():
     event = DecisionEvent.from_decision(
         decision,
         event_id="event-002",
+        request_id="request-002",
         timestamp_ms=1000,
     )
 
@@ -65,13 +69,15 @@ def test_decision_event_json_is_deterministically_serialized():
     event = DecisionEvent.from_decision(
         decision,
         event_id="event-003",
+        request_id="request-003",
         timestamp_ms=2000,
     )
 
     expected = (
         '{"action":"test","allowed":false,"event_id":"event-003",'
         '"event_type":"decision","mode":"security",'
-        '"reason":"default deny","scope":"authorized",'
+        '"reason":"default deny","request_id":"request-003",'
+        '"scope":"authorized",'
         '"timestamp_ms":2000}'
     )
 

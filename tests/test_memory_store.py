@@ -18,6 +18,7 @@ def make_event(action: str, event_id: str) -> DecisionEvent:
     return DecisionEvent.from_decision(
         decision,
         event_id=event_id,
+        request_id=f"request-{event_id}",
         timestamp_ms=1000,
     )
 

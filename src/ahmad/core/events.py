@@ -20,6 +20,9 @@ class DecisionEvent:
     scope: str
     allowed: bool
     reason: str
+    request_id: str
+    source: str | None = None
+    tool_binding_id: str | None = None
 
     @classmethod
     def from_decision(
@@ -27,6 +30,8 @@ class DecisionEvent:
         decision: Decision,
         *,
         event_id: str,
+        request_id: str,
+        source: str | None = None,
         timestamp_ms: int | None = None,
     ) -> "DecisionEvent":
         return cls(
@@ -42,11 +47,18 @@ class DecisionEvent:
             scope=decision.scope.value,
             allowed=decision.allowed,
             reason=decision.reason,
+            request_id=request_id,
+            source=decision.source if source is None else source,
+            tool_binding_id=decision.tool_binding_id,
         )
 
     def to_dict(self) -> dict:
         data = asdict(self)
         data["event_type"] = self.event_type.value
+        if self.source is None:
+            data.pop("source")
+        if self.tool_binding_id is None:
+            data.pop("tool_binding_id")
         return data
 
     def to_json(self) -> str:

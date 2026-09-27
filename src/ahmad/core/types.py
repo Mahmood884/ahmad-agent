@@ -17,6 +17,7 @@ class Scope(str, Enum):
 class AgentRequest:
     text: str
     scope: Scope = Scope.PERSONAL
+    request_id: str | None = None
 
 
 @dataclass(frozen=True)
@@ -26,3 +27,5 @@ class Decision:
     scope: Scope
     allowed: bool
     reason: str
+    source: str | None = None
+    tool_binding_id: str | None = None

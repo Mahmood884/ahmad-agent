@@ -14,8 +14,15 @@ class Scope(str, Enum):
 
 
 @dataclass(frozen=True)
+class AgentRequest:
+    text: str
+    scope: Scope = Scope.PERSONAL
+
+
+@dataclass(frozen=True)
 class Decision:
     action: str
     mode: Mode
     scope: Scope
+    allowed: bool
     reason: str

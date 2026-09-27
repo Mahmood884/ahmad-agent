@@ -1,28 +1,30 @@
-from ahmad.governance.policy import PolicyEngine
+from ahmad.core.types import Decision
+from ahmad.execution.mock_tool import MockTool, ToolResult
 
 
 class ExecutionGateway:
+    """Final execution boundary.
+
+    The gateway never expands authority.
+    Denied decisions never reach a tool.
     """
-    Final enforcement point.
 
-    No privileged operation should bypass this gateway.
-    """
+    def __init__(self) -> None:
+        self.mock_tool = MockTool()
 
-    def __init__(self, policy=None):
-        self.policy = policy or PolicyEngine()
-
-    def request(self, action: str) -> dict:
-        decision = self.policy.evaluate(action)
-
+    def execute(self, decision: Decision) -> ToolResult:
         if not decision.allowed:
-            return {
-                "executed": False,
-                "allowed": False,
-                "reason": decision.reason,
-            }
+            return ToolResult(
+                success=False,
+                tool="none",
+                output="EXECUTION_DENIED",
+            )
 
-        return {
-            "executed": False,
-            "allowed": True,
-            "reason": "Execution backend not implemented",
-        }
+        if decision.action == "demo:mock":
+            return self.mock_tool.run(decision.action)
+
+        return ToolResult(
+            success=False,
+            tool="none",
+            output="EXECUTION_DENIED",
+        )

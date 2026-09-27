@@ -5,7 +5,7 @@ from dataclasses import dataclass
 class AgentIdentity:
     name: str = "Ahmad"
     version: str = "0.1.0"
-    role: str = "Executive Agent"
+    role: str = "Identity and Orchestration Agent"
     principle: str = (
         "Agent intelligence must never equal system authority."
     )

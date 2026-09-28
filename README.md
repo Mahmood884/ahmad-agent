@@ -1,71 +1,147 @@
 # Ahmad Agent
 
-Local-first governed AI agent runtime.
+> Local-first governed AI agent runtime.
+> Agent intelligence must never equal system authority.
+
+---
+
+## What it is
+
+Ahmad is a **governance layer** for AI agents. It sits between an agent's
+intelligence (LLM) and any side effect (tool, file, shell, API). Every
+action passes through a deterministic policy engine, an execution gateway,
+and an append-only event log.
+
+This is not a chatbot. It is infrastructure.
+
+---
+
+## Core principle
+
+    Agent intelligence  !=  system authority
+
+The LLM may **propose**. Only the gateway may **execute**, and only after
+policy approval, binding verification, and durable event recording.
+
+---
 
 ## Architecture
 
-Intelligence
-→ Orchestration
-→ Governance
-→ Execution Gateway
-→ System
+    User (CLI / MCP / HTTP)
+        |
+    Agent Brain (Hermes / Claude / local LLM)
+        |
+    Provider Adapter (subprocess, HTTP, etc.)
+        |
+    Orchestration (runtime)
+        |
+    Governance (PolicyEngine, Trust, DecisionEvent)
+        |
+    Execution Gateway (admission, binding, attempt lifecycle)
+        |
+    Tools (read_file, system_info, ...)
 
-## Core Principle
+Every decision produces:
+- DecisionEvent (allowed/denied, reason, binding)
+- AttemptCreatedEvent / AttemptStartedEvent (dispatch)
+- ResultEvent (success/failure, output)
+- AttemptAmbiguousEvent (when effect status is unknown)
 
-Agent intelligence must never equal system authority.
+All events are **append-only** and replayable.
 
-## Current Version
+---
 
-0.1.0 — Foundation
+## Components
 
-## Current Components
+| Layer | Purpose | Path |
+|---|---|---|
+| Identity | Agent name, version, principle | src/ahmad/core/identity.py |
+| Runtime | Orchestration, provider requests | src/ahmad/core/runtime.py |
+| Types | Decisions, Modes, Scopes, Effects | src/ahmad/core/types.py |
+| Events | DecisionEvent, ResultEvent | src/ahmad/core/events.py |
+| Attempts | Attempt lifecycle events | src/ahmad/core/attempts.py |
+| Resolutions | Ambiguity resolution | src/ahmad/core/resolutions.py |
+| Policy | PolicyEngine, binding-aware rules | src/ahmad/governance/policy.py |
+| Gateway | Final execution boundary | src/ahmad/execution/gateway.py |
+| Registry | Tool + capability metadata | src/ahmad/execution/registry.py |
+| Store | JSONL + SQLite WAL event stores | src/ahmad/memory/ |
+| Projections | Rebuildable state from events | src/ahmad/memory/attempt_projection.py |
+| Providers | Hermes, Claude Code, Codex adapters | src/ahmad/providers/ |
+| Tools | Governed tools (read_file) | src/ahmad/tools/ |
+| MCP | Model Context Protocol server | src/ahmad/mcp/server.py |
+| CLI | Interactive REPL | src/ahmad/__main__.py |
 
-- Agent identity
-- Request router
-- Governance boundary
-- Default-deny execution gateway
-- Memory interface
-- Skills directory
-- Tools directory
-- Agents directory
-- JSONL and SQLite WAL event stores
-- Rebuildable in-memory event projections
-- Capability and tool metadata registries (registration is not authorization)
-- Provider adapter contracts for Claude Code, Codex, and Hermes (transports are not configured)
+---
 
-## CLI
+## Installation
 
-```text
-ahmad run       # interactive request
-ahmad status    # store and event count
-ahmad events    # event metadata; tool output is omitted
-ahmad providers # configured provider transports
-ahmad tools     # registered tool metadata
-ahmad policy    # current default-deny policy summary
-```
+    git clone <repo> ahmad-agent
+    cd ahmad-agent
+    python3 -m venv .venv
+    source .venv/bin/activate
+    pip install pytest pyyaml
+    pip install -e .
 
-The default event store is `data/ahmad.db` using SQLite WAL. `MemoryStore` remains
-available for JSONL workflows and tests. Events are the source of truth;
-projections are disposable views rebuilt from event records. Logs omit request
-text and tool output to reduce accidental secret exposure.
+Requires Python 3.11+.
 
-## Provider boundary
+---
 
-Claude Code, Codex, and Hermes adapters are transport contracts only. They have
-no built-in CLI, subprocess, filesystem, network, or tool access. A registered
-provider may return text, a plan, metadata, and proposed actions. Ahmad routes
-each proposal through PolicyEngine, persists its DecisionEvent, and then invokes
-ExecutionGateway, which rechecks policy before calling a registered tool.
-Provider registration and selection do not authorize actions. No provider is
-registered or executed automatically; tests use injected in-memory transports.
+## Usage
 
-## Planned
+### CLI REPL
 
-- Claude Code integration
-- MCP
-- Agent Skills
-- Sub-agents
-- Event-sourced memory
-- Policy Registry
-- Signed policies
-- Execution adapters
+    python -m ahmad
+    python -m ahmad --provider hermes
+    python -m ahmad --provider none
+
+Commands:
+    /help              Show help
+    /events [N]        Show last N events
+    /tools             List registered tools
+    /providers         List registered providers
+    /status            Runtime status
+    /clear             Clear screen
+    exit / quit / :q   Exit
+
+### MCP Server (stdio)
+
+    python -m ahmad.mcp.server
+
+Hermes integration:
+
+    hermes mcp add ahmad-poc --command python --args -m ahmad.mcp.server
+    hermes mcp test ahmad-poc
+
+Exposed tools:
+- ping         - connectivity test
+- read_file    - governed file read (rooted at $HOME, max 1 MB)
+
+Every MCP tool call is routed through ExecutionGateway with a fresh DecisionEvent.
+
+---
+
+## Providers
+
+| Provider | Transport | Status |
+|---|---|---|
+| Hermes | SubprocessTransport -> hermes chat -q ... -Q | Real |
+| Claude Code | (not configured) | Pending |
+| Codex | (not configured) | Pending |
+
+Providers must be explicitly registered. Selection grants no authority.
+
+---
+
+## Tests
+
+    pytest tests/ -v
+
+96 tests covering governance, event sourcing, attempt lifecycle,
+provider adapters, governed tools, CLI, MCP server, concurrency,
+and corrupted JSONL recovery.
+
+---
+
+## Status
+
+v0.1.0 - Foundation + First Tool + MCP Bridge

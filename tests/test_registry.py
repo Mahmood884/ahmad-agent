@@ -334,4 +334,9 @@ def test_result_store_failure_is_raised_after_execution(tmp_path):
         )
 
     assert external_state["executions"] == 1
-    assert memory.read_all() == [event.to_dict()]
+    events = memory.read_all()
+    assert [item["event_type"] for item in events] == [
+        "decision", "attempt_created", "attempt_started", "attempt_ambiguous"
+    ]
+    assert events[-1]["state"] == "ambiguous"
+    assert events[-1]["reason"].startswith("result persistence failed")

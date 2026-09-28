@@ -12,3 +12,11 @@ data/*
 .DS_Store
 .idea/
 .vscode/
+
+# mutants (mutation testing artifacts)
+mutants/
+.mutmut-cache/
+
+# runtime backups
+*.bak
+*.orig

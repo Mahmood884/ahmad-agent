@@ -13,7 +13,7 @@ from ahmad.governance.policy import PolicyEngine
 from ahmad.memory.sqlite_store import SQLiteEventStore
 from ahmad.memory.store import EventStore
 from ahmad.orchestration.router import Router
-from ahmad.providers.base import ProviderRequest, ProviderResult
+from ahmad.providers.base import ProviderRequest, ProviderResult, validate_provider_result
 from ahmad.providers.registry import ProviderRegistry
 
 logger = logging.getLogger("ahmad.runtime")
@@ -38,16 +38,22 @@ class AhmadRuntime:
         self,
         memory: EventStore | None = None,
         providers: ProviderRegistry | None = None,
+        *,
+        recover_in_flight_on_startup: bool = False,
     ) -> None:
         config = load_config()
         self.router = Router()
         self.policy = PolicyEngine()
         self.memory = memory or SQLiteEventStore(config.data_dir / "ahmad.db")
         self.gateway = ExecutionGateway(memory=self.memory, policy=self.policy)
+        if recover_in_flight_on_startup:
+            recovered = self.gateway.recover_orphaned_attempts()
+            logger.info("attempt_recovery_complete", extra={"ambiguous_attempts": recovered})
         self.providers = providers or ProviderRegistry()
 
-    def handle(self, request: AgentRequest, *, event_id: str | None = None) -> ToolResult:
-        return self._handle_request(request, event_id=event_id, source=None)
+    def handle(self, request: AgentRequest, *, event_id: str | None = None,
+               attempt_id: str | None = None) -> ToolResult:
+        return self._handle_request(request, event_id=event_id, source=None, attempt_id=attempt_id)
 
     def handle_provider_request(
         self,
@@ -71,7 +77,7 @@ class AhmadRuntime:
             prompt=prompt,
             mode=self.router.route(prompt),
         )
-        response = provider.generate(provider_request)
+        response = validate_provider_result(provider.generate(provider_request))
         if not response.success:
             return ProviderOutcome(provider_request_id, response, ())
 
@@ -93,6 +99,7 @@ class AhmadRuntime:
         *,
         event_id: str | None,
         source: str | None,
+        attempt_id: str | None = None,
     ) -> ToolResult:
         mode = self.router.route(request.text)
         tool_binding_id = self.gateway.binding_id_for_action(request.text)
@@ -107,12 +114,17 @@ class AhmadRuntime:
             request, sequence=len(self.memory.read_all())
         )
         if event_id is None:
-            event_id = f"decision-{request_id}"
+            event_id = (f"decision-{request_id}:retry:{attempt_id}" if attempt_id
+                        else f"decision-{request_id}")
 
         decision_event = DecisionEvent.from_decision(
             decision, event_id=event_id, request_id=request_id
         )
-        self.memory.append(decision_event)
+        existing_decision = self.memory.read(event_id)
+        if existing_decision is None:
+            self.memory.append(decision_event)
+        elif existing_decision != decision_event.to_dict():
+            raise ValueError("DecisionEvent ID already exists with different authorization context")
         logger.info(
             "governance_decision",
             extra={
@@ -128,6 +140,7 @@ class AhmadRuntime:
             decision_event_id=decision_event.event_id,
             result_event_id=f"{decision_event.event_id}:result",
             request_id=request_id,
+            attempt_id=attempt_id,
         )
         logger.info(
             "execution_result",

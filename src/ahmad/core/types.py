@@ -13,6 +13,36 @@ class Scope(str, Enum):
     AUTHORIZED = "authorized"
 
 
+class AttemptState(str, Enum):
+    PENDING = "pending"
+    IN_FLIGHT = "in_flight"
+    AMBIGUOUS = "ambiguous"
+
+
+class ResolutionPath(str, Enum):
+    RECONCILE_EVIDENCE = "reconcile_evidence"
+    IDEMPOTENT_RETRY = "idempotent_retry"
+    MANUAL_RECONCILIATION = "manual_reconciliation"
+
+
+class ResolutionResult(str, Enum):
+    CONFIRMED_TERMINAL = "confirmed_terminal"
+    CLEARED_FOR_RETRY = "cleared_for_retry"
+
+
+class ReconcileOutcome(str, Enum):
+    APPLIED = "applied"
+    NOT_APPLIED = "not_applied"
+    UNKNOWN = "unknown"
+    ERROR = "error"
+
+
+class EffectStatus(str, Enum):
+    APPLIED = "applied"
+    NOT_APPLIED = "not_applied"
+    UNKNOWN = "unknown"
+
+
 @dataclass(frozen=True)
 class AgentRequest:
     text: str

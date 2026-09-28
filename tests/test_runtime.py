@@ -34,8 +34,9 @@ def test_runtime_persists_decision_before_tool_and_result_after(tmp_path: Path):
     class ObservingTool:
         def run(self, action: str) -> ToolResult:
             events = memory.read_all()
-            assert len(events) == 1
-            assert events[0]["event_type"] == "decision"
+            assert [event["event_type"] for event in events] == [
+                "decision", "attempt_created", "attempt_started"
+            ]
             return ToolResult(True, "observing_tool", f"observed:{action}")
 
     runtime.gateway.registry.replace_tool("demo:mock", ObservingTool())
@@ -64,10 +65,12 @@ def test_runtime_persists_decision_before_tool_and_result_after(tmp_path: Path):
     assert result.success is True
     assert result.output == "observed:demo:mock"
     events = memory.read_all()
-    assert [event["event_type"] for event in events] == ["decision", "result"]
+    assert [event["event_type"] for event in events] == [
+        "decision", "attempt_created", "attempt_started", "result"
+    ]
     assert events[0]["allowed"] is True
     assert events[1]["decision_event_id"] == events[0]["event_id"]
-    assert events[1]["output"] == result.output
+    assert events[3]["output"] == result.output
 
 
 def test_denied_runtime_request_never_calls_tool(tmp_path: Path):

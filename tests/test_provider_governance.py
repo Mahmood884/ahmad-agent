@@ -119,3 +119,16 @@ def test_provider_selection_does_not_change_policy(tmp_path):
 
     assert outcome.tool_results[0].output == "EXECUTION_DENIED"
     assert tool.calls == 0
+
+
+def test_provider_output_limits_and_schema_are_enforced():
+    import pytest
+    from ahmad.providers.base import validate_provider_result
+
+    with pytest.raises(ValueError, match="proposal count"):
+        validate_provider_result(ProviderResult(
+            "mock", True, proposed_actions=tuple(ProposedAction("x") for _ in range(17))))
+    with pytest.raises(ValueError, match="metadata"):
+        validate_provider_result(ProviderResult("mock", True, metadata={"x": object()}))
+    with pytest.raises(ValueError, match="text"):
+        validate_provider_result(ProviderResult("mock", True, text="x" * 64_001))

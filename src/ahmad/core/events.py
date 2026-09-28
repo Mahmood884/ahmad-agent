@@ -8,6 +8,15 @@ from ahmad.core.types import Decision
 
 class EventType(str, Enum):
     DECISION = "decision"
+    RESULT = "result"
+    ATTEMPT_CREATED = "attempt_created"
+    ATTEMPT_STARTED = "attempt_started"
+    ATTEMPT_AMBIGUOUS = "attempt_ambiguous"
+    ATTEMPT_DECISION_LINKED = "attempt_decision_linked"
+    RECONCILE_EVIDENCE = "reconcile_evidence"
+    IDEMPOTENCY_EVIDENCE = "idempotency_evidence"
+    RESOLUTION = "resolution"
+    REGISTRY_MANIFEST = "registry_manifest"
 
 
 @dataclass(frozen=True)
@@ -23,6 +32,11 @@ class DecisionEvent:
     request_id: str
     source: str | None = None
     tool_binding_id: str | None = None
+
+    @property
+    def binding_fingerprint(self) -> str | None:
+        """The current binding identity includes its implementation fingerprint."""
+        return self.tool_binding_id
 
     @classmethod
     def from_decision(

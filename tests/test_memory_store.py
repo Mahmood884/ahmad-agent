@@ -1,4 +1,5 @@
 import json
+import pytest
 
 from ahmad.core.events import DecisionEvent
 from ahmad.core.types import Mode, Scope
@@ -78,3 +79,11 @@ def test_memory_store_empty_read(tmp_path):
     store = MemoryStore(tmp_path / "events.jsonl")
 
     assert store.read_all() == []
+
+
+def test_memory_store_rejects_duplicate_event_ids(tmp_path):
+    store = MemoryStore(tmp_path / "events.jsonl")
+    event = make_event("test", "duplicate")
+    store.append(event)
+    with pytest.raises(ValueError, match="duplicate event_id"):
+        store.append(event)

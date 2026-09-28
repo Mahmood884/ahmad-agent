@@ -2,7 +2,7 @@ from ahmad.core.types import Decision, Mode, Scope
 
 MOCK_TOOL_BINDING_ID = (
     "demo:mock|mock_tool|0.1.0|ahmad.mock-tool/v1|1|"
-    "1b8186e58d9da85ba71f7ea034da7db0999d5475762609ad73cd0f4524b06232"
+    "f79e6c12cc66985450696a2a13e17a288028479e2b8b57f38a688b88c30726c4"
 )
 
 

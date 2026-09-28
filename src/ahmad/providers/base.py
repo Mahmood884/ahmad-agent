@@ -1,6 +1,7 @@
 """Provider contracts contain no authorization or process execution behavior."""
 
 from dataclasses import dataclass, field
+import json
 from typing import Callable, Protocol
 
 from ahmad.core.types import Mode
@@ -94,7 +95,7 @@ class ProviderAdapter:
             raise RuntimeError(f"{self.name} transport is not configured")
         result = self._transport(request)
         if isinstance(result, ProviderResult):
-            return ProviderResult(
+            return validate_provider_result(ProviderResult(
                 provider=self.name,
                 success=result.success,
                 text=result.text,
@@ -102,5 +103,35 @@ class ProviderAdapter:
                 plan=result.plan,
                 proposed_actions=result.proposed_actions,
                 metadata=dict(result.metadata),
-            )
-        return ProviderResult(provider=self.name, success=True, text=result)
+            ))
+        return validate_provider_result(ProviderResult(provider=self.name, success=True, text=result))
+
+
+def validate_provider_result(result: ProviderResult) -> ProviderResult:
+    """Bound untrusted provider output before it enters Runtime orchestration."""
+    if not isinstance(result, ProviderResult):
+        raise ValueError("provider returned an invalid result schema")
+    if not isinstance(result.text, str) or len(result.text) > 64_000:
+        raise ValueError("provider text is invalid or exceeds 64000 characters")
+    if result.plan is not None and (not isinstance(result.plan, str) or len(result.plan) > 16_000):
+        raise ValueError("provider plan is invalid or exceeds 16000 characters")
+    if not isinstance(result.proposed_actions, tuple) or len(result.proposed_actions) > 16:
+        raise ValueError("provider proposal count exceeds 16 or has invalid schema")
+    for proposal in result.proposed_actions:
+        if not isinstance(proposal, ProposedAction) or not proposal.action or len(proposal.action) > 256:
+            raise ValueError("provider action proposal has invalid schema")
+        _validate_metadata(proposal.metadata)
+    _validate_metadata(result.metadata)
+    return result
+
+
+def _validate_metadata(metadata: dict) -> None:
+    if not isinstance(metadata, dict) or len(metadata) > 32:
+        raise ValueError("provider metadata must be an object with at most 32 keys")
+    try:
+        encoded = json.dumps(metadata, ensure_ascii=False, allow_nan=False,
+                             separators=(",", ":"))
+    except (TypeError, ValueError) as error:
+        raise ValueError("provider metadata must be JSON-compatible") from error
+    if len(encoded) > 16_000:
+        raise ValueError("provider metadata exceeds 16000 characters")

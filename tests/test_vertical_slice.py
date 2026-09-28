@@ -27,10 +27,13 @@ def test_full_slice_allowed(tmp_path: Path):
     assert result.success is True
 
     events = memory.read_all()
-    assert len(events) == 2
+    assert len(events) == 4
     assert events[0]["event_type"] == "decision" and events[0]["allowed"] is True
-    assert events[1]["event_type"] == "result" and events[1]["success"] is True
-    assert events[1]["decision_event_id"] == events[0]["event_id"]
+    assert [event["event_type"] for event in events] == [
+        "decision", "attempt_created", "attempt_started", "result"
+    ]
+    assert events[3]["success"] is True
+    assert events[3]["decision_event_id"] == events[0]["event_id"]
 
 
 def test_full_slice_denied(tmp_path: Path):

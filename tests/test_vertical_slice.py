@@ -3,16 +3,17 @@ from pathlib import Path
 from ahmad.core.events import DecisionEvent
 from ahmad.core.types import Mode, Scope
 from ahmad.execution.gateway import ExecutionGateway
-from ahmad.governance.policy import MOCK_TOOL_BINDING_ID, PolicyEngine
+from ahmad.governance.policy import PolicyEngine
 from ahmad.memory.store import MemoryStore
 
 
 def test_full_slice_allowed(tmp_path: Path):
     memory = MemoryStore(tmp_path / "events.jsonl")
     gateway = ExecutionGateway(memory=memory)
+    binding_id = gateway.binding_id_for_action("demo:mock")
     decision = PolicyEngine().evaluate(
         "demo:mock", Mode.GENERAL, Scope.PERSONAL,
-        tool_binding_id=MOCK_TOOL_BINDING_ID,
+        tool_binding_id=binding_id,
     )
     memory.append(DecisionEvent.from_decision(
         decision, event_id="allowed-001", request_id="request-allowed",

@@ -10,3 +10,8 @@ requires-python = ">=3.11"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.mutmut]
+paths_to_mutate = ["src/ahmad/"]
+tests_dir = ["tests/"]
+runner = "python -m pytest -x -q"

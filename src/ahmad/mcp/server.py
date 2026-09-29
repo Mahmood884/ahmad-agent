@@ -43,8 +43,6 @@ _list_dir_metadata = ToolMetadata(
     risk="low",
     implementation_id="list_dir-v1",
 )
-_gateway.registry.register("list_dir", _list_dir_metadata, ListDirTool())
-_LIST_DIR_BINDING = _gateway.binding_id_for_action("list_dir")
 
 # Register system_info
 _system_info_metadata = ToolMetadata(
@@ -54,8 +52,6 @@ _system_info_metadata = ToolMetadata(
     risk="low",
     implementation_id="system_info-v1",
 )
-_gateway.registry.register("system_info", _system_info_metadata, SystemInfoTool())
-_SYSTEM_INFO_BINDING = _gateway.binding_id_for_action("system_info")
 
 
 # Read-only policy: allow each tool only under its own exact binding fingerprint

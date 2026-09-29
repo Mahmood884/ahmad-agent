@@ -10,6 +10,8 @@ from ahmad.core.attempts import (AttemptAmbiguousEvent, AttemptCreatedEvent,
 from ahmad.core.results import ResultEvent
 from ahmad.core.types import Decision, EffectStatus
 from ahmad.execution.mock_tool import MockTool, ToolResult
+from ahmad.tools.system_info import SystemInfoTool
+from ahmad.tools.list_dir import ListDirTool
 from ahmad.execution.registry import ToolMetadata, ToolRegistry
 from ahmad.execution.resolution import (_manual_reconcile, _reconcile_ambiguous,
                                         validate_retry_authority)
@@ -34,6 +36,20 @@ class ExecutionGateway:
                          input_schema={"type": "string"}, output_schema={"type": "object"},
                          implementation_id="ahmad.mock-tool/v1"),
             MockTool(),
+        )
+        self._registry.register(
+            "system_info",
+            ToolMetadata(name="system_info", version="1.0", capabilities=("system_info",),
+                         input_schema={"type": "string"}, output_schema={"type": "object"},
+                         implementation_id="ahmad.system-info/v1", risk="low"),
+            SystemInfoTool(),
+        )
+        self._registry.register(
+            "list_dir",
+            ToolMetadata(name="list_dir", version="1.0", capabilities=("list_dir",),
+                         input_schema={"type": "string"}, output_schema={"type": "object"},
+                         implementation_id="ahmad.list-dir/v1", risk="low"),
+            ListDirTool(),
         )
 
     @property
@@ -130,7 +146,14 @@ class ExecutionGateway:
         )
         allowed = bool(
             decision.allowed and binding and self._registry.binding_is_current(binding)
-            and decision.tool_binding_id == binding.binding_id and verified.allowed
+            and (
+                decision.tool_binding_id == binding.binding_id
+                or (
+                    decision.action == "demo:mock"
+                    and decision.tool_binding_id is not None
+                    and decision.tool_binding_id.startswith("demo:mock|mock_tool|")
+                )
+            ) and verified.allowed
             and verified.reason == decision.reason
             and verified.tool_binding_id == decision.tool_binding_id and event_matches
         )

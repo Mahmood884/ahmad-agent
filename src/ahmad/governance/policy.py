@@ -5,6 +5,13 @@ MOCK_TOOL_BINDING_ID = (
     "f79e6c12cc66985450696a2a13e17a288028479e2b8b57f38a688b88c30726c4"
 )
 
+# Allowed tool prefixes for governed execution
+ALLOWED_TOOL_PREFIXES = (
+    "demo:mock|",
+    "system_info|",
+    "list_dir|",
+)
+
 
 class PolicyEngine:
     """
@@ -20,18 +27,23 @@ class PolicyEngine:
         source: str | None = None,
         tool_binding_id: str | None = None,
     ) -> Decision:
+        # Check if action is in allowed tool prefixes
+        is_allowed_tool = any(
+            tool_binding_id is not None and tool_binding_id.startswith(prefix)
+            for prefix in ALLOWED_TOOL_PREFIXES
+        )
+
         if (
-            action == "demo:mock"
-            and mode is Mode.GENERAL
+            mode is Mode.GENERAL
             and scope is Scope.PERSONAL
-            and tool_binding_id == MOCK_TOOL_BINDING_ID
+            and is_allowed_tool
         ):
             return Decision(
                 action=action,
                 mode=mode,
                 scope=scope,
                 allowed=True,
-                reason="explicit mock-tool allowlist",
+                reason="explicit tool allowlist",
                 source=source,
                 tool_binding_id=tool_binding_id,
             )

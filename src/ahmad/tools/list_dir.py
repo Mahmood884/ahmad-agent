@@ -1,87 +1,83 @@
-"""ListDirTool — lists a directory's immediate entries, safely bounded.
-
-Contract:
-    tool.run(action: str) -> ToolResult
-
-Action forms:
-    "<path>"              -> list entries in <path>
-    "list_dir:<path>"     -> same, explicit form
-    "" / "list_dir"       -> list entries in root
-
-Guards mirror ReadFileTool: path must resolve under the configured root
-(default: $HOME), must exist and be a directory, entry count is capped.
-No side effects; always EffectStatus.NOT_APPLIED.
-"""
-from __future__ import annotations
+"""List directory contents — read-only, bounded."""
 
 from pathlib import Path
 
-from ahmad.core.types import EffectStatus
 from ahmad.execution.mock_tool import ToolResult
 
 
 class ListDirTool:
+    """Lists files and directories in a given path."""
+
     name = "list_dir"
     version = "1.0"
+    MAX_ENTRIES = 100
 
-    MAX_ENTRIES = 500
-
-    def __init__(self, root: str | Path | None = None) -> None:
+    def __init__(self, root: str | Path | None = None):
         self.root = Path(root).expanduser().resolve() if root else Path.home().resolve()
 
     def run(self, action: str) -> ToolResult:
-        raw = action.strip()
-        if raw.startswith(f"{self.name}:"):
-            raw = raw[len(self.name) + 1:].strip()
-        target = raw or str(self.root)
+        # Parse action: "list_dir" or "list_dir:/path/to/dir"
+        if ":" in action:
+            parts = action.split(":", 1)
+            if len(parts) == 2 and parts[1]:
+                path_str = parts[1]
+            else:
+                path_str = "."
+        else:
+            # If action is just "list_dir", use current directory
+            path_str = "."
 
         try:
-            path = Path(target).expanduser().resolve()
-        except (OSError, RuntimeError) as exc:
-            return self._fail(f"invalid path: {exc}")
+            target = Path(path_str).expanduser().resolve()
 
-        try:
-            path.relative_to(self.root)
-        except ValueError:
-            return self._fail(f"path outside allowed root: {path}")
+            # Security: ensure path is under root
+            if not str(target).startswith(str(self.root)):
+                return ToolResult(
+                    success=False,
+                    tool=self.name,
+                    output=f"DENIED: Path must be under {self.root}",
+                    effect_status=None,
+                )
 
-        if not path.exists():
-            return self._fail(f"not found: {path}")
-        if not path.is_dir():
-            return self._fail(f"not a directory: {path}")
+            if not target.exists():
+                return ToolResult(
+                    success=False,
+                    tool=self.name,
+                    output=f"NOT_FOUND: {target}",
+                    effect_status=None,
+                )
 
-        try:
-            entries = sorted(path.iterdir(), key=lambda p: p.name)
-        except OSError as exc:
-            return self._fail(f"listing failed: {exc}")
+            if not target.is_dir():
+                return ToolResult(
+                    success=False,
+                    tool=self.name,
+                    output=f"NOT_DIR: {target}",
+                    effect_status=None,
+                )
 
-        truncated = len(entries) > self.MAX_ENTRIES
-        entries = entries[: self.MAX_ENTRIES]
+            entries = []
+            for i, item in enumerate(sorted(target.iterdir())):
+                if i >= self.MAX_ENTRIES:
+                    entries.append(f"... (truncated at {self.MAX_ENTRIES} entries)")
+                    break
+                try:
+                    stat = item.stat()
+                    entry_type = "DIR" if item.is_dir() else "FILE"
+                    size = stat.st_size if item.is_file() else 0
+                    entries.append(f"{entry_type} {item.name} ({size} bytes)")
+                except (PermissionError, OSError):
+                    entries.append(f"UNKNOWN {item.name} (access denied)")
 
-        lines = []
-        for entry in entries:
-            try:
-                kind = "dir" if entry.is_dir() else "file"
-                size = entry.stat().st_size if kind == "file" else ""
-            except OSError:
-                kind, size = "?", ""
-            lines.append(f"{kind}\t{size}\t{entry.name}")
-
-        output = "\n".join(lines)
-        if truncated:
-            output += f"\n... truncated at {self.MAX_ENTRIES} entries"
-
-        return ToolResult(
-            success=True,
-            tool=self.name,
-            output=output,
-            effect_status=EffectStatus.NOT_APPLIED,
-        )
-
-    def _fail(self, message: str) -> ToolResult:
-        return ToolResult(
-            success=False,
-            tool=self.name,
-            output=message,
-            effect_status=EffectStatus.NOT_APPLIED,
-        )
+            return ToolResult(
+                success=True,
+                tool=self.name,
+                output="\n".join(entries),
+                effect_status=None,
+            )
+        except Exception as e:
+            return ToolResult(
+                success=False,
+                tool=self.name,
+                output=f"ERROR: {type(e).__name__}: {str(e)}",
+                effect_status=None,
+            )

@@ -15,9 +15,7 @@ from ahmad.core.types import Decision, Mode, Scope
 from ahmad.execution.gateway import ExecutionGateway
 from ahmad.execution.registry import ToolMetadata
 from ahmad.memory.store import MemoryStore
-from ahmad.tools.list_dir import ListDirTool
 from ahmad.tools.read_file import ReadFileTool
-from ahmad.tools.system_info import SystemInfoTool
 
 
 # ─── Runtime (init once) ──────────────────────────────────────────────
@@ -36,22 +34,10 @@ _gateway.registry.register("read_file", _read_file_metadata, ReadFileTool())
 _READ_BINDING = _gateway.binding_id_for_action("read_file")
 
 # Register list_dir
-_list_dir_metadata = ToolMetadata(
-    name="list_dir",
-    version="1.0",
-    capabilities=("fs:list",),
-    risk="low",
-    implementation_id="list_dir-v1",
-)
+_LIST_DIR_BINDING = _gateway.binding_id_for_action("list_dir")
 
 # Register system_info
-_system_info_metadata = ToolMetadata(
-    name="system_info",
-    version="1.0",
-    capabilities=("system:read",),
-    risk="low",
-    implementation_id="system_info-v1",
-)
+_SYSTEM_INFO_BINDING = _gateway.binding_id_for_action("system_info")
 
 
 # Read-only policy: allow each tool only under its own exact binding fingerprint

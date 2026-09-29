@@ -22,3 +22,7 @@ where = ["src"]
 paths_to_mutate = ["src/ahmad/"]
 tests_dir = ["tests/"]
 runner = "python -m pytest -x -q"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+norecursedirs = ["mutants", ".venv", "build", "dist", ".git", "__pycache__"]

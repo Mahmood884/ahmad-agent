@@ -48,7 +48,11 @@ class PolicyEngine:
                 mode=mode,
                 scope=scope,
                 allowed=True,
-                reason="explicit tool allowlist",
+                reason=(
+                    "explicit mock-tool allowlist"
+                    if action == "demo:mock"
+                    else "explicit tool allowlist"
+                ),
                 source=source,
                 tool_binding_id=tool_binding_id,
             )

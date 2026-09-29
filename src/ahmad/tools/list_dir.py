@@ -16,26 +16,24 @@ class ListDirTool:
         self.root = Path(root).expanduser().resolve() if root else Path.home().resolve()
 
     def run(self, action: str) -> ToolResult:
-        # Parse action: "list_dir" or "list_dir:/path/to/dir"
-        if ":" in action:
-            parts = action.split(":", 1)
-            if len(parts) == 2 and parts[1]:
-                path_str = parts[1]
-            else:
-                path_str = "."
-        else:
-            # If action is just "list_dir", use current directory
-            path_str = "."
+        raw_path = action.strip()
+        if raw_path.startswith(f"{self.name}:"):
+            raw_path = raw_path[len(self.name) + 1:].strip()
+        path = Path(raw_path).expanduser() if raw_path else self.root
+        if not path.is_absolute():
+            path = self.root / path
 
         try:
-            target = Path(path_str).expanduser().resolve()
+            target = path.resolve()
 
             # Security: ensure path is under root
-            if not str(target).startswith(str(self.root)):
+            try:
+                target.relative_to(self.root)
+            except ValueError:
                 return ToolResult(
                     success=False,
                     tool=self.name,
-                    output=f"DENIED: Path must be under {self.root}",
+                    output=f"ERROR: path outside allowed root: {target}",
                     effect_status=None,
                 )
 
@@ -43,7 +41,7 @@ class ListDirTool:
                 return ToolResult(
                     success=False,
                     tool=self.name,
-                    output=f"NOT_FOUND: {target}",
+                    output=f"ERROR: path not found: {target}",
                     effect_status=None,
                 )
 
@@ -51,7 +49,7 @@ class ListDirTool:
                 return ToolResult(
                     success=False,
                     tool=self.name,
-                    output=f"NOT_DIR: {target}",
+                    output=f"ERROR: path is not a directory: {target}",
                     effect_status=None,
                 )
 
@@ -62,11 +60,11 @@ class ListDirTool:
                     break
                 try:
                     stat = item.stat()
-                    entry_type = "DIR" if item.is_dir() else "FILE"
-                    size = stat.st_size if item.is_file() else 0
-                    entries.append(f"{entry_type} {item.name} ({size} bytes)")
+                    entry_type = "dir" if item.is_dir() else "file"
+                    size = str(stat.st_size) if item.is_file() else ""
+                    entries.append(f"{entry_type}\t{size}\t{item.name}")
                 except (PermissionError, OSError):
-                    entries.append(f"UNKNOWN {item.name} (access denied)")
+                    entries.append(f"unknown\t\t{item.name} (access denied)")
 
             return ToolResult(
                 success=True,

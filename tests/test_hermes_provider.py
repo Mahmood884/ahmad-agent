@@ -1,5 +1,9 @@
 """Integration tests for HermesProvider (real Hermes CLI + OpenRouter)."""
+import json
+import os
 import shutil
+from urllib.error import URLError
+from urllib.request import Request, urlopen
 
 import pytest
 
@@ -9,6 +13,20 @@ from ahmad.providers.hermes import HermesProvider
 
 
 HERMES_AVAILABLE = shutil.which("hermes") is not None
+OPENROUTER_AVAILABLE = False
+if HERMES_AVAILABLE and os.environ.get("OPENROUTER_API_KEY"):
+    try:
+        request = Request(
+            "https://openrouter.ai/api/v1/models",
+            headers={"Authorization": f"Bearer {os.environ['OPENROUTER_API_KEY']}"},
+        )
+        with urlopen(request, timeout=5) as response:
+            response_payload = json.loads(response.read())
+            OPENROUTER_AVAILABLE = (
+                response.status == 200 and isinstance(response_payload.get("data"), list)
+            )
+    except (URLError, TimeoutError, OSError, json.JSONDecodeError):
+        OPENROUTER_AVAILABLE = False
 
 
 def test_hermes_provider_uses_injected_transport():
@@ -23,6 +41,7 @@ def test_hermes_provider_uses_injected_transport():
 
 
 @pytest.mark.skipif(not HERMES_AVAILABLE, reason="hermes CLI not installed")
+@pytest.mark.skipif(not OPENROUTER_AVAILABLE, reason="OpenRouter unavailable or API key not configured")
 def test_hermes_provider_real_ping():
     """Full integration: Ahmed → Hermes → OpenRouter."""
     provider = HermesProvider(timeout=90)
@@ -40,6 +59,7 @@ def test_hermes_provider_real_ping():
 
 
 @pytest.mark.skipif(not HERMES_AVAILABLE, reason="hermes CLI not installed")
+@pytest.mark.skipif(not OPENROUTER_AVAILABLE, reason="OpenRouter unavailable or API key not configured")
 def test_hermes_provider_real_arabic():
     """Arabic response test with real Hermes CLI."""
     provider = HermesProvider(timeout=90)

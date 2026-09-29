@@ -12,6 +12,7 @@ ALLOWED_TOOL_PREFIXES = (
     "list_dir|",
     "web_search|",
     "write_file|",
+    "scaffold_project|",
 )
 
 

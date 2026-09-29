@@ -63,6 +63,7 @@ class LocalMemoryStore:
     def _connect(self) -> sqlite3.Connection:
         connection = sqlite3.connect(self.path, timeout=10)
         connection.row_factory = sqlite3.Row
+        connection.execute("PRAGMA secure_delete=ON")
         connection.execute("PRAGMA foreign_keys=ON")
         return connection
 
@@ -141,4 +142,15 @@ class LocalMemoryStore:
                 "DELETE FROM memories WHERE id=? AND owner_id=?",
                 (memory_id, self.owner_id),
             )
+        with self._connection() as connection:
+            journal_mode = connection.execute("PRAGMA journal_mode").fetchone()[0]
+            if journal_mode.lower() == "wal":
+                checkpoint = connection.execute("PRAGMA wal_checkpoint(TRUNCATE)").fetchone()
+                if checkpoint[0]:
+                    raise sqlite3.OperationalError("could not checkpoint WAL before secure vacuum")
+            connection.execute("VACUUM")
+            if journal_mode.lower() == "wal":
+                checkpoint = connection.execute("PRAGMA wal_checkpoint(TRUNCATE)").fetchone()
+                if checkpoint[0]:
+                    raise sqlite3.OperationalError("could not truncate WAL after secure vacuum")
         return True

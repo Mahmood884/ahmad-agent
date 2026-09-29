@@ -32,6 +32,7 @@ class DecisionEvent:
     request_id: str
     source: str | None = None
     tool_binding_id: str | None = None
+    network_approved: bool = False
 
     @property
     def binding_fingerprint(self) -> str | None:
@@ -64,6 +65,7 @@ class DecisionEvent:
             request_id=request_id,
             source=decision.source if source is None else source,
             tool_binding_id=decision.tool_binding_id,
+            network_approved=decision.network_approved,
         )
 
     def to_dict(self) -> dict:
@@ -73,6 +75,8 @@ class DecisionEvent:
             data.pop("source")
         if self.tool_binding_id is None:
             data.pop("tool_binding_id")
+        if not self.network_approved:
+            data.pop("network_approved")
         return data
 
     def to_json(self) -> str:

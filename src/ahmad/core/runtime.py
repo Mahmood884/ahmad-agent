@@ -134,15 +134,46 @@ class AhmadRuntime:
     ) -> ToolResult:
         mode = self.router.route(request.text)
         tool_binding_id = self.gateway.binding_id_for_action(request.text)
-        decision = self.policy.evaluate(
-            request.text,
-            mode,
-            request.scope,
-            source=source,
-            tool_binding_id=tool_binding_id,
+        descriptor = self.gateway.registry.get(request.text)
+        redact_input = bool(
+            descriptor
+            and descriptor.metadata.implementation_config.get("redact_input")
+        )
+        decision_action = descriptor.action if redact_input else request.text
+        network_approved = False
+        if decision_action == "component_lib" and request.text.startswith("component_lib:"):
+            try:
+                component_arguments = json.loads(request.text[len("component_lib:"):])
+                network_approved = (
+                    isinstance(component_arguments, dict)
+                    and component_arguments.get("allow_network") is True
+                )
+            except json.JSONDecodeError:
+                pass
+        if network_approved:
+            decision = self.policy.evaluate(
+                decision_action,
+                mode,
+                request.scope,
+                source=source,
+                tool_binding_id=tool_binding_id,
+                network_approved=True,
+            )
+        else:
+            decision = self.policy.evaluate(
+                decision_action,
+                mode,
+                request.scope,
+                source=source,
+                tool_binding_id=tool_binding_id,
+            )
+        request_for_id = (
+            AgentRequest(decision_action, request.scope)
+            if redact_input and request.request_id is None
+            else request
         )
         request_id = request.request_id or self._derive_request_id(
-            request, sequence=len(self.memory.read_all())
+            request_for_id, sequence=len(self.memory.read_all())
         )
         if event_id is None:
             event_id = (f"decision-{request_id}:retry:{attempt_id}" if attempt_id
@@ -172,6 +203,7 @@ class AhmadRuntime:
             result_event_id=f"{decision_event.event_id}:result",
             request_id=request_id,
             attempt_id=attempt_id,
+            execution_action=request.text if redact_input else None,
         )
         logger.info(
             "execution_result",

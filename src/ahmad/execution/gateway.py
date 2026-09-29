@@ -2,8 +2,10 @@ from pathlib import Path
 """Final enforcement boundary for governed tool execution."""
 
 import hashlib
+import hmac
 import inspect
 import json
+import secrets
 import time
 
 from ahmad.core.attempts import (AttemptAmbiguousEvent, AttemptCreatedEvent,
@@ -18,6 +20,9 @@ from ahmad.tools.write_file import WriteFileTool
 from ahmad.tools.scaffold_project import ScaffoldProjectTool
 from ahmad.tools.web_scrape import WebScrapeTool
 from ahmad.tools.venv_install import VenvInstallTool
+from ahmad.tools.ui_tools import ComponentLibraryTool, GenerateUITool, ThemePickerTool
+from ahmad.tools.local_memory import MemoryAddTool, MemoryForgetTool, MemorySearchTool
+from ahmad.tools.instrumentation import CanReadTool, CalibrateSensorTool, ModbusReadTool
 from ahmad.execution.registry import ToolMetadata, ToolRegistry
 from ahmad.execution.resolution import (_manual_reconcile, _reconcile_ambiguous,
                                         validate_retry_authority)
@@ -34,6 +39,7 @@ class ExecutionGateway:
         self.memory = memory
         self.policy = policy or PolicyEngine()
         self._manual_authorizer = manual_authorizer
+        self._sensitive_digest_key = secrets.token_bytes(32)
         self.__resolution_writer = _resolution_writer_for(memory)
         self._registry = ToolRegistry()
         self._registry.register(
@@ -91,6 +97,72 @@ class ExecutionGateway:
                          input_schema={"type": "string"}, output_schema={"type": "object"},
                          implementation_id="ahmad.venv-install/v1", risk="medium"),
             VenvInstallTool(root=Path.home() / "ahmad-agent"),
+        )
+        self._registry.register(
+            "theme_picker",
+            ToolMetadata(name="theme_picker", version="1.0", capabilities=("ui:theme",),
+                         input_schema={"type": "object"}, output_schema={"type": "object"},
+                         implementation_id="ahmad.ui-theme/v1", risk="low"),
+            ThemePickerTool(),
+        )
+        self._registry.register(
+            "generate_ui",
+            ToolMetadata(name="generate_ui", version="1.0", capabilities=("ui:generate",),
+                         input_schema={"type": "object"}, output_schema={"type": "string"},
+                         implementation_id="ahmad.ui-generate/v1", risk="medium"),
+            GenerateUITool(root=Path.home() / "ahmad-agent"),
+        )
+        self._registry.register(
+            "component_lib",
+            ToolMetadata(name="component_lib", version="1.0", capabilities=("ui:components",),
+                         input_schema={"type": "object"}, output_schema={"type": "string"},
+                         implementation_id="ahmad.ui-components/v1", risk="medium"),
+            ComponentLibraryTool(root=Path.home() / "ahmad-agent"),
+        )
+        self._registry.register(
+            "memory_add",
+            ToolMetadata(name="memory_add", version="1.0", capabilities=("memory:add",),
+                         input_schema={"type": "object"}, output_schema={"type": "object"},
+                         implementation_id="ahmad.local-memory-add/v1", risk="medium",
+                         implementation_config={"redact_input": True, "redact_output": True}),
+            MemoryAddTool(),
+        )
+        self._registry.register(
+            "memory_search",
+            ToolMetadata(name="memory_search", version="1.0", capabilities=("memory:search",),
+                         input_schema={"type": "object"}, output_schema={"type": "array"},
+                         implementation_id="ahmad.local-memory-search/v1", risk="low",
+                         implementation_config={"redact_input": True, "redact_output": True}),
+            MemorySearchTool(),
+        )
+        self._registry.register(
+            "memory_forget",
+            ToolMetadata(name="memory_forget", version="1.0", capabilities=("memory:forget",),
+                         input_schema={"type": "object"}, output_schema={"type": "object"},
+                         implementation_id="ahmad.local-memory-forget/v1", risk="medium",
+                         implementation_config={"redact_input": True, "redact_output": True}),
+            MemoryForgetTool(),
+        )
+        self._registry.register(
+            "can_read",
+            ToolMetadata(name="can_read", version="1.0", capabilities=("can:read",),
+                         input_schema={"type": "object"}, output_schema={"type": "array"},
+                         implementation_id="ahmad.socketcan-read/v1", risk="medium"),
+            CanReadTool(),
+        )
+        self._registry.register(
+            "modbus_read",
+            ToolMetadata(name="modbus_read", version="1.0", capabilities=("modbus:read",),
+                         input_schema={"type": "object"}, output_schema={"type": "array"},
+                         implementation_id="ahmad.modbus-read/v1", risk="medium"),
+            ModbusReadTool(),
+        )
+        self._registry.register(
+            "calibrate_sensor",
+            ToolMetadata(name="calibrate_sensor", version="1.0", capabilities=("sensor:fit",),
+                         input_schema={"type": "object"}, output_schema={"type": "object"},
+                         implementation_id="ahmad.sensor-fit/v1", risk="low"),
+            CalibrateSensorTool(),
         )
 
     @property
@@ -160,17 +232,25 @@ class ExecutionGateway:
         )
 
     def execute(self, decision: Decision, *, decision_event_id: str,
-                result_event_id: str, request_id: str, attempt_id: str | None = None) -> ToolResult:
+                result_event_id: str, request_id: str, attempt_id: str | None = None,
+                execution_action: str | None = None) -> ToolResult:
         if not request_id:
             raise ValueError("request_id is required for gateway execution")
         if self.memory.read(result_event_id) is not None:
             raise ValueError("result_event_id already exists; refusing re-execution")
 
         binding = self._registry._resolve_binding(decision.action)
-        verified = self.policy.evaluate(
-            decision.action, decision.mode, decision.scope, source=decision.source,
-            tool_binding_id=binding.binding_id if binding else None,
-        )
+        if decision.network_approved:
+            verified = self.policy.evaluate(
+                decision.action, decision.mode, decision.scope, source=decision.source,
+                tool_binding_id=binding.binding_id if binding else None,
+                network_approved=True,
+            )
+        else:
+            verified = self.policy.evaluate(
+                decision.action, decision.mode, decision.scope, source=decision.source,
+                tool_binding_id=binding.binding_id if binding else None,
+            )
         persisted = self.memory.read(decision_event_id)
         result_request_id = persisted.get("request_id", request_id) if persisted else request_id
         event_matches = bool(
@@ -184,6 +264,7 @@ class ExecutionGateway:
             and persisted.get("reason") == decision.reason
             and persisted.get("source") == decision.source
             and persisted.get("tool_binding_id") == decision.tool_binding_id
+            and persisted.get("network_approved", False) == decision.network_approved
         )
         allowed = bool(
             decision.allowed and binding and self._registry.binding_is_current(binding)
@@ -209,9 +290,25 @@ class ExecutionGateway:
         assert binding is not None
         descriptor = self._registry.get(decision.action)
         assert descriptor is not None
+        redact_input = bool(descriptor.metadata.implementation_config.get("redact_input"))
+        if redact_input:
+            if (
+                execution_action is None
+                or not execution_action.startswith(f"{binding.action}:")
+            ):
+                raise ValueError("sensitive tool execution requires a matching private input")
+            tool_action = execution_action
+        else:
+            if execution_action is not None:
+                raise ValueError("private tool input is not enabled for this tool")
+            tool_action = decision.action
         guarantee = descriptor.idempotency_guarantee
-        input_json = json.dumps({"action": decision.action}, sort_keys=True, separators=(",", ":"))
-        input_digest = hashlib.sha256(input_json.encode("utf-8")).hexdigest()
+        input_json = json.dumps({"action": tool_action}, sort_keys=True, separators=(",", ":"))
+        input_digest = (
+            hmac.new(self._sensitive_digest_key, input_json.encode("utf-8"), hashlib.sha256).hexdigest()
+            if redact_input
+            else hashlib.sha256(input_json.encode("utf-8")).hexdigest()
+        )
         key_scope = f"{guarantee.key_scope if guarantee else 'request-decision'}:{decision.action}:{decision.tool_binding_id}"
         attempt_id = attempt_id or f"attempt:{decision_event_id}"
         existing_attempt = next((item for item in self.memory.read_all()
@@ -298,11 +395,11 @@ class ExecutionGateway:
                 kwargs = {"idempotency_key": idem_key}
                 if binding.metadata.execution_timeout_ms is not None:
                     kwargs["timeout_ms"] = binding.metadata.execution_timeout_ms
-                result = binding.tool.run(decision.action, **kwargs)
+                result = binding.tool.run(tool_action, **kwargs)
             elif binding.metadata.execution_timeout_ms is not None:
-                result = binding.tool.run(decision.action, timeout_ms=binding.metadata.execution_timeout_ms)
+                result = binding.tool.run(tool_action, timeout_ms=binding.metadata.execution_timeout_ms)
             else:
-                result = binding.tool.run(decision.action)
+                result = binding.tool.run(tool_action)
         except Exception as error:
             failed = ToolResult(False, binding.metadata.name,
                                 f"TOOL_EXCEPTION:{type(error).__name__}", EffectStatus.UNKNOWN)
@@ -325,7 +422,15 @@ class ExecutionGateway:
                 effect_status = EffectStatus.UNKNOWN
             elif effect_status is None:
                 effect_status = EffectStatus.UNKNOWN
-        recorded_result = ToolResult(result.success, result.tool, result.output, effect_status)
+        returned_result = ToolResult(result.success, result.tool, result.output, effect_status)
+        recorded_result = ToolResult(
+            result.success,
+            result.tool,
+            "[sensitive output redacted]" if descriptor.metadata.implementation_config.get(
+                "redact_output"
+            ) else result.output,
+            effect_status,
+        )
         try:
             self.memory.append(ResultEvent.from_tool_result(
                 recorded_result, event_id=result_event_id, decision_event_id=decision_event_id,
@@ -350,4 +455,4 @@ class ExecutionGateway:
                 decision_event_id=decision_event_id,
                 reason="tool failure did not prove absence of external effect",
             ))
-        return recorded_result
+        return returned_result

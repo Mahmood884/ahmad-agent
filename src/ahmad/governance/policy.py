@@ -15,6 +15,15 @@ ALLOWED_TOOL_PREFIXES = (
     "scaffold_project|",
     "web_scrape|",
     "venv_install|",
+    "theme_picker|",
+    "generate_ui|",
+    "component_lib|",
+    "memory_add|",
+    "memory_search|",
+    "memory_forget|",
+    "can_read|",
+    "modbus_read|",
+    "calibrate_sensor|",
 )
 
 
@@ -31,30 +40,40 @@ class PolicyEngine:
         *,
         source: str | None = None,
         tool_binding_id: str | None = None,
+        network_approved: bool = False,
     ) -> Decision:
         # Check if action is in allowed tool prefixes
         is_allowed_tool = any(
             tool_binding_id is not None and tool_binding_id.startswith(prefix)
             for prefix in ALLOWED_TOOL_PREFIXES
         )
-
-        if (
+        requires_network_approval = bool(
+            tool_binding_id and tool_binding_id.startswith("component_lib|")
+        )
+        allowed = (
             mode is Mode.GENERAL
             and scope is Scope.PERSONAL
             and is_allowed_tool
-        ):
+            and (not requires_network_approval or network_approved)
+        )
+
+        if allowed:
+            reason = (
+                "explicit mock-tool allowlist"
+                if action == "demo:mock"
+                else "explicit network approval"
+                if requires_network_approval
+                else "explicit tool allowlist"
+            )
             return Decision(
                 action=action,
                 mode=mode,
                 scope=scope,
                 allowed=True,
-                reason=(
-                    "explicit mock-tool allowlist"
-                    if action == "demo:mock"
-                    else "explicit tool allowlist"
-                ),
+                reason=reason,
                 source=source,
                 tool_binding_id=tool_binding_id,
+                network_approved=network_approved,
             )
 
         return Decision(
@@ -62,7 +81,15 @@ class PolicyEngine:
             mode=mode,
             scope=scope,
             allowed=False,
-            reason="default deny",
+            reason=(
+                "explicit network approval required"
+                if mode is Mode.GENERAL
+                and scope is Scope.PERSONAL
+                and is_allowed_tool
+                and requires_network_approval
+                else "default deny"
+            ),
             source=source,
             tool_binding_id=tool_binding_id,
+            network_approved=network_approved,
         )

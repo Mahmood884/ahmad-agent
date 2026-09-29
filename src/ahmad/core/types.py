@@ -59,3 +59,4 @@ class Decision:
     reason: str
     source: str | None = None
     tool_binding_id: str | None = None
+    network_approved: bool = False

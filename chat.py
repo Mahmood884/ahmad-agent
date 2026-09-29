@@ -49,7 +49,6 @@ def main():
             outcome = runtime.handle_provider_request(
                 "hermes", 
                 full_prompt, 
-                mode=Mode.GENERAL, 
                 scope=Scope.PERSONAL,
                 request_id=request_id
             )

@@ -17,6 +17,7 @@ from ahmad.tools.web_search import WebSearchTool
 from ahmad.tools.write_file import WriteFileTool
 from ahmad.tools.scaffold_project import ScaffoldProjectTool
 from ahmad.tools.web_scrape import WebScrapeTool
+from ahmad.tools.venv_install import VenvInstallTool
 from ahmad.execution.registry import ToolMetadata, ToolRegistry
 from ahmad.execution.resolution import (_manual_reconcile, _reconcile_ambiguous,
                                         validate_retry_authority)
@@ -83,6 +84,13 @@ class ExecutionGateway:
                          input_schema={"type": "string"}, output_schema={"type": "object"},
                          implementation_id="ahmad.web-scrape/v1", risk="low"),
             WebScrapeTool(),
+        )
+        self._registry.register(
+            "venv_install",
+            ToolMetadata(name="venv_install", version="1.0", capabilities=("venv_install",),
+                         input_schema={"type": "string"}, output_schema={"type": "object"},
+                         implementation_id="ahmad.venv-install/v1", risk="medium"),
+            VenvInstallTool(root=Path.home() / "ahmad-agent"),
         )
 
     @property

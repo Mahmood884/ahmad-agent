@@ -14,6 +14,7 @@ ALLOWED_TOOL_PREFIXES = (
     "write_file|",
     "scaffold_project|",
     "web_scrape|",
+    "venv_install|",
 )
 
 

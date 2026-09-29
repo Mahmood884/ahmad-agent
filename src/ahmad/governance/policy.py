@@ -11,6 +11,7 @@ ALLOWED_TOOL_PREFIXES = (
     "system_info|",
     "list_dir|",
     "web_search|",
+    "write_file|",
 )
 
 

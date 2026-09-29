@@ -13,6 +13,7 @@ from ahmad.execution.mock_tool import MockTool, ToolResult
 from ahmad.tools.system_info import SystemInfoTool
 from ahmad.tools.list_dir import ListDirTool
 from ahmad.tools.web_search import WebSearchTool
+from ahmad.tools.write_file import WriteFileTool
 from ahmad.execution.registry import ToolMetadata, ToolRegistry
 from ahmad.execution.resolution import (_manual_reconcile, _reconcile_ambiguous,
                                         validate_retry_authority)
@@ -58,6 +59,13 @@ class ExecutionGateway:
                          input_schema={"type": "string"}, output_schema={"type": "object"},
                          implementation_id="ahmad.web-search/v1", risk="low"),
             WebSearchTool(),
+        )
+        self._registry.register(
+            "write_file",
+            ToolMetadata(name="write_file", version="1.0", capabilities=("write_file",),
+                         input_schema={"type": "string"}, output_schema={"type": "object"},
+                         implementation_id="ahmad.write-file/v1", risk="medium"),
+            WriteFileTool(root=Path.home() / "ahmad-agent"),
         )
 
     @property

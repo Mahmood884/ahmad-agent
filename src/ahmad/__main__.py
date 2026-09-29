@@ -31,6 +31,7 @@ Commands:
   /tools             List registered tools
   /providers         List available providers
   /status            Show runtime status
+  /reset             Clear conversation history (this session)
   /clear             Clear screen
   exit, quit, :q     Exit
 
@@ -128,6 +129,7 @@ def _cmd_status(runtime: AhmadRuntime) -> None:
     print(f"  Events: {len(runtime.memory.read_all())}")
     print(f"  Providers: {len(runtime.providers.list())}")
     print(f"  Tools: {len(runtime.gateway.registry.list())}")
+    print(f"  Conversation turns: {len(runtime._get_conversation('default'))}")
 
 
 def repl(argv: list[str] | None = None) -> int:
@@ -176,6 +178,10 @@ def repl(argv: list[str] | None = None) -> int:
             continue
         if line == "/status":
             _cmd_status(runtime)
+            continue
+        if line == "/reset":
+            runtime.reset_conversation()
+            print("  conversation cleared (in-memory)")
             continue
         if line == "/clear":
             print("\033[2J\033[H", end="")

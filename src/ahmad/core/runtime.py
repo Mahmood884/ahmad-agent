@@ -5,6 +5,7 @@ import time
 from dataclasses import dataclass
 
 from ahmad.core.config import load_config
+from ahmad.core.conversation import ConversationContext, sanitize_conversation_id
 from ahmad.core.events import DecisionEvent
 from ahmad.core.types import AgentRequest, Mode, Scope
 from ahmad.execution.gateway import ExecutionGateway
@@ -50,6 +51,8 @@ class AhmadRuntime:
             recovered = self.gateway.recover_orphaned_attempts()
             logger.info("attempt_recovery_complete", extra={"ambiguous_attempts": recovered})
         self.providers = providers or ProviderRegistry()
+        self._conversations_dir = config.data_dir / "conversations"
+        self._conversations: dict[str, ConversationContext] = {}
 
     def handle(self, request: AgentRequest, *, event_id: str | None = None,
                attempt_id: str | None = None) -> ToolResult:
@@ -62,22 +65,37 @@ class AhmadRuntime:
         *,
         scope: Scope = Scope.PERSONAL,
         request_id: str | None = None,
+        conversation_id: str = "default",
     ) -> ProviderOutcome:
-        """Ask a provider for intelligence; route every proposed action back through governance."""
+        """Ask a provider for intelligence; route every proposed action back through governance.
+
+        `conversation_id` selects a bounded, persisted turn history that is
+        prepended to `prompt` before it reaches the provider transport. A
+        conversation with no prior turns renders unchanged — single-shot
+        callers see identical behavior to before this existed.
+        """
         provider = self.providers.get(provider_name)
         if provider is None:
             raise ValueError(f"unknown provider: {provider_name}")
+
+        conversation = self._get_conversation(conversation_id)
 
         provider_request_id = request_id or self._derive_request_id(
             AgentRequest(f"provider:{provider_name}:{prompt}", scope),
             sequence=len(self.memory.read_all()),
         )
+        rendered_prompt = conversation.render_prompt(prompt)
         provider_request = ProviderRequest(
             request_id=provider_request_id,
-            prompt=prompt,
+            prompt=rendered_prompt,
             mode=self.router.route(prompt),
         )
         response = validate_provider_result(provider.generate(provider_request))
+
+        conversation.add_turn("user", prompt)
+        if response.success:
+            conversation.add_turn("assistant", response.text)
+
         if not response.success:
             return ProviderOutcome(provider_request_id, response, ())
 
@@ -92,6 +110,19 @@ class AhmadRuntime:
                 )
             )
         return ProviderOutcome(provider_request_id, response, tuple(results))
+
+    def reset_conversation(self, conversation_id: str = "default") -> None:
+        """Clear in-memory history for a conversation (persisted file is left as-is)."""
+        self._get_conversation(conversation_id).clear()
+
+    def _get_conversation(self, conversation_id: str) -> ConversationContext:
+        conversation_id = sanitize_conversation_id(conversation_id)
+        if conversation_id not in self._conversations:
+            self._conversations[conversation_id] = ConversationContext(
+                conversation_id,
+                path=self._conversations_dir / f"{conversation_id}.jsonl",
+            )
+        return self._conversations[conversation_id]
 
     def _handle_request(
         self,

@@ -12,6 +12,7 @@ from ahmad.core.types import Decision, EffectStatus
 from ahmad.execution.mock_tool import MockTool, ToolResult
 from ahmad.tools.system_info import SystemInfoTool
 from ahmad.tools.list_dir import ListDirTool
+from ahmad.tools.web_search import WebSearchTool
 from ahmad.execution.registry import ToolMetadata, ToolRegistry
 from ahmad.execution.resolution import (_manual_reconcile, _reconcile_ambiguous,
                                         validate_retry_authority)
@@ -50,6 +51,13 @@ class ExecutionGateway:
                          input_schema={"type": "string"}, output_schema={"type": "object"},
                          implementation_id="ahmad.list-dir/v1", risk="low"),
             ListDirTool(),
+        )
+        self._registry.register(
+            "web_search",
+            ToolMetadata(name="web_search", version="1.0", capabilities=("web_search",),
+                         input_schema={"type": "string"}, output_schema={"type": "object"},
+                         implementation_id="ahmad.web-search/v1", risk="low"),
+            WebSearchTool(),
         )
 
     @property

@@ -10,6 +10,7 @@ ALLOWED_TOOL_PREFIXES = (
     "demo:mock|",
     "system_info|",
     "list_dir|",
+    "web_search|",
 )
 
 

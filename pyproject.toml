@@ -7,6 +7,13 @@ name = "ahmad-agent"
 version = "0.1.0"
 description = "Ahmad Agent - local-first governed AI agent runtime"
 requires-python = ">=3.11"
+dependencies = [
+    "sqlcipher3-binary>=0.6,<0.7",
+]
+
+[project.scripts]
+ahmad-sqlite-migrate = "ahmad.memory.sqlite_migrate:main"
+ahmad-dashboard = "ahmad.dashboard:main"
 
 [project.optional-dependencies]
 industrial = [

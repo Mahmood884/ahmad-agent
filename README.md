@@ -140,16 +140,30 @@ Memory tools do not accept a caller-supplied user ID: the MCP server derives
 the partition from its operating-system account. Each account gets a separate
 `~/.local/share/ahmad-agent/memories.sqlite3` database with owner-only file
 permissions. Search is lexical full-text search, not semantic/vector search;
-`memory_forget` deletes one memory by its ID. Memory content and search results
-are redacted from the append-only governance event log; the log records only
-the tool name and an HMAC input digest. The digest key is stored at
-`~/.config/ahmad/digest.key` with owner-only (`0600`) permissions so identical
-memory inputs retain stable digests across gateway restarts.
-Memory deletion enables SQLite `secure_delete`, vacuums the database, and
-checkpoints/truncates WAL files. These measures are not encryption and cannot
-protect a powered-off/copied storage device or guarantee erasure from
-filesystem snapshots and backups. Full database encryption is deferred to
-v0.3.0 so it can be designed together with key storage, rotation, and recovery.
+`memory_forget` deletes one memory by its ID. Memory content and search results are redacted from the append-only governance
+event log; the log records only the tool name and an HMAC input digest. The
+digest key is stored at `~/.config/ahmad/digest.key` with owner-only (`0600`)
+permissions so identical memory inputs retain stable digests across gateway
+restarts. SQLite event and local-memory databases use SQLCipher and a separate
+key at `~/.config/ahmad/encryption.key` (also mode `0600`). Losing that key
+makes the encrypted databases unrecoverable; back it up securely.
+This encryption covers the SQLite event and memory stores only. Conversation
+turn history is currently persisted as plaintext JSONL under
+`data/conversations/`; keep that directory private and do not treat SQLCipher as
+protection for those transcripts. The CLI's default event store is JSONL too.
+
+To convert an existing plaintext SQLite database, stop Ahmad and every process
+using the database, then run:
+
+    ahmad-sqlite-migrate /path/to/database.db --confirm-application-stopped
+
+The migrator verifies schema and row counts before replacing the database and
+preserves a mode-`0600` plaintext backup at `DATABASE.plaintext.bak`. Protect
+that backup as sensitive data and apply your retention/deletion policy to it.
+SQLCipher protects database files at rest; it does not by itself establish
+GDPR compliance or erase plaintext backups, exports, filesystem snapshots, or
+copies held elsewhere. `memory_forget` additionally enables SQLite
+`secure_delete`, vacuums, and checkpoints/truncates WAL files.
 
 CAN and Modbus tools do not transmit CAN frames or expose Modbus write functions.
 Modbus requests require a literal private/loopback IP address, a unit ID,
@@ -182,6 +196,63 @@ Every MCP tool call is routed through ExecutionGateway with a fresh DecisionEven
 
 ---
 
+## Governance dashboard
+
+Run the read-only local dashboard with:
+
+    ahmad-dashboard
+
+It reads the CLI's default `data/events.jsonl` store and serves the newest 100
+events at `http://127.0.0.1:8765` (JSON at `/api/events`). Use `--store PATH`
+to select another JSONL event store and `--port PORT` to change the local
+port. It binds only to a loopback IP and rejects non-local Host headers. It
+does not provide authentication; event data remains accessible to local
+processes and browser sessions on the machine, so protect the event store and
+close the dashboard when it is not needed.
+
+## Multi-agent coordination
+
+The bounded coordinator lets registered providers exchange analysis without
+granting agents execution authority:
+
+    from ahmad.agents.coordinator import AgentSpec, MultiAgentCoordinator
+
+    coordinator = MultiAgentCoordinator(runtime)
+    result = coordinator.run(
+        "Review this design",
+        [
+            AgentSpec("planner", "planner", "hermes"),
+            AgentSpec("critic", "critic", "hermes"),
+        ],
+        rounds=2,
+    )
+    print(result.transcript)
+
+Each agent ID must be unique and each provider must already be registered on
+the runtime. Rounds, turns, transcript length, and per-turn output are bounded.
+Provider-proposed actions are counted for reporting but never executed; any
+real side effect must still be separately submitted through the governed
+runtime.
+
+## Conversations, streaming, and cost
+
+Provider conversations retain bounded turns by conversation ID. The REPL
+streams text as the provider emits it when the configured transport supports
+streaming; other provider adapters may fall back to a single completed chunk.
+`AhmadRuntime.stream_provider_request()` exposes the same interface to callers.
+Final proposed actions continue through the normal governance gateway.
+
+Provider-call records are appended to `data/provider_costs.jsonl` without
+prompts or generated text. Usage and cost are marked as provider-reported when
+metadata supplies them. When token usage is missing, configured per-provider
+rates can produce a clearly marked character-based estimate; otherwise cost
+is recorded as unknown. Rates are passed with `provider_rates` when creating
+`AhmadRuntime`; estimates are not billing statements.
+Conversation transcripts contain the prompt and response and are not encrypted
+by this feature; protect and delete them according to your data-retention
+requirements. The REPL's `/reset` clears the active in-memory context; it does
+not erase the corresponding persisted transcript file.
+
 ## Providers
 
 | Provider | Transport | Status |
@@ -198,9 +269,9 @@ Providers must be explicitly registered. Selection grants no authority.
 
     pytest tests/ -v
 
-96 tests covering governance, event sourcing, attempt lifecycle,
-provider adapters, governed tools, CLI, MCP server, concurrency,
-and corrupted JSONL recovery.
+Tests cover governance, event sourcing, attempt lifecycle, provider adapters,
+governed tools, CLI, MCP server, concurrency, encrypted SQLite/migration,
+streaming, cost accounting, and corrupted JSONL recovery.
 
 ---
 

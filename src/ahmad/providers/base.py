@@ -2,7 +2,7 @@
 
 from dataclasses import dataclass, field
 import json
-from typing import Callable, Protocol
+from typing import Callable, Iterator, Protocol
 
 from ahmad.core.types import Mode
 
@@ -70,6 +70,8 @@ class Provider(Protocol):
 
     def generate(self, request: ProviderRequest) -> ProviderResult: ...
 
+    def generate_stream(self, request: ProviderRequest) -> Iterator[str]: ...
+
 
 class ProviderAdapter:
     """Provider adapter requiring an explicitly supplied transport."""
@@ -105,6 +107,30 @@ class ProviderAdapter:
                 metadata=dict(result.metadata),
             ))
         return validate_provider_result(ProviderResult(provider=self.name, success=True, text=result))
+
+    def generate_stream(self, request: ProviderRequest) -> Iterator[str]:
+        """Yield provider text and return the complete result as the generator value."""
+        if self._transport is None:
+            raise RuntimeError(f"{self.name} transport is not configured")
+
+        stream = getattr(self._transport, "stream", None)
+        if callable(stream):
+            chunks: list[str] = []
+            for chunk in stream(request):
+                if not isinstance(chunk, str):
+                    raise ValueError("provider stream yielded a non-text chunk")
+                chunks.append(chunk)
+                yield chunk
+            result = ProviderResult(
+                provider=self.name,
+                success=True,
+                text="".join(chunks),
+            )
+        else:
+            result = self.generate(request)
+            if result.text:
+                yield result.text
+        return validate_provider_result(result)
 
 
 def validate_provider_result(result: ProviderResult) -> ProviderResult:

@@ -3,11 +3,16 @@ from __future__ import annotations
 
 import os
 import re
-import sqlite3
 from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Iterator
+from typing import Any, Iterator
+
+from ahmad.memory.sqlite_encryption import (
+    connect_encrypted,
+    load_encryption_key,
+    require_sqlcipher,
+)
 
 
 class LocalMemoryStore:
@@ -22,6 +27,7 @@ class LocalMemoryStore:
         path: str | Path | None = None,
         *,
         owner_id: str | None = None,
+        key_path: str | Path | None = None,
     ) -> None:
         self.path = (
             Path(path).expanduser()
@@ -29,9 +35,8 @@ class LocalMemoryStore:
             else Path.home() / ".local" / "share" / "ahmad-agent" / "memories.sqlite3"
         )
         self.owner_id = owner_id or self._current_owner_id()
+        self._key = load_encryption_key(key_path)
         self.path.parent.mkdir(parents=True, exist_ok=True)
-        self.path.touch(mode=0o600, exist_ok=True)
-        self.path.chmod(0o600)
         with self._connection() as connection:
             connection.execute(
                 """
@@ -60,15 +65,19 @@ class LocalMemoryStore:
             return f"uid:{os.getuid()}"
         return f"user:{Path.home().resolve()}"
 
-    def _connect(self) -> sqlite3.Connection:
-        connection = sqlite3.connect(self.path, timeout=10)
-        connection.row_factory = sqlite3.Row
+    def _connect(self) -> Any:
+        connection = connect_encrypted(
+            self.path,
+            self._key,
+            timeout=10,
+            row_factory=require_sqlcipher().Row,
+        )
         connection.execute("PRAGMA secure_delete=ON")
         connection.execute("PRAGMA foreign_keys=ON")
         return connection
 
     @contextmanager
-    def _connection(self) -> Iterator[sqlite3.Connection]:
+    def _connection(self) -> Iterator[Any]:
         connection = self._connect()
         try:
             with connection:
@@ -147,10 +156,14 @@ class LocalMemoryStore:
             if journal_mode.lower() == "wal":
                 checkpoint = connection.execute("PRAGMA wal_checkpoint(TRUNCATE)").fetchone()
                 if checkpoint[0]:
-                    raise sqlite3.OperationalError("could not checkpoint WAL before secure vacuum")
+                    raise require_sqlcipher().OperationalError(
+                        "could not checkpoint WAL before secure vacuum"
+                    )
             connection.execute("VACUUM")
             if journal_mode.lower() == "wal":
                 checkpoint = connection.execute("PRAGMA wal_checkpoint(TRUNCATE)").fetchone()
                 if checkpoint[0]:
-                    raise sqlite3.OperationalError("could not truncate WAL after secure vacuum")
+                    raise require_sqlcipher().OperationalError(
+                        "could not truncate WAL after secure vacuum"
+                    )
         return True

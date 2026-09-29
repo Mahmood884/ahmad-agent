@@ -3,6 +3,8 @@ import json
 import logging
 import time
 from dataclasses import dataclass
+from pathlib import Path
+from typing import Iterator, Mapping
 
 from ahmad.core.config import load_config
 from ahmad.core.conversation import ConversationContext, sanitize_conversation_id
@@ -15,6 +17,7 @@ from ahmad.memory.sqlite_store import SQLiteEventStore
 from ahmad.memory.store import EventStore
 from ahmad.orchestration.router import Router
 from ahmad.providers.base import ProviderRequest, ProviderResult, validate_provider_result
+from ahmad.providers.costs import ProviderCostLedger
 from ahmad.providers.registry import ProviderRegistry
 
 logger = logging.getLogger("ahmad.runtime")
@@ -41,6 +44,9 @@ class AhmadRuntime:
         providers: ProviderRegistry | None = None,
         *,
         recover_in_flight_on_startup: bool = False,
+        cost_ledger_path: Path | None = None,
+        provider_rates: Mapping[str, Mapping[str, float]] | None = None,
+        conversations_dir: Path | None = None,
     ) -> None:
         config = load_config()
         self.router = Router()
@@ -51,8 +57,13 @@ class AhmadRuntime:
             recovered = self.gateway.recover_orphaned_attempts()
             logger.info("attempt_recovery_complete", extra={"ambiguous_attempts": recovered})
         self.providers = providers or ProviderRegistry()
-        self._conversations_dir = config.data_dir / "conversations"
+        self._conversations_dir = conversations_dir or config.data_dir / "conversations"
         self._conversations: dict[str, ConversationContext] = {}
+        self.cost_ledger = ProviderCostLedger(
+            cost_ledger_path or config.data_dir / "provider_costs.jsonl",
+            provider_rates,
+        )
+        self.last_stream_outcome: ProviderOutcome | None = None
 
     def handle(self, request: AgentRequest, *, event_id: str | None = None,
                attempt_id: str | None = None) -> ToolResult:
@@ -90,18 +101,101 @@ class AhmadRuntime:
             prompt=rendered_prompt,
             mode=self.router.route(prompt),
         )
-        response = validate_provider_result(provider.generate(provider_request))
-
+        try:
+            response = validate_provider_result(provider.generate(provider_request))
+        except Exception:
+            self.cost_ledger.record(provider.name, provider_request_id, rendered_prompt, None)
+            raise
+        self.cost_ledger.record(provider.name, provider_request_id, rendered_prompt, response)
         conversation.add_turn("user", prompt)
+        return self._complete_provider_response(
+            provider, response, provider_request_id, conversation, scope
+        )
+
+    def stream_provider_request(
+        self,
+        provider_name: str,
+        prompt: str,
+        *,
+        scope: Scope = Scope.PERSONAL,
+        request_id: str | None = None,
+        conversation_id: str = "default",
+    ) -> Iterator[str]:
+        """Yield response text as produced, then govern any final proposed actions.
+
+        After iteration completes, ``last_stream_outcome`` contains the same
+        ProviderOutcome shape returned by ``handle_provider_request``.
+        """
+        self.last_stream_outcome = None
+        provider = self.providers.get(provider_name)
+        if provider is None:
+            raise ValueError(f"unknown provider: {provider_name}")
+
+        conversation = self._get_conversation(conversation_id)
+        provider_request_id = request_id or self._derive_request_id(
+            AgentRequest(f"provider:{provider_name}:{prompt}", scope),
+            sequence=len(self.memory.read_all()),
+        )
+        rendered_prompt = conversation.render_prompt(prompt)
+        provider_request = ProviderRequest(
+            request_id=provider_request_id,
+            prompt=rendered_prompt,
+            mode=self.router.route(prompt),
+        )
+        conversation.add_turn("user", prompt)
+        chunks: list[str] = []
+        try:
+            generate_stream = getattr(provider, "generate_stream", None)
+            if callable(generate_stream):
+                stream = iter(generate_stream(provider_request))
+                response = None
+                while True:
+                    try:
+                        chunk = next(stream)
+                    except StopIteration as stop:
+                        response = stop.value
+                        break
+                    if not isinstance(chunk, str):
+                        raise ValueError("provider stream yielded a non-text chunk")
+                    chunks.append(chunk)
+                    yield chunk
+                if response is None:
+                    response = ProviderResult(provider.name, True, "".join(chunks))
+            else:
+                response = validate_provider_result(provider.generate(provider_request))
+                if response.text:
+                    chunks.append(response.text)
+                    yield response.text
+            response = validate_provider_result(response)
+        except Exception:
+            self.cost_ledger.record(provider.name, provider_request_id, rendered_prompt, None)
+            raise
+
+        self.cost_ledger.record(provider.name, provider_request_id, rendered_prompt, response)
+        self.last_stream_outcome = self._complete_provider_response(
+            provider, response, provider_request_id, conversation, scope
+        )
+
+    def reset_conversation(self, conversation_id: str = "default") -> None:
+        """Clear in-memory history for a conversation (persisted file is left as-is)."""
+        self._get_conversation(conversation_id).clear()
+
+    def _complete_provider_response(
+        self,
+        provider,
+        response: ProviderResult,
+        request_id: str,
+        conversation: ConversationContext,
+        scope: Scope,
+    ) -> ProviderOutcome:
         if response.success:
             conversation.add_turn("assistant", response.text)
-
         if not response.success:
-            return ProviderOutcome(provider_request_id, response, ())
+            return ProviderOutcome(request_id, response, ())
 
         results: list[ToolResult] = []
         for index, proposal in enumerate(response.proposed_actions):
-            proposal_id = f"{provider_request_id}:proposal:{index}"
+            proposal_id = f"{request_id}:proposal:{index}"
             results.append(
                 self._handle_request(
                     AgentRequest(proposal.action, scope, request_id=proposal_id),
@@ -109,11 +203,7 @@ class AhmadRuntime:
                     source=f"provider:{provider.name}",
                 )
             )
-        return ProviderOutcome(provider_request_id, response, tuple(results))
-
-    def reset_conversation(self, conversation_id: str = "default") -> None:
-        """Clear in-memory history for a conversation (persisted file is left as-is)."""
-        self._get_conversation(conversation_id).clear()
+        return ProviderOutcome(request_id, response, tuple(results))
 
     def _get_conversation(self, conversation_id: str) -> ConversationContext:
         conversation_id = sanitize_conversation_id(conversation_id)

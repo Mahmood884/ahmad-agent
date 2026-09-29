@@ -1,16 +1,22 @@
 """Append-only SQLite WAL event store with durable uniqueness claims."""
 
 import json
-import sqlite3
 from pathlib import Path
 from typing import Any
 
+from ahmad.memory.sqlite_encryption import connect_encrypted, load_encryption_key
 from ahmad.memory.store import _RESOLUTION_WRITE_TOKEN, _event_type_value
 
 
 class SQLiteEventStore:
-    def __init__(self, path: str | Path = "data/ahmad.db") -> None:
+    def __init__(
+        self,
+        path: str | Path = "data/ahmad.db",
+        *,
+        key_path: str | Path | None = None,
+    ) -> None:
         self.path = Path(path)
+        self._key = load_encryption_key(key_path)
         self.path.parent.mkdir(parents=True, exist_ok=True)
         with self._connect() as connection:
             connection.execute("""CREATE TABLE IF NOT EXISTS events (
@@ -28,8 +34,8 @@ class SQLiteEventStore:
                 PRIMARY KEY(namespace, claim_key),
                 FOREIGN KEY(event_id) REFERENCES events(event_id))""")
 
-    def _connect(self) -> sqlite3.Connection:
-        connection = sqlite3.connect(self.path, timeout=30)
+    def _connect(self) -> Any:
+        connection = connect_encrypted(self.path, self._key, timeout=30)
         connection.execute("PRAGMA journal_mode=WAL")
         connection.execute("PRAGMA synchronous=FULL")
         connection.execute("PRAGMA foreign_keys=ON")

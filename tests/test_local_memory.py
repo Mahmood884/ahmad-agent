@@ -1,5 +1,4 @@
 import json
-import sqlite3
 from pathlib import Path
 
 import pytest
@@ -32,7 +31,7 @@ def test_memory_is_partitioned_by_owner_and_forget_is_scoped(
     database = tmp_path / "memories.sqlite3"
     user_one = LocalMemoryStore(database, owner_id="uid:1001")
     user_two = LocalMemoryStore(database, owner_id="uid:1002")
-    connection = sqlite3.connect(database)
+    connection = user_one._connect()
     connection.execute(f"PRAGMA journal_mode={journal_mode}")
     connection.close()
     memory_id = user_one.add("private workshop detail")

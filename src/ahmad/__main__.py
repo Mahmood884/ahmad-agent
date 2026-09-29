@@ -193,11 +193,13 @@ def repl(argv: list[str] | None = None) -> int:
             continue
 
         try:
-            outcome = runtime.handle_provider_request(args.provider, line)
             print()
-            print(f"  {outcome.response.text}")
+            print("  ", end="", flush=True)
+            for chunk in runtime.stream_provider_request(args.provider, line):
+                print(chunk, end="", flush=True)
             print()
-            if outcome.tool_results:
+            outcome = runtime.last_stream_outcome
+            if outcome is not None and outcome.tool_results:
                 for tr in outcome.tool_results:
                     marker = "✅" if tr.success else "❌"
                     print(f"  {marker} tool={tr.tool} output={tr.output[:120]}")

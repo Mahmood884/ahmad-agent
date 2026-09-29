@@ -71,17 +71,6 @@ def _policy(
     tool_binding_id=None,
     network_approved=False,
 ):
-    action_requests_network = False
-    if action.startswith("component_lib:"):
-        try:
-            arguments = json.loads(action[len("component_lib:"):])
-            action_requests_network = (
-                isinstance(arguments, dict)
-                and arguments.get("allow_network") is True
-            )
-        except json.JSONDecodeError:
-            pass
-    network_approved = network_approved and action_requests_network
     policy_decision = _base_policy.evaluate(
         action,
         mode,

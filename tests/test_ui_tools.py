@@ -276,3 +276,42 @@ def test_mcp_component_network_approval_is_rechecked_by_gateway(
     assert responses[0]["result"]["isError"]
     assert not responses[1]["result"].get("isError", False)
     assert calls == [["npx", "--yes", "shadcn@latest", "add", "--yes", "button"]]
+
+
+def _mcp_server_with_test_store(tmp_path: Path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    server = importlib.import_module("ahmad.mcp.server")
+    event_store = MemoryStore(tmp_path / "events.jsonl")
+    monkeypatch.setattr(server, "_store", event_store)
+    monkeypatch.setattr(server._gateway, "memory", event_store)
+    responses = []
+    monkeypatch.setattr(server, "send_response", responses.append)
+    return server, responses
+
+
+def test_mcp_policy_rejects_unregistered_binding(tmp_path: Path, monkeypatch):
+    server, responses = _mcp_server_with_test_store(tmp_path, monkeypatch)
+
+    server._dispatch_governed(
+        "unregistered-binding",
+        "system_info",
+        "system_info|unregistered",
+    )
+
+    assert responses[0]["result"]["isError"]
+    assert responses[0]["result"]["content"][0]["text"] == "EXECUTION_DENIED"
+
+
+def test_mcp_policy_rejects_network_binding_without_approval(tmp_path: Path, monkeypatch):
+    server, responses = _mcp_server_with_test_store(tmp_path, monkeypatch)
+    component_binding = server._TOOL_BINDINGS["component_lib"]
+
+    server._dispatch_governed(
+        "network-not-approved",
+        "component_lib",
+        component_binding,
+        network_approved=False,
+    )
+
+    assert responses[0]["result"]["isError"]
+    assert responses[0]["result"]["content"][0]["text"] == "EXECUTION_DENIED"

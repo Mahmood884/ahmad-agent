@@ -1,3 +1,7 @@
+import hashlib
+import hmac
+import json
+
 import pytest
 
 from ahmad.core.types import Decision, Mode, Scope
@@ -7,6 +11,32 @@ from ahmad.execution.mock_tool import ToolResult
 from ahmad.execution.registry import Capability, CapabilityRegistry, ToolMetadata
 from ahmad.governance.policy import MOCK_TOOL_BINDING_ID, PolicyEngine
 from ahmad.memory.store import MemoryStore
+
+
+def test_sensitive_input_digest_is_stable_across_gateway_restart(tmp_path):
+    digest_key_path = tmp_path / ".config" / "ahmad" / "digest.key"
+    action = 'memory_add:{"content":"stable private note"}'
+    encoded_input = json.dumps(
+        {"action": action}, sort_keys=True, separators=(",", ":")
+    ).encode("utf-8")
+
+    first_gateway = ExecutionGateway(
+        MemoryStore(tmp_path / "events-first.jsonl"),
+        digest_key_path=digest_key_path,
+    )
+    first_digest = hmac.new(
+        first_gateway._sensitive_digest_key, encoded_input, hashlib.sha256
+    ).hexdigest()
+    second_gateway = ExecutionGateway(
+        MemoryStore(tmp_path / "events-second.jsonl"),
+        digest_key_path=digest_key_path,
+    )
+    second_digest = hmac.new(
+        second_gateway._sensitive_digest_key, encoded_input, hashlib.sha256
+    ).hexdigest()
+
+    assert first_digest == second_digest
+    assert digest_key_path.stat().st_mode & 0o777 == 0o600
 
 
 def test_registering_capability_does_not_authorize_it(tmp_path):

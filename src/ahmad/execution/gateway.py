@@ -5,7 +5,9 @@ import hashlib
 import hmac
 import inspect
 import json
+import os
 import secrets
+import stat
 import time
 
 from ahmad.core.attempts import (AttemptAmbiguousEvent, AttemptCreatedEvent,
@@ -31,15 +33,59 @@ from ahmad.memory.store import EventStore
 from ahmad.memory.store import _resolution_writer_for
 
 
+def _load_or_create_digest_key(path: str | Path | None = None) -> bytes:
+    key_path = (
+        Path(path).expanduser()
+        if path is not None
+        else Path.home() / ".config" / "ahmad" / "digest.key"
+    )
+    key_path.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+    nofollow = getattr(os, "O_NOFOLLOW", 0)
+    try:
+        descriptor = os.open(
+            key_path,
+            os.O_WRONLY | os.O_CREAT | os.O_EXCL | nofollow,
+            0o600,
+        )
+    except FileExistsError:
+        descriptor = os.open(key_path, os.O_RDONLY | nofollow)
+        try:
+            file_stat = os.fstat(descriptor)
+            if not stat.S_ISREG(file_stat.st_mode):
+                raise ValueError("digest key path must be a regular file")
+            if hasattr(os, "getuid") and file_stat.st_uid != os.getuid():
+                raise PermissionError("digest key file must be owned by the current user")
+            if file_stat.st_size != 32:
+                raise ValueError("digest key file must contain exactly 32 bytes")
+            key = os.read(descriptor, 33)
+            if len(key) != 32:
+                raise ValueError("digest key file must contain exactly 32 bytes")
+            os.fchmod(descriptor, 0o600)
+            return key
+        finally:
+            os.close(descriptor)
+    else:
+        key = secrets.token_bytes(32)
+        try:
+            os.fchmod(descriptor, 0o600)
+            written = 0
+            while written < len(key):
+                written += os.write(descriptor, key[written:])
+            os.fsync(descriptor)
+            return key
+        finally:
+            os.close(descriptor)
+
+
 class ExecutionGateway:
     """Revalidate policy and binding, durably mark dispatch, then invoke the tool."""
 
     def __init__(self, memory: EventStore, policy: PolicyEngine | None = None,
-                 manual_authorizer=None):
+                 manual_authorizer=None, *, digest_key_path: str | Path | None = None):
         self.memory = memory
         self.policy = policy or PolicyEngine()
         self._manual_authorizer = manual_authorizer
-        self._sensitive_digest_key = secrets.token_bytes(32)
+        self._sensitive_digest_key = _load_or_create_digest_key(digest_key_path)
         self.__resolution_writer = _resolution_writer_for(memory)
         self._registry = ToolRegistry()
         self._registry.register(

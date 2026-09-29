@@ -15,7 +15,9 @@ from ahmad.core.types import Decision, Mode, Scope
 from ahmad.execution.gateway import ExecutionGateway
 from ahmad.execution.registry import ToolMetadata
 from ahmad.memory.store import MemoryStore
+from ahmad.tools.list_dir import ListDirTool
 from ahmad.tools.read_file import ReadFileTool
+from ahmad.tools.system_info import SystemInfoTool
 
 
 # ─── Runtime (init once) ──────────────────────────────────────────────
@@ -31,21 +33,48 @@ _read_file_metadata = ToolMetadata(
     implementation_id="read_file-v1",
 )
 _gateway.registry.register("read_file", _read_file_metadata, ReadFileTool())
-
-# Read-only policy: allow read_file under $HOME with matching binding
 _READ_BINDING = _gateway.binding_id_for_action("read_file")
 
+# Register list_dir
+_list_dir_metadata = ToolMetadata(
+    name="list_dir",
+    version="1.0",
+    capabilities=("fs:list",),
+    risk="low",
+    implementation_id="list_dir-v1",
+)
+_gateway.registry.register("list_dir", _list_dir_metadata, ListDirTool())
+_LIST_DIR_BINDING = _gateway.binding_id_for_action("list_dir")
 
+# Register system_info
+_system_info_metadata = ToolMetadata(
+    name="system_info",
+    version="1.0",
+    capabilities=("system:read",),
+    risk="low",
+    implementation_id="system_info-v1",
+)
+_gateway.registry.register("system_info", _system_info_metadata, SystemInfoTool())
+_SYSTEM_INFO_BINDING = _gateway.binding_id_for_action("system_info")
+
+
+# Read-only policy: allow each tool only under its own exact binding fingerprint
 def _policy(action, mode, scope, *, source=None, tool_binding_id=None):
-    allowed = (
-        action.startswith("read_file:")
-        and scope is Scope.PERSONAL
-        and tool_binding_id == _READ_BINDING
+    allowed = scope is Scope.PERSONAL and (
+        (action.startswith("read_file:") and tool_binding_id == _READ_BINDING)
+        or (
+            (action == "list_dir" or action.startswith("list_dir:"))
+            and tool_binding_id == _LIST_DIR_BINDING
+        )
+        or (
+            (action == "system_info" or action.startswith("system_info:"))
+            and tool_binding_id == _SYSTEM_INFO_BINDING
+        )
     )
     return Decision(
         action, mode, scope,
         allowed,
-        "mcp: read_file approval" if allowed else "default deny",
+        "mcp: read-only tool approval" if allowed else "default deny",
         source=source,
         tool_binding_id=tool_binding_id,
     )
@@ -79,24 +108,13 @@ def _err(req_id, text: str) -> None:
     })
 
 
-# ─── Tool handlers ───────────────────────────────────────────────────
-def _call_ping(req_id) -> None:
-    _ok(req_id, "PONG from ahmad-agent")
-
-
-def _call_read_file(req_id, arguments: dict) -> None:
-    path = arguments.get("path")
-    if not path:
-        _err(req_id, "missing path")
-        return
-
-    action = f"read_file:{path}"
+def _dispatch_governed(req_id, action: str, tool_binding_id: str | None) -> None:
+    """Shared decision → gateway.execute path for any governed, read-only tool call."""
     decision = _gateway.policy.evaluate(
         action, Mode.GENERAL, Scope.PERSONAL,
-        tool_binding_id=_READ_BINDING,
+        tool_binding_id=tool_binding_id,
     )
 
-    # Create a unique event pair
     ts = int(time.time() * 1000)
     eid = f"mcp:{req_id}:{ts}"
     rid = f"mcp-req:{req_id}:{ts}"
@@ -121,6 +139,31 @@ def _call_read_file(req_id, arguments: dict) -> None:
         _ok(req_id, result.output)
     else:
         _err(req_id, result.output)
+
+
+# ─── Tool handlers ───────────────────────────────────────────────────
+def _call_ping(req_id) -> None:
+    _ok(req_id, "PONG from ahmad-agent")
+
+
+def _call_read_file(req_id, arguments: dict) -> None:
+    path = arguments.get("path")
+    if not path:
+        _err(req_id, "missing path")
+        return
+    _dispatch_governed(req_id, f"read_file:{path}", _READ_BINDING)
+
+
+def _call_list_dir(req_id, arguments: dict) -> None:
+    path = arguments.get("path") or ""
+    action = f"list_dir:{path}" if path else "list_dir"
+    _dispatch_governed(req_id, action, _LIST_DIR_BINDING)
+
+
+def _call_system_info(req_id, arguments: dict) -> None:
+    section = arguments.get("section") or ""
+    action = f"system_info:{section}" if section else "system_info"
+    _dispatch_governed(req_id, action, _SYSTEM_INFO_BINDING)
 
 
 # ─── Request dispatcher ──────────────────────────────────────────────
@@ -164,6 +207,32 @@ def handle_request(request: dict) -> None:
                             "required": ["path"],
                         },
                     },
+                    {
+                        "name": "list_dir",
+                        "description": "List a directory's entries (governed, rooted at $HOME).",
+                        "inputSchema": {
+                            "type": "object",
+                            "properties": {
+                                "path": {
+                                    "type": "string",
+                                    "description": "Directory path (default: $HOME)",
+                                }
+                            },
+                        },
+                    },
+                    {
+                        "name": "system_info",
+                        "description": "Read-only system info (cpu, memory, disk, os).",
+                        "inputSchema": {
+                            "type": "object",
+                            "properties": {
+                                "section": {
+                                    "type": "string",
+                                    "description": "cpu | memory | disk | os (default: all)",
+                                }
+                            },
+                        },
+                    },
                 ]
             },
         })
@@ -174,6 +243,10 @@ def handle_request(request: dict) -> None:
             _call_ping(req_id)
         elif name == "read_file":
             _call_read_file(req_id, args)
+        elif name == "list_dir":
+            _call_list_dir(req_id, args)
+        elif name == "system_info":
+            _call_system_info(req_id, args)
         else:
             send_response({
                 "jsonrpc": "2.0",

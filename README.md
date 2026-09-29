@@ -142,7 +142,9 @@ the partition from its operating-system account. Each account gets a separate
 permissions. Search is lexical full-text search, not semantic/vector search;
 `memory_forget` deletes one memory by its ID. Memory content and search results
 are redacted from the append-only governance event log; the log records only
-the tool name and a process-keyed input digest.
+the tool name and an HMAC input digest. The digest key is stored at
+`~/.config/ahmad/digest.key` with owner-only (`0600`) permissions so identical
+memory inputs retain stable digests across gateway restarts.
 Memory deletion enables SQLite `secure_delete`, vacuums the database, and
 checkpoints/truncates WAL files. These measures are not encryption and cannot
 protect a powered-off/copied storage device or guarantee erasure from

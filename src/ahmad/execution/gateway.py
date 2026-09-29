@@ -16,6 +16,7 @@ from ahmad.tools.list_dir import ListDirTool
 from ahmad.tools.web_search import WebSearchTool
 from ahmad.tools.write_file import WriteFileTool
 from ahmad.tools.scaffold_project import ScaffoldProjectTool
+from ahmad.tools.web_scrape import WebScrapeTool
 from ahmad.execution.registry import ToolMetadata, ToolRegistry
 from ahmad.execution.resolution import (_manual_reconcile, _reconcile_ambiguous,
                                         validate_retry_authority)
@@ -75,6 +76,13 @@ class ExecutionGateway:
                          input_schema={"type": "string"}, output_schema={"type": "object"},
                          implementation_id="ahmad.scaffold/v1", risk="medium"),
             ScaffoldProjectTool(root=Path.home() / "ahmad-agent"),
+        )
+        self._registry.register(
+            "web_scrape",
+            ToolMetadata(name="web_scrape", version="1.0", capabilities=("web_scrape",),
+                         input_schema={"type": "string"}, output_schema={"type": "object"},
+                         implementation_id="ahmad.web-scrape/v1", risk="low"),
+            WebScrapeTool(),
         )
 
     @property

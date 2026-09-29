@@ -13,6 +13,7 @@ ALLOWED_TOOL_PREFIXES = (
     "web_search|",
     "write_file|",
     "scaffold_project|",
+    "web_scrape|",
 )
 
 

@@ -20,3 +20,6 @@ mutants/
 # runtime backups
 *.bak
 *.orig
+
+# repo dumps (contain runtime data)
+project_dump.txt

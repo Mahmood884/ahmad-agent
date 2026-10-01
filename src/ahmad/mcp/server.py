@@ -271,7 +271,20 @@ def handle_request(request: dict) -> None:
                                     "description": "Absolute or relative path to the file",
                                 }
                             },
-                            "required": ["path"],
+                            "required": ["path",
+          {
+            "name": "agent_memory",
+            "description": "Save, retrieve, list, or delete long-term agent memories (preferences, paths, api keys, etc.).",
+            "inputSchema": {
+              "type": "object",
+              "properties": {
+                "action": {"type": "string", "enum": ["get", "set", "list", "delete"], "description": "The memory action to perform"},
+                "key": {"type": "string", "description": "The memory key (required for get/set/delete)"},
+                "value": {"type": "string", "description": "The value to save (required for set)"}
+              },
+              "required": ["action"]
+            }
+          }],
                         },
                     },
                     {

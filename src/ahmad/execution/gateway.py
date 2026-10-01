@@ -22,6 +22,7 @@ from ahmad.tools.write_file import WriteFileTool
 from ahmad.tools.scaffold_project import ScaffoldProjectTool
 from ahmad.tools.web_scrape import WebScrapeTool
 from ahmad.tools.venv_install import VenvInstallTool
+from ahmad.tools.agent_memory import AgentMemoryTool
 from ahmad.tools.ui_tools import ComponentLibraryTool, GenerateUITool, ThemePickerTool
 from ahmad.tools.local_memory import MemoryAddTool, MemoryForgetTool, MemorySearchTool
 from ahmad.tools.instrumentation import CanReadTool, CalibrateSensorTool, ModbusReadTool
@@ -144,6 +145,13 @@ class ExecutionGateway:
                          input_schema={"type": "string"}, output_schema={"type": "object"},
                          implementation_id="ahmad.venv-install/v1", risk="medium"),
             VenvInstallTool(root=Path.home() / "ahmad-agent"),
+        )
+        self._registry.register(
+            "agent_memory",
+            ToolMetadata(name="agent_memory", version="1.0", capabilities=("agent_memory",),
+                         input_schema={"type": "string"}, output_schema={"type": "object"},
+                         implementation_id="ahmad.memory/v1", risk="low"),
+            AgentMemoryTool(),
         )
         self._registry.register(
             "theme_picker",

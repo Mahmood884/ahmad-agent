@@ -15,6 +15,7 @@ ALLOWED_TOOL_PREFIXES = (
     "scaffold_project|",
     "web_scrape|",
     "venv_install|",
+    "agent_memory|",
     "theme_picker|",
     "generate_ui|",
     "component_lib|",

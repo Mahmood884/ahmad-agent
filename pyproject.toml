@@ -16,6 +16,10 @@ ahmad-sqlite-migrate = "ahmad.memory.sqlite_migrate:main"
 ahmad-dashboard = "ahmad.dashboard:main"
 
 [project.optional-dependencies]
+dev = [
+    "mypy>=1.15",
+    "pyrefly>=0.20",
+]
 industrial = [
     "python-can>=4.4,<5",
     "pymodbus>=3.8,<4",
@@ -33,3 +37,19 @@ runner = "python -m pytest -x -q"
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 norecursedirs = ["mutants", ".venv", "build", "dist", ".git", "__pycache__"]
+
+[tool.mypy]
+python_version = "3.11"
+files = ["src"]
+mypy_path = "src"
+check_untyped_defs = true
+show_error_codes = true
+warn_unused_ignores = true
+
+[tool.pyrefly]
+project-includes = ["src"]
+search-path = ["src"]
+python-version = "3.11.0"
+preset = "legacy"
+check-unannotated-defs = true
+infer-return-types = "never"

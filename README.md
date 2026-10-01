@@ -273,6 +273,21 @@ Tests cover governance, event sourcing, attempt lifecycle, provider adapters,
 governed tools, CLI, MCP server, concurrency, encrypted SQLite/migration,
 streaming, cost accounting, and corrupted JSONL recovery.
 
+## Type checking
+
+Install the optional development checkers with:
+
+    .venv/bin/pip install -e ".[dev]"
+
+Run both checkers against the application source:
+
+    .venv/bin/mypy
+    .venv/bin/pyrefly check
+
+Mypy and Pyrefly are intentionally configured together during the gradual
+adoption of Pyrefly. They may report different diagnostics; review both rather
+than treating one checker as a replacement for the other.
+
 ---
 
 ## Status

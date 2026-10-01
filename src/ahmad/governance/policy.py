@@ -24,6 +24,7 @@ ALLOWED_TOOL_PREFIXES = (
     "can_read|",
     "modbus_read|",
     "calibrate_sensor|",
+    "rasool_feed_read|",
 )
 
 

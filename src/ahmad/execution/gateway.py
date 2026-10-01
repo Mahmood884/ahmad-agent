@@ -25,6 +25,7 @@ from ahmad.tools.venv_install import VenvInstallTool
 from ahmad.tools.ui_tools import ComponentLibraryTool, GenerateUITool, ThemePickerTool
 from ahmad.tools.local_memory import MemoryAddTool, MemoryForgetTool, MemorySearchTool
 from ahmad.tools.instrumentation import CanReadTool, CalibrateSensorTool, ModbusReadTool
+from ahmad.tools.rasool_feed_read import RasoolFeedReadTool
 from ahmad.execution.registry import ToolMetadata, ToolRegistry
 from ahmad.execution.resolution import (_manual_reconcile, _reconcile_ambiguous,
                                         validate_retry_authority)
@@ -209,6 +210,15 @@ class ExecutionGateway:
                          input_schema={"type": "object"}, output_schema={"type": "object"},
                          implementation_id="ahmad.sensor-fit/v1", risk="low"),
             CalibrateSensorTool(),
+        )
+        self._registry.register(
+            "rasool_feed_read",
+            ToolMetadata(name="rasool_feed_read", version="1.0",
+                         capabilities=("rasool:feed:read",),
+                         input_schema={"type": "object"}, output_schema={"type": "object"},
+                         implementation_id="ahmad.rasool-feed-read/v1", risk="low",
+                         failure_is_no_effect=True),
+            RasoolFeedReadTool(),
         )
 
     @property

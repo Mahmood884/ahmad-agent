@@ -48,8 +48,10 @@ class RasoolBridgeTool:
     MAX_OUTPUT_CHARS = 8000
     TIMEOUT_S = 30
 
-    _ALLOWED_ACTIONS = frozenset({"status", "digest", "feed_query"})
-    _ALLOWED_KEYS = frozenset({"action", "limit", "source", "hours"})
+    _ALLOWED_ACTIONS = frozenset({"status", "digest", "feed_query", "live_search"})
+    _ALLOWED_KEYS = frozenset({"action", "limit", "source", "hours", "query", "max", "sort"})
+    _MAX_SEARCH = 30
+    _SORT_CHOICES = frozenset({"stars", "updated", "forks", "help-wanted-issues"})
     _COLUMNS = ("source", "url", "title_original", "title_ar", "summary_ar", "score")
 
     def __init__(
@@ -92,6 +94,8 @@ class RasoolBridgeTool:
             return self._status()
         if op == "digest":
             return self._digest(args)
+        if op == "live_search":
+            return self._live_search(args)
         return self._feed_query(args)
 
     # --- actions -----------------------------------------------------------
@@ -161,6 +165,75 @@ class RasoolBridgeTool:
         return self._ok({
             "origin": "rasool.feed_query",
             "untrusted_content": True,
+            "count": len(items),
+            "items": items,
+        })
+
+    def _live_search(self, args: dict) -> ToolResult:
+        bin_path = self.rasool_dir / ".venv" / "bin" / "rasool-live-search"
+        if not bin_path.is_file():
+            return self._fail(
+                "rasool-live-search binary not found (reinstall rasool editable)"
+            )
+
+        query = args.get("query")
+        if not isinstance(query, str) or not (1 <= len(query.strip()) <= 200):
+            return self._fail("query is required (1-200 chars)")
+
+        max_results = args.get("max", 10)
+        if isinstance(max_results, bool) or not isinstance(max_results, int):
+            return self._fail("max must be an integer")
+        if not 1 <= max_results <= self._MAX_SEARCH:
+            return self._fail(f"max must be between 1 and {self._MAX_SEARCH}")
+
+        sort = args.get("sort", "stars")
+        if not isinstance(sort, str) or sort not in self._SORT_CHOICES:
+            return self._fail(f"sort must be one of {sorted(self._SORT_CHOICES)}")
+
+        cmd = [
+            str(bin_path),
+            "--query",
+            query.strip(),
+            "--max",
+            str(max_results),
+            "--sort",
+            sort,
+        ]
+        try:
+            proc = subprocess.run(
+                cmd,
+                cwd=str(self.rasool_dir),
+                capture_output=True,
+                text=True,
+                timeout=self.TIMEOUT_S,
+                env={"PATH": "/usr/bin:/bin", "HOME": str(Path.home())},
+            )
+        except subprocess.TimeoutExpired:
+            return self._fail(f"live_search timed out after {self.TIMEOUT_S}s")
+        except OSError as exc:
+            return self._fail(f"failed to execute live_search: {exc}")
+
+        if proc.returncode != 0:
+            return self._fail(
+                (proc.stderr or "live_search failed").strip()[: self.MAX_OUTPUT_CHARS]
+            )
+
+        raw = (proc.stdout or "").strip()
+        try:
+            payload = json.loads(raw)
+        except ValueError as exc:
+            return self._fail(f"live_search returned invalid JSON: {exc}")
+        if not isinstance(payload, dict):
+            return self._fail("live_search returned non-object JSON")
+
+        items = payload.get("items")
+        if not isinstance(items, list):
+            return self._fail("live_search payload missing items list")
+
+        return self._ok({
+            "origin": "rasool.live_search",
+            "untrusted_content": True,
+            "query": query.strip(),
             "count": len(items),
             "items": items,
         })

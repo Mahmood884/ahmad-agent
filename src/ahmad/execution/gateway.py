@@ -27,6 +27,7 @@ from ahmad.tools.ui_tools import ComponentLibraryTool, GenerateUITool, ThemePick
 from ahmad.tools.local_memory import MemoryAddTool, MemoryForgetTool, MemorySearchTool
 from ahmad.tools.instrumentation import CanReadTool, CalibrateSensorTool, ModbusReadTool
 from ahmad.tools.rasool_feed_read import RasoolFeedReadTool
+from ahmad.tools.rasool_bridge import RasoolBridgeTool
 from ahmad.execution.registry import ToolMetadata, ToolRegistry
 from ahmad.execution.resolution import (_manual_reconcile, _reconcile_ambiguous,
                                         validate_retry_authority)
@@ -227,6 +228,15 @@ class ExecutionGateway:
                          implementation_id="ahmad.rasool-feed-read/v1", risk="low",
                          failure_is_no_effect=True),
             RasoolFeedReadTool(),
+        )
+        self._registry.register(
+            "rasool_bridge",
+            ToolMetadata(name="rasool_bridge", version="1.0",
+                         capabilities=("rasool:bridge",),
+                         input_schema={"type": "object"}, output_schema={"type": "object"},
+                         implementation_id="ahmad.rasool-bridge/v1", risk="low",
+                         failure_is_no_effect=True),
+            RasoolBridgeTool(),
         )
 
     @property

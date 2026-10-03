@@ -53,6 +53,7 @@ _MCP_TOOL_NAMES = (
     "calibrate_sensor",
     "rasool_feed_read",
     "rasool_bridge",
+    "memory_bridge",
 )
 _TOOL_BINDINGS = {
     name: _gateway.binding_id_for_action(name)
@@ -311,6 +312,25 @@ def handle_request(request: dict) -> None:
                                 "source": {"type": "string", "pattern": "^[a-z0-9_]{1,40}$"},
                                 "hours": {"type": "integer", "minimum": 1, "maximum": 168},
                             },
+                            "additionalProperties": False,
+                        },
+                    },
+                    {
+                        "name": "memory_bridge",
+                        "description": "Governed long-term memory: store/search/list/stats. All outputs untrusted.",
+                        "inputSchema": {
+                            "type": "object",
+                            "properties": {
+                                "action": {"type": "string", "enum": ["store", "search", "get_by_tag", "recent", "stats"]},
+                                "content": {"type": "string", "maxLength": 8000},
+                                "tags": {"type": "array", "maxItems": 10, "items": {"type": "string", "maxLength": 64}},
+                                "query": {"type": "string", "maxLength": 512},
+                                "mode": {"type": "string", "enum": ["semantic", "exact", "hybrid", "ranked"]},
+                                "limit": {"type": "integer", "minimum": 1, "maximum": 50},
+                                "page": {"type": "integer", "minimum": 1},
+                                "page_size": {"type": "integer", "minimum": 1, "maximum": 50},
+                            },
+                            "required": ["action"],
                             "additionalProperties": False,
                         },
                     },

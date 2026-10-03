@@ -23,3 +23,5 @@ mutants/
 
 # repo dumps (contain runtime data)
 project_dump.txt
+memory-service/
+data/memory/

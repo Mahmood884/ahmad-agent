@@ -28,6 +28,7 @@ from ahmad.tools.local_memory import MemoryAddTool, MemoryForgetTool, MemorySear
 from ahmad.tools.instrumentation import CanReadTool, CalibrateSensorTool, ModbusReadTool
 from ahmad.tools.rasool_feed_read import RasoolFeedReadTool
 from ahmad.tools.rasool_bridge import RasoolBridgeTool
+from ahmad.tools.memory_bridge import MemoryBridgeTool
 from ahmad.execution.registry import ToolMetadata, ToolRegistry
 from ahmad.execution.resolution import (_manual_reconcile, _reconcile_ambiguous,
                                         validate_retry_authority)
@@ -237,6 +238,15 @@ class ExecutionGateway:
                          implementation_id="ahmad.rasool-bridge/v1", risk="low",
                          failure_is_no_effect=True),
             RasoolBridgeTool(),
+        )
+        self._registry.register(
+            "memory_bridge",
+            ToolMetadata(name="memory_bridge", version="1.0",
+                         capabilities=("memory:bridge",),
+                         input_schema={"type": "object"}, output_schema={"type": "object"},
+                         implementation_id="ahmad.memory-bridge/v1", risk="low",
+                         failure_is_no_effect=True),
+            MemoryBridgeTool(),
         )
 
     @property

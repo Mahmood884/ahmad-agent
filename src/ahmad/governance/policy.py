@@ -27,6 +27,7 @@ ALLOWED_TOOL_PREFIXES = (
     "calibrate_sensor|",
     "rasool_feed_read|",
     "rasool_bridge|",
+    "memory_bridge|",
 )
 
 

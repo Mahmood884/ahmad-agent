@@ -9,9 +9,11 @@ import os
 import secrets
 import stat
 import time
+from typing import Any, Callable
 
 from ahmad.core.attempts import (AttemptAmbiguousEvent, AttemptCreatedEvent,
                                  AttemptDecisionLinkedEvent, AttemptStartedEvent)
+from ahmad.core.config import load_config
 from ahmad.core.results import ResultEvent
 from ahmad.core.types import Decision, EffectStatus
 from ahmad.execution.mock_tool import MockTool, ToolResult
@@ -29,7 +31,8 @@ from ahmad.tools.instrumentation import CanReadTool, CalibrateSensorTool, Modbus
 from ahmad.tools.rasool_feed_read import RasoolFeedReadTool
 from ahmad.tools.rasool_bridge import RasoolBridgeTool
 from ahmad.tools.memory_bridge import MemoryBridgeTool
-from ahmad.execution.registry import ToolMetadata, ToolRegistry
+from ahmad.execution.registry import (WORKSPACE_ROOT_KEY, ExecutableTool,
+                                      ToolMetadata, ToolRegistry)
 from ahmad.execution.resolution import (_manual_reconcile, _reconcile_ambiguous,
                                         validate_retry_authority)
 from ahmad.governance.policy import PolicyEngine
@@ -81,12 +84,57 @@ def _load_or_create_digest_key(path: str | Path | None = None) -> bytes:
             os.close(descriptor)
 
 
+def build_workspace_tools(
+    workspace_root: str | Path,
+) -> dict[str, tuple[ToolMetadata, ExecutableTool]]:
+    """Build the five workspace-bound tools around one shared, resolved root.
+
+    The resolved root is recorded in implementation_config, so it becomes part
+    of the ToolBinding manifest and therefore of the binding id.
+    """
+    root = Path(workspace_root).expanduser().resolve()
+    specs: tuple[tuple[str, Callable[..., ExecutableTool], dict[str, Any]], ...] = (
+        ("write_file", WriteFileTool, dict(
+            name="write_file", version="1.0", capabilities=("write_file",),
+            input_schema={"type": "string"}, output_schema={"type": "object"},
+            implementation_id="ahmad.write-file/v1", risk="medium")),
+        ("scaffold_project", ScaffoldProjectTool, dict(
+            name="scaffold_project", version="1.0", capabilities=("scaffold_project",),
+            input_schema={"type": "string"}, output_schema={"type": "object"},
+            implementation_id="ahmad.scaffold/v1", risk="medium")),
+        ("venv_install", VenvInstallTool, dict(
+            name="venv_install", version="1.0", capabilities=("venv_install",),
+            input_schema={"type": "string"}, output_schema={"type": "object"},
+            implementation_id="ahmad.venv-install/v1", risk="medium")),
+        ("generate_ui", GenerateUITool, dict(
+            name="generate_ui", version="1.0", capabilities=("ui:generate",),
+            input_schema={"type": "object"}, output_schema={"type": "string"},
+            implementation_id="ahmad.ui-generate/v1", risk="medium")),
+        ("component_lib", ComponentLibraryTool, dict(
+            name="component_lib", version="1.0", capabilities=("ui:components",),
+            input_schema={"type": "object"}, output_schema={"type": "string"},
+            implementation_id="ahmad.ui-components/v1", risk="medium")),
+    )
+    built: dict[str, tuple[ToolMetadata, ExecutableTool]] = {}
+    for action, tool_class, fields in specs:
+        tool = tool_class(root=root)
+        metadata = ToolMetadata(
+            **fields, implementation_config={WORKSPACE_ROOT_KEY: str(tool.root)}
+        )
+        built[action] = (metadata, tool)
+    return built
+
+
 class ExecutionGateway:
     """Revalidate policy and binding, durably mark dispatch, then invoke the tool."""
 
     def __init__(self, memory: EventStore, policy: PolicyEngine | None = None,
-                 manual_authorizer=None, *, digest_key_path: str | Path | None = None):
+                 manual_authorizer=None, *, digest_key_path: str | Path | None = None,
+                 workspace_root: str | Path | None = None):
         self.memory = memory
+        self._workspace_tools = build_workspace_tools(
+            workspace_root if workspace_root is not None else load_config().workspace_dir
+        )
         self.policy = policy or PolicyEngine()
         self._manual_authorizer = manual_authorizer
         self._sensitive_digest_key = _load_or_create_digest_key(digest_key_path)
@@ -120,20 +168,8 @@ class ExecutionGateway:
                          implementation_id="ahmad.web-search/v1", risk="low"),
             WebSearchTool(),
         )
-        self._registry.register(
-            "write_file",
-            ToolMetadata(name="write_file", version="1.0", capabilities=("write_file",),
-                         input_schema={"type": "string"}, output_schema={"type": "object"},
-                         implementation_id="ahmad.write-file/v1", risk="medium"),
-            WriteFileTool(root=Path.home() / "ahmad-agent"),
-        )
-        self._registry.register(
-            "scaffold_project",
-            ToolMetadata(name="scaffold_project", version="1.0", capabilities=("scaffold_project",),
-                         input_schema={"type": "string"}, output_schema={"type": "object"},
-                         implementation_id="ahmad.scaffold/v1", risk="medium"),
-            ScaffoldProjectTool(root=Path.home() / "ahmad-agent"),
-        )
+        self._registry.register("write_file", *self._workspace_tools["write_file"])
+        self._registry.register("scaffold_project", *self._workspace_tools["scaffold_project"])
         self._registry.register(
             "web_scrape",
             ToolMetadata(name="web_scrape", version="1.0", capabilities=("web_scrape",),
@@ -141,13 +177,7 @@ class ExecutionGateway:
                          implementation_id="ahmad.web-scrape/v1", risk="low"),
             WebScrapeTool(),
         )
-        self._registry.register(
-            "venv_install",
-            ToolMetadata(name="venv_install", version="1.0", capabilities=("venv_install",),
-                         input_schema={"type": "string"}, output_schema={"type": "object"},
-                         implementation_id="ahmad.venv-install/v1", risk="medium"),
-            VenvInstallTool(root=Path.home() / "ahmad-agent"),
-        )
+        self._registry.register("venv_install", *self._workspace_tools["venv_install"])
         self._registry.register(
             "agent_memory",
             ToolMetadata(name="agent_memory", version="1.0", capabilities=("agent_memory",),
@@ -162,20 +192,8 @@ class ExecutionGateway:
                          implementation_id="ahmad.ui-theme/v1", risk="low"),
             ThemePickerTool(),
         )
-        self._registry.register(
-            "generate_ui",
-            ToolMetadata(name="generate_ui", version="1.0", capabilities=("ui:generate",),
-                         input_schema={"type": "object"}, output_schema={"type": "string"},
-                         implementation_id="ahmad.ui-generate/v1", risk="medium"),
-            GenerateUITool(root=Path.home() / "ahmad-agent"),
-        )
-        self._registry.register(
-            "component_lib",
-            ToolMetadata(name="component_lib", version="1.0", capabilities=("ui:components",),
-                         input_schema={"type": "object"}, output_schema={"type": "string"},
-                         implementation_id="ahmad.ui-components/v1", risk="medium"),
-            ComponentLibraryTool(root=Path.home() / "ahmad-agent"),
-        )
+        self._registry.register("generate_ui", *self._workspace_tools["generate_ui"])
+        self._registry.register("component_lib", *self._workspace_tools["component_lib"])
         self._registry.register(
             "memory_add",
             ToolMetadata(name="memory_add", version="1.0", capabilities=("memory:add",),

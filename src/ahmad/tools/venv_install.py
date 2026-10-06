@@ -39,7 +39,7 @@ class VenvInstallTool:
             target_cwd = Path(cwd_str).expanduser().resolve()
             
             # Security Guard 1: Must be under the allowed root
-            if not str(target_cwd).startswith(str(self.root)):
+            if not target_cwd.is_relative_to(self.root):
                 return ToolResult(False, self.name, f"DENIED: cwd must be under {self.root}", None)
                 
             # Security Guard 2: Verify .venv exists to ensure isolation

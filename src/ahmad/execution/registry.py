@@ -1,12 +1,16 @@
 """Descriptive capability and tool registries; registration grants no authority."""
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 import hashlib
 import json
 import marshal
+from pathlib import Path
 from typing import Protocol
 
 from ahmad.execution.mock_tool import ToolResult
+
+# implementation_config key that binds a tool to its resolved workspace root.
+WORKSPACE_ROOT_KEY = "workspace_root"
 
 
 @dataclass(frozen=True)
@@ -151,10 +155,13 @@ class ToolRegistry:
     ) -> None:
         binding = self._items[action]
         generation = binding.generation + 1
+        if metadata is None:
+            # Explicit re-registration: a replacement tool with another workspace
+            # root gets a new manifest, binding id and generation.
+            metadata = self._rebind_workspace_root(binding.metadata, tool)
+        new_binding = self._make_binding(action, metadata, tool, generation)
         self._generations[action] = generation
-        self._items[action] = self._make_binding(
-            action, metadata or binding.metadata, tool, generation
-        )
+        self._items[action] = new_binding
 
     def list(self) -> tuple[ToolDescriptor, ...]:
         return tuple(self._describe(binding) for binding in self._items.values())
@@ -171,7 +178,35 @@ class ToolRegistry:
         return None
 
     @staticmethod
+    def _workspace_root_matches(metadata: ToolMetadata, tool: ExecutableTool) -> bool:
+        """True when the tool's live root equals the root recorded in the manifest."""
+        recorded = metadata.implementation_config.get(WORKSPACE_ROOT_KEY)
+        if recorded is None:
+            return True
+        root = getattr(tool, "root", None)
+        if root is None or not isinstance(recorded, str):
+            return False
+        try:
+            actual = str(Path(root).resolve())
+        except (OSError, RuntimeError):
+            return False
+        return str(root) == recorded == actual
+
+    @staticmethod
+    def _rebind_workspace_root(metadata: ToolMetadata, tool: ExecutableTool) -> ToolMetadata:
+        config = metadata.implementation_config
+        root = getattr(tool, "root", None)
+        if WORKSPACE_ROOT_KEY not in config or root is None:
+            return metadata
+        return replace(
+            metadata,
+            implementation_config={**config, WORKSPACE_ROOT_KEY: str(Path(root).resolve())},
+        )
+
+    @staticmethod
     def binding_is_current(binding: ToolBinding) -> bool:
+        if not ToolRegistry._workspace_root_matches(binding.metadata, binding.tool):
+            return False
         current = ToolRegistry._make_binding(
             binding.action, binding.metadata, binding.tool, binding.generation
         )
@@ -187,6 +222,10 @@ class ToolRegistry:
         if metadata.reconcile_contract and metadata.reconcile_contract.available:
             if not callable(getattr(tool, "reconcile", None)):
                 raise ValueError("Registry declares reconciliation but tool has no reconcile method")
+        if not ToolRegistry._workspace_root_matches(metadata, tool):
+            raise ValueError(
+                "tool root does not match the workspace_root recorded in implementation_config"
+            )
         implementation_fingerprint = ToolRegistry.implementation_fingerprint(tool)
         reconcile_fingerprint = ToolRegistry.reconcile_fingerprint(tool)
         manifest = {

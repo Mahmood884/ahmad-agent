@@ -196,6 +196,20 @@ def _call_system_info(req_id, arguments: dict) -> None:
     _dispatch_governed(req_id, action, _TOOL_BINDINGS["system_info"])
 
 
+def _write_file_action(arguments: dict) -> str:
+    """Build the governed write_file action string.
+
+    The raw payload is wrapped in the documented ``content=`` key so raw
+    content that itself begins with "content=" round-trips unchanged:
+    WriteFileTool strips exactly one leading key.
+    """
+    return (
+        f"write_file:{arguments.get('path', '')}"
+        f"|mode={arguments.get('mode', '')}"
+        f"|content={arguments.get('content', '')}"
+    )
+
+
 def _call_registered_tool(req_id, name: str, arguments: dict) -> None:
     try:
         if name == "web_search":
@@ -203,10 +217,7 @@ def _call_registered_tool(req_id, name: str, arguments: dict) -> None:
         elif name == "web_scrape":
             action = f"web_scrape:{arguments.get('url', '')}"
         elif name == "write_file":
-            action = (
-                f"write_file:{arguments.get('path', '')}"
-                f"|mode={arguments.get('mode', '')}|{arguments.get('content', '')}"
-            )
+            action = _write_file_action(arguments)
         elif name == "scaffold_project":
             action = (
                 f"scaffold_project:name={arguments.get('name', '')}"

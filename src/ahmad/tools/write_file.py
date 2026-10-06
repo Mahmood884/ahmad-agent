@@ -57,6 +57,17 @@ class WriteFileTool:
             path_str = parts[0]
             mode = parts[1].split("=", 1)[1]
             content = "|".join(parts[2:]) # In case content has pipes
+            # Strip exactly one leading "content=" key (the documented format).
+            #
+            # COMPATIBILITY CHANGE: a direct, unwrapped call whose raw payload
+            # begins with "content=" now loses that one prefix (the key form
+            # wins) — previously the prefix was written literally. The MCP path
+            # (ahmad.mcp.server._write_file_action), the only production caller,
+            # wraps its raw payload in the key, so it preserves raw content
+            # byte-for-byte, including payloads starting with "content=".
+            # The bare action format cannot distinguish the two cases.
+            if content.startswith("content="):
+                content = content[len("content="):]
             
             target = Path(path_str).expanduser().resolve()
             if not target.is_relative_to(self.root):

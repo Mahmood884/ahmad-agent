@@ -242,8 +242,22 @@ def test_mcp_component_network_approval_is_rechecked_by_gateway(
     event_store = MemoryStore(tmp_path / "events.jsonl")
     monkeypatch.setattr(server, "_store", event_store)
     monkeypatch.setattr(server._gateway, "memory", event_store)
-    component_binding = server._gateway.registry._resolve_binding("component_lib")
-    monkeypatch.setattr(component_binding.tool, "root", tmp_path)
+    # Rebind component_lib to the temp workspace through the supported API:
+    # mutating tool.root in place now invalidates the ToolBinding.
+    registry = server._gateway.registry
+    monkeypatch.setattr(registry, "_items", dict(registry._items))
+    monkeypatch.setattr(registry, "_generations", dict(registry._generations))
+    registry.replace_tool("component_lib", ComponentLibraryTool(root=tmp_path))
+    monkeypatch.setitem(
+        server._TOOL_BINDINGS,
+        "component_lib",
+        registry._resolve_binding("component_lib").binding_id,
+    )
+    monkeypatch.setattr(
+        server,
+        "_ALLOWED_BINDINGS",
+        frozenset(b for b in server._TOOL_BINDINGS.values() if b is not None),
+    )
     assert GenerateUITool(root=tmp_path).run(
         'generate_ui:{"name":"ui-demo","description":"Dashboard"}'
     ).success
@@ -276,6 +290,56 @@ def test_mcp_component_network_approval_is_rechecked_by_gateway(
     assert responses[0]["result"]["isError"]
     assert not responses[1]["result"].get("isError", False)
     assert calls == [["npx", "--yes", "shadcn@latest", "add", "--yes", "button"]]
+
+
+def test_component_binding_allowlist_is_restored_after_teardown(tmp_path, monkeypatch):
+    """Rebinding component_lib inside monkeypatch.context() must be reverted.
+
+    Self-contained: the original state is captured here, the same rebind
+    pattern used by the network-approval test is applied inside a
+    monkeypatch context, and restoration is asserted after the context
+    exits. It does not depend on any other test having run first, nor on a
+    fixed generation. Nothing in production approval policy is changed.
+    """
+    server = importlib.import_module("ahmad.mcp.server")
+    registry = server._gateway.registry
+
+    original_binding = registry._resolve_binding("component_lib")
+    assert original_binding is not None
+    original_binding_id = original_binding.binding_id
+    original_generation = original_binding.generation
+    original_allowed = server._ALLOWED_BINDINGS
+    # production invariant of the untouched state
+    assert server._TOOL_BINDINGS["component_lib"] == original_binding_id
+    assert original_allowed == frozenset(
+        b for b in server._TOOL_BINDINGS.values() if b is not None
+    )
+
+    with monkeypatch.context() as context:
+        context.setattr(registry, "_items", dict(registry._items))
+        context.setattr(registry, "_generations", dict(registry._generations))
+        registry.replace_tool("component_lib", ComponentLibraryTool(root=tmp_path))
+        new_binding_id = registry._resolve_binding("component_lib").binding_id
+        context.setitem(server._TOOL_BINDINGS, "component_lib", new_binding_id)
+        context.setattr(
+            server,
+            "_ALLOWED_BINDINGS",
+            frozenset(b for b in server._TOOL_BINDINGS.values() if b is not None),
+        )
+        # the mutation genuinely happened inside the context
+        assert new_binding_id != original_binding_id
+        assert registry._resolve_binding("component_lib").generation != original_generation
+        assert server._ALLOWED_BINDINGS != original_allowed
+
+    # everything is restored after the context exits
+    restored = registry._resolve_binding("component_lib")
+    assert restored is not None
+    assert restored.binding_id == original_binding_id
+    assert restored.generation == original_generation
+    assert server._TOOL_BINDINGS["component_lib"] == original_binding_id
+    assert server._ALLOWED_BINDINGS == original_allowed
+    recorded = Path(restored.metadata.implementation_config["workspace_root"])
+    assert recorded == (Path.home() / "ahmad-workspace").resolve()
 
 
 def _mcp_server_with_test_store(tmp_path: Path, monkeypatch):

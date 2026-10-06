@@ -40,7 +40,7 @@ class ScaffoldProjectTool:
                 return ToolResult(False, self.name, f"DENIED: Directory '{target_dir}' already exists.", None)
                 
             # Security Guard: Ensure it's under the allowed root
-            if not str(target_dir).startswith(str(self.root)):
+            if not target_dir.is_relative_to(self.root):
                 return ToolResult(False, self.name, f"DENIED: Path must be under {self.root}", None)
 
             # Create directory

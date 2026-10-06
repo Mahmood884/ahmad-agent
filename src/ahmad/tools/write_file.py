@@ -33,7 +33,7 @@ class WriteFileTool:
             target = Path(path_str).expanduser().resolve()
             
             # Security Guard 1: Path must be under root
-            if not str(target).startswith(str(self.root)):
+            if not target.is_relative_to(self.root):
                 return ToolResult(False, self.name, f"DENIED: Path must be under {self.root}", None)
                 
             # Security Guard 2: Prevent writing to hidden files or critical dirs unless explicitly allowed
@@ -59,7 +59,7 @@ class WriteFileTool:
             content = "|".join(parts[2:]) # In case content has pipes
             
             target = Path(path_str).expanduser().resolve()
-            if not str(target).startswith(str(self.root)):
+            if not target.is_relative_to(self.root):
                 return ToolResult(False, self.name, f"DENIED: Path must be under {self.root}", None)
                 
             if mode == "create" and target.exists():

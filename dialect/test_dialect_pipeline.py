@@ -330,3 +330,21 @@ def test_origin_type_from_latin_gloss():
     idx = {e["term"]: e for e in doc["entries"]}
     for t in ["جنس", "شاصي", "شيك", "عرجوش", "كونديشن", "نرفز"]:
         assert idx[t]["usage"].get("origin_type") == "english", t
+
+
+# ── 13) documented ambiguity notes (post-review 2) ──────────────────────────
+
+def test_ambiguous_entries_carry_notes():
+    """خندريس/سحة/إحبيبة/سكان/دهريز — توثيق الغموض أو الأصل غير الموثّق."""
+    doc = json.loads(DICT.read_text(encoding="utf-8"))
+    idx = {e["term"]: e for e in doc["entries"]}
+    for t in ["خندريس", "سحة", "إحبيبة", "سكان", "دهريز"]:
+        assert idx[t].get("notes"), t  # notes must be present and non-empty
+
+
+def test_unsubstantiated_origins_stay_untagged():
+    """سكان/دهريز — المراجع ادّعى أصل بلا شاهد → يبقيان بدون origin_type."""
+    doc = json.loads(DICT.read_text(encoding="utf-8"))
+    idx = {e["term"]: e for e in doc["entries"]}
+    for t in ["سكان", "دهريز"]:
+        assert "origin_type" not in idx[t]["usage"], t

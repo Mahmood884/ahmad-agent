@@ -2726,7 +2726,8 @@
         "lexical_class": "describe",
         "speaker_intent": "context-dependent"
       },
-      "category": "عامية بحرينية"
+      "category": "عامية بحرينية",
+      "notes": "المجتمع نفسه يقول: 'حتى الآن لم يتم اكتشاف معنى لهذه الكلمة والبحث ما زال جارياً' — مدخل يحفظ الكلمة مع الاعتراف بالجهل"
     },
     {
       "term": "خنه",
@@ -16713,7 +16714,8 @@
         "lexical_class": "describe",
         "speaker_intent": "context-dependent"
       },
-      "category": "عامية بحرينية"
+      "category": "عامية بحرينية",
+      "notes": "أصل الكلمة غير موثّق في المصدر — بعض المراجعين يقولون هندية/فارسية، لا شاهد قاطع"
     },
     {
       "term": "وين دلف",
@@ -16761,7 +16763,8 @@
         "lexical_class": "describe",
         "speaker_intent": "context-dependent"
       },
-      "category": "عامية بحرينية"
+      "category": "عامية بحرينية",
+      "notes": "معناها محل نقاش في المجتمع نفسه — المصدر يقول 'ما نعرف هالكلمة'"
     },
     {
       "term": "نوبة الثانية",
@@ -16809,7 +16812,8 @@
         "lexical_class": "describe",
         "speaker_intent": "context-dependent"
       },
-      "category": "عامية بحرينية"
+      "category": "عامية بحرينية",
+      "notes": "أصل الكلمة غير موثّق في المصدر"
     },
     {
       "term": "إحبيبة",
@@ -16821,7 +16825,8 @@
         "lexical_class": "describe",
         "speaker_intent": "context-dependent"
       },
-      "category": "عامية بحرينية"
+      "category": "عامية بحرينية",
+      "notes": "معناها محل نقاش في المجتمع نفسه — المصدر يقول 'ما نعرف هالكلمة'"
     },
     {
       "term": "يدندك",

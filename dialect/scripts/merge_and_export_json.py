@@ -296,6 +296,8 @@ def load_whatsapp_corpus(path: Path) -> dict[str, dict]:
             "usage": usage,
             "category": "عامية بحرينية",
         }
+        if e.get("notes"):
+            entry["notes"] = e["notes"]
         out[key] = entry
     return out
 
@@ -325,15 +327,22 @@ def merge(primary: dict, secondary: dict, curated: dict, whatsapp: dict | None =
             added += 1
     # whatsapp corpus fills what remains
     wa_added = 0
+    wa_notes = 0
     for key, entry in whatsapp.items():
         if key not in merged:
             merged[key] = entry
             wa_added += 1
+        elif entry.get("notes") and not merged[key].get("notes"):
+            # gap-fill the notes field only: the whatsapp entry carries a
+            # documentation note (ambiguity admitted by the community) for a
+            # term that already exists from a higher-precedence source.
+            merged[key]["notes"] = entry["notes"]
+            wa_notes += 1
     print(f"[merge] curated: {len(curated)} entries ({curated_override} override primary)")
     print(f"[merge] primary: {len(primary)} entries")
     print(f"[merge] secondary: {len(secondary)} entries")
     print(f"[merge] added from secondary: {added}")
-    print(f"[merge] whatsapp corpus: {len(whatsapp)} entries (+{wa_added} new)")
+    print(f"[merge] whatsapp corpus: {len(whatsapp)} entries (+{wa_added} new, +{wa_notes} notes filled)")
     print(f"[merge] total unique: {len(merged)}")
     return merged
 

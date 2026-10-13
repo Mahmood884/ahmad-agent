@@ -1,0 +1,120 @@
+# مصدر رابع — مجموعة "قاموس أهل البحرين" (WhatsApp, 2026-10-13)
+#
+# لصق من مجموعة خليجية — 263 (term, meaning) مستخرجة من النص.
+# 231 منها موجودة أصلاً في القاموس (تغطية 87% — تحقق صحي).
+# 32 جديدة فقط، وهي المدرجة هنا.
+#
+# التصنيف: تلقائي (نفس قواعد build_enriched_yaml.py — الكلمات المفتاحية
+# + حدود الكلمة). الترجات الأجنبية تُوسم origin_type من اسمها اللاتيني
+# في المعنى (سكروب→screwdriver→english...).
+#
+# الأولوية: ملء الفراغات فقط (مو تجاوز).
+
+entries:
+
+  - term: دقَه
+    meaning: "يعني مقلب"
+
+  - term: سلسووول
+    meaning: "ضعيف جدا"
+
+  - term: عرنجوش
+    meaning: "عصير برتقال — من الإنجليزية orange juice"
+
+  - term: سكان
+    meaning: "مقوّد السيارة"
+
+  - term: وين دلف
+    meaning: "وين راح"
+
+  - term: قميظة
+    meaning: "حسافة"
+
+  - term: مملوح
+    meaning: "وسيم — ويُطلق على اللي يشتغل واجد (مكافح)"
+
+  - term: سحة
+    meaning: "تمر"
+
+  - term: نوبة الثانية
+    meaning: "مرة ثانية"
+
+  - term: هالنوبة
+    meaning: "هالمرة"
+
+  - term: الللابله
+    meaning: "عقب باجر"
+
+  - term: دهريز
+    meaning: "مدخل البيت"
+
+  - term: إحبيبة
+    meaning: "قليل"
+
+  - term: يدندك
+    meaning: "يطالع بالخش"
+
+  - term: نفل
+    meaning: "عينت — مثل أو نفس"
+
+  - term: اذا سمنت البدحة
+    meaning: "في عيد البش — البدحة سمكة ضعيفة"
+
+  - term: يالهيس
+    meaning: "تقريباً مثل معنى المبغول"
+
+  - term: سكروب
+    meaning: "مفك البراغي — من الإنجليزية screwdriver"
+    synonyms: []
+
+  - term: بوت
+    meaning: "جوتي طويل — من الإنجليزية boot"
+    synonyms: []
+
+  - term: هرن
+    meaning: "بوري السيارة — من الإنجليزية horn"
+    synonyms: []
+
+  - term: بيب
+    meaning: "أنبوب — من الإنجليزية pipe"
+    synonyms: []
+
+  - term: سيت
+    meaning: "مقعد السيارة — من الإنجليزية seat"
+    synonyms: []
+
+  - term: بنسل
+    meaning: "قلم رصاص — من الإنجليزية pencil"
+    synonyms: []
+
+  - term: تيب
+    meaning: "لاصق — من الإنجليزية tape"
+    synonyms: []
+
+  - term: كاتشب
+    meaning: "صلصة طماطم — من الإنجليزية ketchup"
+    synonyms: []
+
+  - term: نوتة
+    meaning: "دفتر — من الإنجليزية note book"
+    synonyms: []
+
+  - term: تليفزيون
+    meaning: "جهاز مرئي — من الإنجليزية television"
+    synonyms: []
+
+  - term: تليفون
+    meaning: "الهاتف — من الإنجليزية telephone"
+    synonyms: []
+
+  - term: صابون اشطف
+    meaning: "صابون قوالب"
+
+  - term: صابون نعيم
+    meaning: "مسحوق الصابون"
+
+  - term: حبابوه
+    meaning: "ثمرة النخلة التي تلي مرحلة تفتح الطلح مباشرة"
+
+  - term: يتهردق
+    meaning: "يتهدم — يقال: تهردقت البناية"

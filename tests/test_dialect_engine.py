@@ -34,7 +34,11 @@ def test_substring_is_not_a_match(engine):
 
 def test_whole_word_still_matches(engine):
     assert "[لون]" in engine.enrich_context("لون")
-    assert "[هلا]" in engine.enrich_context("هلا والله")
+    # "هلا والله" is now a CURATED phrase entry (warmth=medium) — the longest
+    # phrase wins over the bare "هلا" token. Both are greetings; the phrase
+    # is the correct hit.
+    assert "[هلا والله]" in engine.enrich_context("هلا والله")
+    assert "[هلا]" in engine.enrich_context("هلا والله بيك") or "[هلا]" in engine.enrich_context("هلا")
 
 
 def test_clitics_resolve_to_stem(engine):

@@ -16,7 +16,7 @@ it tells the agent how each word *sounds* (lexical_tone), what it *is*
 ## Pipeline
 
 ```
-raw/bahraini_dictionary_raw.txt   (499KB — TWO sources, see below)
+raw/bahraini_dictionary_raw.txt   (499KB — FOUR sources, see below)
         │
         ├─ source 1: JSON-in-markdown (x2 identical copies, 1896 occurrences)
         │            ▼  scripts/extract_dictionary.py
@@ -24,12 +24,18 @@ raw/bahraini_dictionary_raw.txt   (499KB — TWO sources, see below)
         │            ▼  scripts/build_enriched_yaml.py
         │     data/dictionary_enriched.yaml     (948 entries + usage block on each)
         │
-        └─ source 2: antigravity python script in the file's TAIL
-                     (entries_raw = [...], 835 entries — 351 genuinely new)
-                     ▼  scripts/merge_and_export_json.py --secondary-from-python
-                  data/antigravity_entries.json    (835 entries, usage-filled)
+        ├─ source 2: antigravity python script in the file's TAIL
+        │            (entries_raw = [...], 835 entries — 351 genuinely new)
+        │            ▼  scripts/merge_and_export_json.py --secondary-from-python
+        │         data/antigravity_entries.json    (835 entries, usage-filled)
+        │
+        ├─ source 3: curated greeting warmth scale (user, 2026-10-13)
+        │            data/greeting_warmth_curated.yaml  (11 entries — HIGHEST precedence)
+        │
+        └─ source 4: WhatsApp-group corpus "قاموس أهل البحرين" (2026-10-13)
+                     data/whatsapp_corpus_curated.yaml    (32 new entries, usage auto-filled)
                                     ▼
-        data/bahraini_dictionary_unified.json  (1299 = 948 + 351, unified product)
+        data/bahraini_dictionary_unified.json  (1335 = 948 + 351 + 11 + 26 net-new)
 ```
 
 Run all steps:
@@ -91,16 +97,17 @@ or question). Never train on these labels as intent ground truth.
 ## Statistics (verified run, 2026-10-13, post-review v2)
 
 - **Primary source:** 948 unique entries from 1,896 occurrences (2 identical copies)
-- **Secondary source:** 835 entries → **+351 new** (4 normalized-duplicate variants absorbed)
-- **Unified total:** **1299 entries** · **0 null fields** (sparse fields omitted, not null)
-- Field coverage: term 1299, meaning 1299, examples (source-carried), synonyms (source-carried),
+- **Secondary source (antigravity):** 835 entries → **+351 new**
+- **Curated warmth scale (user):** 11 entries (1 overrides primary `هلا`)
+- **WhatsApp corpus:** 263 pairs parsed → 231 already covered (87% coverage — verified) → **+26 net-new** (32 written, 6 already present)
+- **Unified total:** **1335 entries** · **0 null fields** (sparse fields omitted, not null)
+- Field coverage: term 1335, meaning 1335, examples (source-carried), synonyms (source-carried),
   dialect_region 11, origin 55, notes 5
-- Usage distribution (primary source, all fixes applied):
-  - lexical_tone: neutral 919 / negative 18 / aggressive 7 / positive 4
-  - lexical_class: describe 908 / insult 18 / dismiss 5 / curse 5 / praise 4 /
-    question 5 / threat 2 / greeting 1
-  - origin_type (with source-field fallback): english 44, hindi 5, persian 4,
-    french 2, italian 2, turkish 2, russian 1 = **60 total** (was 29 pattern-only)
+- Usage distribution:
+  - lexical_tone: neutral 1284 / negative 19 / aggressive 14 / friendly 13 / positive 5
+  - lexical_class: describe 1267 / insult 19 / greeting 13 / question 10 / dismiss 8 / curse 7 / praise 5 / threat 6
+  - warmth (greetings only): high 7 / medium 3 / low 1 — the graded scale
+  - origin_type: english 44, hindi 5, persian 4, french 2, italian 2, turkish 2, russian 1
 
 ## Runtime access — dialect/engine.py
 
@@ -203,11 +210,13 @@ dialect/
 │   ├── build_enriched_yaml.py         # clean YAML → enriched YAML (lexical usage blocks)
 │   ├── merge_and_export_json.py       # sources → unified JSON (secondary extractable via --secondary-from-python)
 │   └── ollama_bridge.py               # Ollama client — delegates all dialect logic to DialectEngine
-└── data/
+├── data/
     ├── dictionary_raw.yaml            # 948 entries, 4254 lines
     ├── dictionary_enriched.yaml       # 948 entries + usage, 7155 lines
     ├── antigravity_entries.json       # 835 secondary-source entries (351 new merged in)
-    └── bahraini_dictionary_unified.json  # 1299 entries, unified product (~375KB)
+    ├── greeting_warmth_curated.yaml   # 11 curated warmth-scale entries (user — HIGHEST precedence)
+    ├── whatsapp_corpus_curated.yaml   # 32 entries from the WhatsApp corpus (+26 net-new)
+    └── bahraini_dictionary_unified.json  # 1335 entries, unified product
 ```
 
 Related: `../prompts/semantic_fidelity.md` — the agent system prompt built

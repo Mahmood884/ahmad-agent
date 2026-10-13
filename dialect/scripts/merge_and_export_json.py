@@ -4,8 +4,9 @@ Merge Bahraini dialect sources → single enriched JSON.
 دمج مصادر قاموس البحرية → ملف JSON واحد موحّد
 
 Sources (by precedence):
-  1. data/dictionary_enriched.yaml   (948 entries, usage already filled) — PRIMARY
-  2. data/antigravity_entries.json   (835 entries, generic usage) — SECONDARY
+  1. data/greeting_warmth_curated.yaml  (curated warmth scale — HIGHEST)
+  2. data/dictionary_enriched.yaml       (948 entries, usage already filled)
+  3. data/antigravity_entries.json       (835 entries, generic usage)
 
 DISCOVERY 2026-10-13 (post-review): the secondary source is REAL — it lives
 inside the raw paste itself. The tail of raw/bahraini_dictionary_raw.txt
@@ -13,10 +14,19 @@ contains a complete antigravity enrichment script whose `entries_raw = [...]`
 list holds 835 entries, of which 351 are genuinely new (not in the 948).
 Extracted with ast.literal_eval (no eval) into data/antigravity_entries.json.
 
-Schema unification (review finding ③): every entry — from BOTH sources — now
+WARMTH SCALE 2026-10-13 (user-curated): Bahraini greeting warmth is GRADED,
+not binary:
+  low    → bare greeting (هلا)
+  medium → + oath (هلا والله) or personal address (هلا بيك/بيهم)
+  high   → + poetic imagery (اسفرت وانورة / استهلت / وأمطرت)
+           or follow-up questions (ووينك / أخبارك / وش مسوي)
+The curated source carries these entries; it OVERRIDES the primary source on
+conflict (the user is the source of truth for warmth).
+
+Schema unification (review finding ③): every entry — from ALL sources — now
 emits the SAME usage schema: {lexical_tone, lexical_class, speaker_intent,
-strength?, origin_type?}. The old analyze_usage_generic emitted {tone, intent}
-and friendly/dismiss-strength=high, which mixed schemas. Removed.
+strength?, origin_type?, warmth?}. The old analyze_usage_generic emitted
+{tone, intent} and friendly/dismiss-strength=high, which mixed schemas. Removed.
 
 Also fixed (review findings):
 - null fields dropped: 2,773 nulls (dialect_region/origin/notes) removed —
@@ -231,18 +241,88 @@ def extract_secondary_from_python(script_path: Path) -> list[dict]:
     return ast.literal_eval(seg[br : j + 1])
 
 
+# ── Source 0: curated warmth scale (user — highest precedence) ───────────────
+def load_curated_warmth(path: Path) -> dict[str, dict]:
+    """Load the user-curated greeting warmth entries. These OVERRIDE everything."""
+    data = yaml.safe_load(path.read_text(encoding="utf-8"))
+    out = {}
+    for e in data.get("entries", []):
+        key = normalize_term(e["term"])
+        if key not in out:
+            out[key] = {
+                "term": e["term"],
+                "meaning": e.get("meaning", ""),
+                "examples": e.get("examples", []),
+                "synonyms": e.get("synonyms", []),
+                "usage": e.get("usage", {}),
+                "category": "عامية بحرينية",
+            }
+    return out
+
+
+# ── Source 0b: whatsapp corpus (fills gaps — usage auto-analyzed) ────────────
+def load_whatsapp_corpus(path: Path) -> dict[str, dict]:
+    """Load the whatsapp-group corpus. Terms get auto-analyzed usage.
+
+    The entries here carry NO usage block (the paste was raw text); the same
+    single-schema analyzer as the antigravity source runs on them, so they
+    land in the unified JSON with an identical schema. Loanwords carrying a
+    latin gloss in the meaning ("من الإنجليزية screwdriver") get origin_type
+    english via the marker scan.
+    """
+    data = yaml.safe_load(path.read_text(encoding="utf-8"))
+    out = {}
+    for e in data.get("entries", []):
+        key = normalize_term(e["term"])
+        if key in out:
+            continue
+        usage = analyze_usage(e["term"], e.get("meaning", ""), e.get("origin"))
+        entry = {
+            "term": e["term"],
+            "meaning": e.get("meaning", ""),
+            "examples": e.get("examples", []),
+            "synonyms": e.get("synonyms", []),
+            "usage": usage,
+            "category": "عامية بحرينية",
+        }
+        out[key] = entry
+    return out
+
+
 # ── Merge & export ────────────────────────────────────────────────────────────
-def merge(primary: dict, secondary: dict) -> dict:
-    """Primary wins on term conflict; secondary fills gaps only. Order: primary first."""
-    merged = dict(primary)
+def merge(primary: dict, secondary: dict, curated: dict, whatsapp: dict | None = None) -> dict:
+    """Curated wins on conflict; then primary; then secondary/whatsapp fill gaps.
+
+    Order: curated entries first (the user's explicit scale), then primary
+    in source order, then secondary additions, then whatsapp additions.
+    """
+    whatsapp = whatsapp or {}
+    merged: dict[str, dict] = {}
+    # curated first (highest precedence — overrides هلا from primary)
+    for key, entry in curated.items():
+        merged[key] = entry
+    curated_override = sum(1 for k in curated if k in primary)
+    # primary next (skip keys already claimed by curated)
+    for key, entry in primary.items():
+        if key not in merged:
+            merged[key] = entry
+    # secondary fills remaining gaps
     added = 0
     for key, entry in secondary.items():
         if key not in merged:
             merged[key] = entry
             added += 1
+    # whatsapp corpus fills what remains
+    wa_added = 0
+    for key, entry in whatsapp.items():
+        if key not in merged:
+            merged[key] = entry
+            wa_added += 1
+    print(f"[merge] curated: {len(curated)} entries ({curated_override} override primary)")
     print(f"[merge] primary: {len(primary)} entries")
     print(f"[merge] secondary: {len(secondary)} entries")
     print(f"[merge] added from secondary: {added}")
+    print(f"[merge] whatsapp corpus: {len(whatsapp)} entries (+{wa_added} new)")
     print(f"[merge] total unique: {len(merged)}")
     return merged
 
@@ -296,6 +376,7 @@ def export_json(entries: dict, out_path: Path, primary_count: int, secondary_add
 def main():
     base = Path(__file__).resolve().parent.parent
     enriched_yaml = base / "data" / "dictionary_enriched.yaml"
+    curated_yaml = base / "data" / "greeting_warmth_curated.yaml"
     secondary_json = base / "data" / "antigravity_entries.json"
     out_path = base / "data" / "bahraini_dictionary_unified.json"
 
@@ -314,6 +395,21 @@ def main():
     primary = load_enriched_yaml(enriched_yaml)
     print(f"[load] enriched_yaml: {len(primary)} entries")
 
+    curated = {}
+    if curated_yaml.exists():
+        curated = load_curated_warmth(curated_yaml)
+        print(f"[load] curated warmth: {len(curated)} entries")
+    else:
+        print("[load] greeting_warmth_curated.yaml not found — skipping curated source")
+
+    whatsapp = {}
+    whatsapp_yaml = base / "data" / "whatsapp_corpus_curated.yaml"
+    if whatsapp_yaml.exists():
+        whatsapp = load_whatsapp_corpus(whatsapp_yaml)
+        print(f"[load] whatsapp corpus: {len(whatsapp)} entries")
+    else:
+        print("[load] whatsapp_corpus_curated.yaml not found — skipping whatsapp source")
+
     secondary = {}
     if secondary_json.exists():
         secondary = load_antigravity_entries(secondary_json)
@@ -321,8 +417,8 @@ def main():
     else:
         print("[load] antigravity_entries.json not found — skipping secondary source")
 
-    merged = merge(primary, secondary)
-    added = len(merged) - len(primary)
+    merged = merge(primary, secondary, curated, whatsapp)
+    added = len(merged) - len(primary) - len(curated) + sum(1 for k in curated if k in primary)
     export_json(merged, out_path, len(primary), added)
 
 

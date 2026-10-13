@@ -4,10 +4,10 @@
     "language": "Arabic (Bahraini dialect)",
     "description": "قاموس موحّد للهجة البحرينية مع تحليل usage كامل",
     "version": "3.0",
-    "entry_count": 1299,
+    "entry_count": 1335,
     "sources": [
       "dictionary_enriched.yaml (948 entries, usage-filled)",
-      "antigravity_entries.json (+351 new, usage-filled with same schema)"
+      "antigravity_entries.json (+377 new, usage-filled with same schema)"
     ],
     "schema": {
       "entry": {
@@ -30,6 +30,186 @@
     }
   },
   "entries": [
+    {
+      "term": "هلا",
+      "meaning": "مرحباً — تحية مجردة، أدنى درجة حفاوة",
+      "examples": [
+        "هلا"
+      ],
+      "synonyms": [
+        "أهلا",
+        "مرحبا"
+      ],
+      "usage": {
+        "lexical_tone": "friendly",
+        "lexical_class": "greeting",
+        "speaker_intent": "context-dependent",
+        "warmth": "low"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "هلا والله",
+      "meaning": "مرحباً والله — قسم يرفع الحفاوة إلى المتوسطة",
+      "examples": [
+        "هلا والله"
+      ],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "friendly",
+        "lexical_class": "greeting",
+        "speaker_intent": "context-dependent",
+        "warmth": "medium"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "هلا بيك",
+      "meaning": "مرحباً بك — خطاب شخصي مباشر، حفاوة متوسطة",
+      "examples": [
+        "هلا بيك"
+      ],
+      "synonyms": [
+        "هلا فيك"
+      ],
+      "usage": {
+        "lexical_tone": "friendly",
+        "lexical_class": "greeting",
+        "speaker_intent": "context-dependent",
+        "warmth": "medium"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "هلا بيهم",
+      "meaning": "مرحباً بهم — خطاب شخصي للغائب/الجماعة، حفاوة متوسطة",
+      "examples": [
+        "هلا بيهم"
+      ],
+      "synonyms": [
+        "هلا بكم"
+      ],
+      "usage": {
+        "lexical_tone": "friendly",
+        "lexical_class": "greeting",
+        "speaker_intent": "context-dependent",
+        "warmth": "medium"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "اسفرت وانورة",
+      "meaning": "أشرقت وأضاءت — تصوير شعري: المكان استنار بمقدم المقابل",
+      "examples": [
+        "هلا والله اسفرت وانورة"
+      ],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "friendly",
+        "lexical_class": "greeting",
+        "speaker_intent": "context-dependent",
+        "warmth": "high"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "استهلت",
+      "meaning": "هلّلت — تصوير شعري: ندوء الفرح بمقدم المقابل (استهلال)",
+      "examples": [
+        "واستهلت"
+      ],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "friendly",
+        "lexical_class": "greeting",
+        "speaker_intent": "context-dependent",
+        "warmth": "high"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "وأمطرت",
+      "meaning": "وأمطرت — تصوير شعري: السماء أمطرت بمقدم المقابل (مطر البركة)",
+      "examples": [
+        "وأمطرت"
+      ],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "friendly",
+        "lexical_class": "greeting",
+        "speaker_intent": "context-dependent",
+        "warmth": "high"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "ووينك",
+      "meaning": "وين أنت — استفلام متابعة يرفع الحفاوة للعليا",
+      "examples": [
+        "ووينك"
+      ],
+      "synonyms": [
+        "وينك"
+      ],
+      "usage": {
+        "lexical_tone": "friendly",
+        "lexical_class": "greeting",
+        "speaker_intent": "context-dependent",
+        "warmth": "high"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "أخبارك",
+      "meaning": "ما أخبارك — استفلام متابعة (الحال والخبر)",
+      "examples": [
+        "اخبارك"
+      ],
+      "synonyms": [
+        "أخبارك",
+        "اخبارك"
+      ],
+      "usage": {
+        "lexical_tone": "friendly",
+        "lexical_class": "greeting",
+        "speaker_intent": "context-dependent",
+        "warmth": "high"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "وش مسوي",
+      "meaning": "وش تسوي — استفلام متابعة (النشاط الحالي)",
+      "examples": [
+        "ويش مسوي"
+      ],
+      "synonyms": [
+        "وش تسوي",
+        "ويش مسوي"
+      ],
+      "usage": {
+        "lexical_tone": "friendly",
+        "lexical_class": "greeting",
+        "speaker_intent": "context-dependent",
+        "warmth": "high"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "هلا والله اسفرت وانورة واستهلت وأمطرت هلا ووينك اخبارك ويش مسوي",
+      "meaning": "التحية البحرية الكاملة بأقصى حفاوة — قسم + تصوير شعري + استفلام متابعة",
+      "examples": [
+        "هلا والله اسفرت وانورة واستهلت وأمطرت هلا ووينك اخبارك ويش مسوي"
+      ],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "friendly",
+        "lexical_class": "greeting",
+        "speaker_intent": "context-dependent",
+        "warmth": "high"
+      },
+      "category": "عامية بحرينية"
+    },
     {
       "term": "أبشار",
       "meaning": "شرشف السرير",
@@ -11147,18 +11327,6 @@
       "category": "عامية بحرينية"
     },
     {
-      "term": "هلا",
-      "meaning": "مرحباً",
-      "examples": [],
-      "synonyms": [],
-      "usage": {
-        "lexical_tone": "neutral",
-        "lexical_class": "greeting",
-        "speaker_intent": "context-dependent"
-      },
-      "category": "عامية بحرينية"
-    },
-    {
       "term": "هليلج",
       "meaning": "هليلج",
       "examples": [],
@@ -16488,6 +16656,318 @@
       "usage": {
         "lexical_tone": "friendly",
         "lexical_class": "greeting",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "دقَه",
+      "meaning": "يعني مقلب",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "سلسووول",
+      "meaning": "ضعيف جدا",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "عرنجوش",
+      "meaning": "عصير برتقال — من الإنجليزية orange juice",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "سكان",
+      "meaning": "مقوّد السيارة",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "وين دلف",
+      "meaning": "وين راح",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "question",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "قميظة",
+      "meaning": "حسافة",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "مملوح",
+      "meaning": "وسيم — ويُطلق على اللي يشتغل واجد (مكافح)",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "positive",
+        "lexical_class": "praise",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "سحة",
+      "meaning": "تمر",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "نوبة الثانية",
+      "meaning": "مرة ثانية",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "هالنوبة",
+      "meaning": "هالمرة",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "الللابله",
+      "meaning": "عقب باجر",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "دهريز",
+      "meaning": "مدخل البيت",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "إحبيبة",
+      "meaning": "قليل",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "يدندك",
+      "meaning": "يطالع بالخش",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "نفل",
+      "meaning": "عينت — مثل أو نفس",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "اذا سمنت البدحة",
+      "meaning": "في عيد البش — البدحة سمكة ضعيفة",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "يالهيس",
+      "meaning": "تقريباً مثل معنى المبغول",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "بوت",
+      "meaning": "جوتي طويل — من الإنجليزية boot",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "بيب",
+      "meaning": "أنبوب — من الإنجليزية pipe",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "بنسل",
+      "meaning": "قلم رصاص — من الإنجليزية pencil",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "تليفزيون",
+      "meaning": "جهاز مرئي — من الإنجليزية television",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "تليفون",
+      "meaning": "الهاتف — من الإنجليزية telephone",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "صابون اشطف",
+      "meaning": "صابون قوالب",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "صابون نعيم",
+      "meaning": "مسحوق الصابون",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "حبابوه",
+      "meaning": "ثمرة النخلة التي تلي مرحلة تفتح الطلح مباشرة",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "يتهردق",
+      "meaning": "يتهدم — يقال: تهردقت البناية",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
         "speaker_intent": "context-dependent"
       },
       "category": "عامية بحرينية"

@@ -142,7 +142,7 @@ def test_ontology_has_no_dangling_refs():
 def test_schema_consistency():
     doc = json.loads(DICT.read_text(encoding="utf-8"))
     entries = doc["entries"]
-    assert doc["metadata"]["entry_count"] == len(entries) == 1299
+    assert doc["metadata"]["entry_count"] == len(entries) == 1335
     for e in entries:
         u = e.get("usage") or {}
         assert u.get("lexical_tone") in TONE_ENUM, (e["term"], u)
@@ -201,3 +201,43 @@ if __name__ == "__main__":
             print(f"ERROR {fn.__name__} — {type(exc).__name__}: {str(exc)[:160]}")
     print(f"\n{len(fns) - failed}/{len(fns)} نجحت")
     raise SystemExit(1 if failed else 0)
+
+
+# ── 8) مقياس الحفاوة (greeting warmth) ─────────────────────────────────────────
+
+def test_warmth_scale_graded():
+    """هلا = low · هلا والله/بيك = medium · الشعري = high — متدرّج مو ثنائي."""
+    e = _engine()
+    assert "درجة الحفاوة: low" in e.enrich_context("هلا")
+    assert "درجة الحفاوة: medium" in e.enrich_context("هلا بيك")
+    assert "درجة الحفاوة: high" in e.enrich_context("هلا والله اسفرت وانورة")
+
+
+def test_warmth_field_on_greeting_entries():
+    doc = json.loads(DICT.read_text(encoding="utf-8"))
+    warmth = {e["term"]: e["usage"].get("warmth") for e in doc["entries"] if e["usage"].get("warmth")}
+    assert warmth.get("هلا") == "low"
+    assert warmth.get("هلا والله") == "medium"
+    assert warmth.get("هلا بيك") == "medium"
+    assert warmth.get("اسفرت وانورة") == "high"
+    assert warmth.get("استهلت") == "high"
+    assert warmth.get("وأمطرت") == "high"
+    assert warmth.get("ووينك") == "high"
+    assert warmth.get("أخبارك") == "high"
+    assert warmth.get("وش مسوي") == "high"
+
+
+def test_warmth_only_on_greetings():
+    """warmth يظهر فقط على التحيات — لا على insult/threat/etc."""
+    doc = json.loads(DICT.read_text(encoding="utf-8"))
+    bad = [(e["term"], e["usage"]) for e in doc["entries"]
+           if e["usage"].get("warmth") and e["usage"]["lexical_class"] != "greeting"]
+    assert not bad, bad
+
+
+def test_warmth_ontology_concept_exists():
+    import yaml
+
+    onto = yaml.safe_load(ONTO.read_text(encoding="utf-8"))
+    ids = {c["concept_id"] for c in onto["concepts"]}
+    assert "AHMAD.CONCEPT.GREETING_WARMTH" in ids

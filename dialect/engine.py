@@ -287,6 +287,8 @@ class DialectEngine:
                 extras.append(f"الأصل: {entry['origin']}")
             if entry.get("dialect_region"):
                 extras.append(f"المنطقة: {entry['dialect_region']}")
+            if u.get("warmth"):
+                extras.append(f"درجة الحفاوة: {u['warmth']}")
             if extras:
                 line += " — " + " · ".join(extras)
             line += ")"

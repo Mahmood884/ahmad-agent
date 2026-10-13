@@ -50,11 +50,20 @@ def test_multiword_term_matches_as_phrase(engine):
 
 
 def test_every_term_resolves_to_itself(engine):
+    # A term whose surface carries a pronunciation gloss — "مطعم (بضم الميم)" —
+    # is indexed under its bare key ("مطعم"), so scanning its own (gloss-stripped)
+    # tokens returns the bare entry when both exist. That is the intended
+    # canonicalization: the user typing "مطعم" gets the plain entry. Accepted:
+    # the first hit is the term itself OR its paren-stripped twin.
     missed = []
     for term in engine._entries:
         toks = engine_mod.tokenize(engine_mod._PAREN_RE.sub(" ", term))
         hits = engine._scan(toks, engine._term_phrases, engine._term_lengths, True)
-        if not hits or hits[0]["term"] != term:
+        if not hits:
+            missed.append(term)
+            continue
+        bare = engine_mod._PAREN_RE.sub("", term).strip()
+        if hits[0]["term"] != term and hits[0]["term"] != bare:
             missed.append(term)
     assert missed == []
 

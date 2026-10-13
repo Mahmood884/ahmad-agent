@@ -1,15 +1,20 @@
-# TASK PROMPT — Bahraini Dialect Dictionary Enrichment
+# TASK PROMPT — Bahraini Dialect Dictionary Enrichment (v3 schema)
 
 > انسخ هذا البرومبت كامل وأعطه لـ Codex (أو أي نموذج ثاني). المهمة معرّفة
 > بالمدخلات والمخرجات ومعايير القبول — طريقة الحل متروكة للمنفّذ.
+>
+> ⚠️ تحديث المخطط (2026-10-13): الحقول صارت `lexical_tone` / `lexical_class`
+> / `speaker_intent`. أي تنفيذ على المخطط القديم (`tone` / `intent`) غير
+> متوافق مع `engine.py` والمقارنة بينه تصير بلا معنى.
 
 ---
 
 ## المهمة
 
-ابنِ خط معالجة (pipeline) يحوّل قاموس البحرية الخام إلى قاموس YAML مخصّب،
-حيث كل مدخل يحمل حقل `usage` يصف: النبرة (tone)، القصد (intent)، الشدة
-(strength)، وأصل الكلمة (origin_type).
+ابنِ خط معالجة (pipeline) يحوّل قاموس البحرية الخام إلى قاموس مخصّب + ملف
+JSON موحّد، حيث كل مدخل يحمل حقل `usage` يصف: النبرة المعجمية
+(`lexical_tone`)، الصنف المعجمي (`lexical_class`)، قصد المتكلم
+(`speaker_intent`)، الشدة (`strength`)، وأصل الكلمة (`origin_type`).
 
 ## المدخل
 
@@ -17,10 +22,14 @@
 ~/ahmad-agent/dialect/raw/bahraini_dictionary_raw.txt
 ```
 
-ملف نصي 499KB. محتواه: قاموس JSON (معه `metadata` و `entries`) ملصوق داخل
-markdown code fences (```json). الملف يحتوي نسختين متطابقتين من نفس القاموس
-(1896 تكرار لـ 948 مصطلح فريد)، مع نثر عربي خارج الـ fences في البداية
-والنهاية يجب تجاهله.
+ملف نصي 499KB. محتواه — **مصدران**، مو نسخة مكررة:
+
+1. **المصدر الأول:** قاموس JSON (معه `metadata` و `entries`) ملصوق داخل
+   markdown code fences (```json)، **مرتين متطابقتين** (1896 تكرار لـ
+   948 مصطلح فريد — أول ظهور يفوز).
+2. **المصدر الثاني (في ذيل الملف):** سكربت بايثون كامل (تخصيب antigravity)
+   يحتوي `entries_raw = [...]` — **835 مدخل**، منها **351 مصطلح جديد** غير
+   موجود في المصدر الأول. استخرجه بـ `ast.literal_eval` (مو `eval`).
 
 بنية كل مدخل في `entries`:
 ```json
@@ -28,48 +37,52 @@ markdown code fences (```json). الملف يحتوي نسختين متطابق�
 ```
 (الحقول الاختيارية dialect_region / origin / notes موجودة في بعض المداخل فقط)
 
-## المطلوب — خطوتان
+## المطلوب — ثلاث خطوات
 
 ### الخطوة 1: الاستخراج (`scripts/extract_dictionary.py`)
 
 - استخرج كل بلوكات ```json من الملف الخام
 - من كل بلوك، استخرج مصفوفة `"entries": [...]` (المصفوفة ضخمة ومتعددة الأسطر —
   استخدم مطابقة الأقواس، مو regex ساذج)
-- دمج كل المداخل، إزالة التكرار بالمفتاح `term` (أول ظهور يفوز)
-- اكتب المخرج YAML نظيفاً في `data/dictionary_raw.yaml`:
-  ```yaml
-  entries:
-  - term: ...
-    meaning: ...
-    examples: []
-    synonyms: []
-    dialect_region: ...   # فقط إن وُجد
-    origin: ...           # فقط إن وُجد
-    notes: ...            # فقط إن وُجد
-  ```
-- استخدم `yaml.dump(..., allow_unicode=True, sort_keys=False)` — الترتيب
-  الأبجدي للمداخل يجب أن يُحفظ كما هو في المصدر
+- استخرج كذلك `entries_raw = [...]` من سكربت الذيل (استخراج نصي + `ast`)
+- اكتب المخرج YAML نظيفاً في `data/dictionary_raw.yaml` (المصدر الأول فقط)،
+  وفي `data/antigravity_entries.json` (المصدر الثاني كـ JSON)
+- الترتيب الأبجدي للمداخل يُحفظ كما هو في المصدر
 
 ### الخطوة 2: التخصيب (`scripts/build_enriched_yaml.py`)
 
 - اقرأ `data/dictionary_raw.yaml`
-- لكل مدخل، أضف حقل `usage`:
+- لكل مدخل، أضف حقل `usage` بالمخطط الجديد:
   ```yaml
   usage:
-    tone: neutral        # positive | negative | neutral | aggressive
-    intent: describe     # describe | question | greeting | praise | curse | threat | dismiss | insult
-    strength: medium     # high | medium — فقط لـ threat/curse/insult
-    origin_type: english # english | hindi | italian | persian | russian | turkish — فقط للكلمات الدخيلة
+    lexical_tone: neutral      # positive | negative | neutral | aggressive | friendly
+    lexical_class: describe    # describe | question | greeting | praise | curse | threat | dismiss | insult
+    speaker_intent: context-dependent   # ثابت دائماً — الكلمة لا تحدّد قصد المتكلم
+    strength: medium           # high | medium — فقط لـ threat/curse/insult/dismiss
+    origin_type: english       # english | hindi | italian | persian | russian | turkish | french — فقط للكلمات الدخيلة
   ```
 - اكتب المخرج في `data/dictionary_enriched.yaml`
 
+### الخطوة 3: الدمج (`scripts/merge_and_export_json.py`)
+
+- ادمج: المصدر الأول (948، usage كامل) أساسي + المصدر الثاني (835) ثانوي
+  يملأ الفراغات فقط — **نفس مخطط الـ usage** للمصدرين (لا تخلط مخططين)
+- مفتاح إزالة التكرار: `term` مطبَّع (تطويل/شدّة/ألف/ياء/تاء مربوطة)،
+  **كلمة-كلمة** (تطبيع العبارة كلها يترك `طايح النصبة` بالتاء فلا تطابق نفسها)
+- **لا حقول null:** الحقل الغائب يُحذف، مو `null`
+- الترتيب = ترتيب المصدر (الأساسي أولاً ثم الإضافات) — مو فرز codepoint
+- المخرج: `data/bahraini_dictionary_unified.json` مع `metadata.entry_count`
+  و`metadata.schema` (الملف يصف نفسه)
+
 ## قواعد التصنيف (الحد الأدنى المقبول)
 
-- **الكلمات الدخيلة:** قائمة أنماط معروفة (مثل أجست=Adjust، آيسي=Aircon،
+- **الكلمات الدخيلة:** قائمة أنماط معروفة (أجست=Adjust، آيسي=Aircon،
   بست=Bus، سبيتار=Hospital، موتر=Motor، كنديشن=Conditioner، روتي، شربت،
   سيده=Hindi، طاولة، معكرونة=Italian، أوتو، أوز، بار، بوز=Persian، استكانه
-  =Russian، تتن، برغي=Turkish...). المطابقة على `term` فقط (مش على المعنى).
-- **التهديد:** معانٍ فيها ضرب/كسر/سحق/سقط/خوف/وعيد
+  =Russian، تتن، برغي=Turkish). المطابقة على `term` فقط. **المصدر الثاني:
+  استخدم حقل `origin`/`original` إن وُجد** (أستكانه=روسية، أوتي=فارسية...)
+  قبل الأنماط — الأنماط وحدها تفقد 26 مدخلاً عندهم الأصل جاهز.
+- **التهديد:** معانٍ فيها ضرب/كسر/سحق/خوف/وعيد
 - **الإهانة:** معانٍ فيها غبي/أحمق/كذاب/مجنون/جبان/حقير/وسخ/مقرف/هبلة/بله/تافه
 - **اللعنة:** معانٍ فيها دعاء بالسوء/اللعنة/هلك/شيطان
 - **التحية:** معانٍ فيها مرحبا/هلا/أهلا/حباب/السلام/مساء/صباح
@@ -96,24 +109,27 @@ markdown code fences (```json). الملف يحتوي نسختين متطابق�
 | ونقه | أوصله بعيداً | greeting — لأن "عيد" جوّا "بعيداً" |
 
 **المطلوب:** المطابقة بحدود الكلمة — الكلمة المفتاحية تُحسب فقط إن لم يسبقها
-ولم يتبعها حرف عربي مباشرة. (مثلاً `(?<![\u0621-\u064A])كلمة(?![\u0621-\u064A])`
-في Python re، أو ما يعادلها بلغتك).
+ولم يتبعها حرف عربي مباشرة (مثلاً `(?<![\u0621-\u064A])كلمة(?![\u0621-\u064A])`
+في Python re).
 
-**الكلمات الغامضة التي يجب إزالتها من القوائم:** "أهل" (أيضاً معناها
-عائلة/ناس)، "سلم" (أيضاً معناها سلّم/سلم)، "عيد" (تظهر في أمثال)، "وعيد"
-(معناها تهديد مو تحية)، "هل" و "كيف" (قصيرتان ويصطدمان بكلمات شائعة).
+**الكلمات الغامضة التي يجب إزالتها من القوائم:** "أهل"، "سلم"، "عيد"،
+"وعيد"، "هل"، "كيف" (انظر الجدول).
 
 ## معايير القبول (Acceptance Criteria)
 
 1. `data/dictionary_raw.yaml` يحتوي **948 مدخل فريد** بالضبط
-2. `data/dictionary_enriched.yaml` يحتوي **948 مدخل**، وكل واحد فيه `usage`
-3. توزيع النبرة منطقي: الأغلبية الساحقة `neutral` (المفردات أغلبها أسماء
-   وأوصاف) — لو طلع `question` أو `greeting` بعشرات المداخل، فيه خطأ
-   substring
-4. الحالات الـ 14 في جدول التحذير أعلاه يجب أن تُصنّف `describe/neutral`
+2. `data/antigravity_entries.json` يحتوي **835 مدخل**
+3. `data/bahraini_dictionary_unified.json` يحتوي **1299 مدخل**
+   (948 + 351 جديدة) — و`metadata.entry_count` يطابق
+4. **صفر حقول null** في كل المخرجات (الحقل الغائب يُحذف)
+5. كل المداخل — من المصدرين — تحمل نفس مخطط `usage` (lexical_tone +
+   lexical_class + speaker_intent) — **صفر انحراف مخطط**
+6. توزيع النبرة منطقي: الأغلبية الساحقة `neutral` — لو طلع `question` أو
+   `greeting` بعشرات المداخل، فيه خطأ substring
+7. الحالات في جدول التحذير أعلاه تُصنّف `describe/neutral`
    (عدا "هلا: مرحباً" → greeting)
-5. إعادة التشغيل من الصفر تنتج نفس المخرج حرفياً (deterministic)
-6. السكربتات تشتغل بـ `python3 scripts/...` مع PyYAML فقط
+8. إعادة التشغيل من الصفر تنتج نفس المخرج **بايت-بايت** (deterministic)
+9. السكربتات تشتغل بـ `python3 scripts/...` مع PyYAML فقط
 
 ## البيئة
 

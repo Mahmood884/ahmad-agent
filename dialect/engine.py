@@ -92,7 +92,7 @@ def _clitic_stems(tok: str) -> list[str]:
 
 
 class DialectEngine:
-    """Runtime access layer for the dialect dictionary + ontology."""
+    """Runtime access layer v2 — whole-word matching + full context payload."""
 
     def __init__(
         self,
@@ -109,6 +109,7 @@ class DialectEngine:
         self._concepts: dict[str, dict] = {}
         self._alias_index: dict[str, dict] = {}
         self._rejected: set[str] = set()
+        self._rejected_forms: set[str] = set()
         # token-tuple indexes used by enrich_context (word-boundary matching)
         self._term_phrases: dict[tuple[str, ...], dict] = {}
         self._label_phrases: dict[tuple[str, ...], dict] = {}
@@ -135,7 +136,12 @@ class DialectEngine:
                 self._synonym_index.setdefault(syn, e)
             key = _phrase_key(term)
             if key:
-                self._term_phrases.setdefault(key, e)
+                # prefer the bare term over a parenthesized variant:
+                # "مطعم (بضم الميم)" and "مطعم" share the key ('مطعم',) —
+                # the plain form wins so lookup("مطعم") returns "مطعم".
+                existing = self._term_phrases.get(key)
+                if existing is None or ("(" in existing.get("term", "") and "(" not in term):
+                    self._term_phrases[key] = e
 
         onto = yaml.safe_load(self._onto_path.read_text(encoding="utf-8"))
         for c in onto.get("concepts", []):
@@ -148,7 +154,13 @@ class DialectEngine:
             if label_key:
                 self._label_phrases.setdefault(label_key, c)
         for r in onto.get("rejected_terms", []):
-            self._rejected.add(r.get("term", ""))
+            raw_term = r.get("term", "")
+            self._rejected.add(raw_term)
+            # split "عزوز / زيزو / غزيزو" into individual forms
+            for form in re.split(r"\s*/\s*", raw_term):
+                form = form.strip()
+                if form:
+                    self._rejected_forms.add(normalize_term(form))
 
         self._term_lengths = sorted({len(k) for k in self._term_phrases}, reverse=True)
         self._label_lengths = sorted({len(k) for k in self._label_phrases}, reverse=True)
@@ -232,7 +244,26 @@ class DialectEngine:
         seen: set[str] = set()
         tokens = tokenize(user_message)
 
-        # dialect terms
+        # rejected-terms alert (all spellings, incl. عزوز / زيزو / غزيزو)
+        rejected_hit = False
+        for form in self._rejected_forms:
+            form_key = _phrase_key(form)
+            if not form_key:
+                continue
+            if form_key in self._term_phrases:
+                # single-word form: token/phrase match
+                if self._scan(tokens, {form_key: {"term": form}}, [len(form_key)], True):
+                    found.append(f"⚠️ مصطلحات مرفوضة في الرسالة: {form}")
+                    rejected_hit = True
+                    break
+            else:
+                # multi-word form: phrase scan
+                if self._scan(tokens, {form_key: {"term": form}}, [len(form_key)], False):
+                    found.append(f"⚠️ مصطلحات مرفوضة في الرسالة: {form}")
+                    rejected_hit = True
+                    break
+
+        # dialect terms — with notes / examples / synonyms / origin / region
         for entry in self._scan(tokens, self._term_phrases, self._term_lengths, True):
             if len(found) >= max_terms:
                 break
@@ -240,11 +271,26 @@ class DialectEngine:
             if term in seen:
                 continue
             u = entry.get("usage", {})
-            found.append(
+            line = (
                 f"- [{term}] {entry.get('meaning','')} "
                 f"(نبرة الكلمة: {u.get('lexical_tone','?')}، "
-                f"نوعها: {u.get('lexical_class','?')})"
+                f"نوعها: {u.get('lexical_class','?')}"
             )
+            extras = []
+            if entry.get("notes"):
+                extras.append(f"ملاحظة: {entry['notes']}")
+            if entry.get("examples"):
+                extras.append("مثال: " + " / ".join(entry["examples"][:2]))
+            if entry.get("synonyms"):
+                extras.append("مرادفات: " + "، ".join(entry["synonyms"][:4]))
+            if entry.get("origin"):
+                extras.append(f"الأصل: {entry['origin']}")
+            if entry.get("dialect_region"):
+                extras.append(f"المنطقة: {entry['dialect_region']}")
+            if extras:
+                line += " — " + " · ".join(extras)
+            line += ")"
+            found.append(line)
             seen.add(term)
 
         # project concepts (matched by preferred_label, as before)

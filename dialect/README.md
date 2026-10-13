@@ -3,33 +3,66 @@
 ## What this is
 
 Converts the raw Bahraini dialect dictionary (pasted from the Qwen session,
-499KB text file) into an **enriched YAML dictionary** where every entry carries
-a `usage` block: `{tone, intent, strength?, origin_type?}`.
+499KB text file) into an **enriched unified JSON dictionary** where every
+entry carries a `usage` block:
+`{lexical_tone, lexical_class, speaker_intent, strength?, origin_type?}`.
 
 The enriched output is the vocabulary layer for AHMAD-OS's dialect engine —
-it tells the agent how each word *sounds* (tone), what it *wants* (intent),
-how *severe* it is (strength), and where it *came from* (origin_type).
+it tells the agent how each word *sounds* (lexical_tone), what it *is*
+(lexical_class), that the speaker's intent is NOT word-derivable
+(speaker_intent), how *severe* it is (strength), and where it *came from*
+(origin_type).
 
 ## Pipeline
 
 ```
-raw/bahraini_dictionary_raw.txt   (499KB, pasted JSON-in-markdown, 2 duplicate copies)
+raw/bahraini_dictionary_raw.txt   (499KB — TWO sources, see below)
         │
-        ▼  scripts/extract_dictionary.py
-data/dictionary_raw.yaml          (948 unique entries, clean YAML)
+        ├─ source 1: JSON-in-markdown (x2 identical copies, 1896 occurrences)
+        │            ▼  scripts/extract_dictionary.py
+        │     data/dictionary_raw.yaml          (948 unique entries, clean YAML)
+        │            ▼  scripts/build_enriched_yaml.py
+        │     data/dictionary_enriched.yaml     (948 entries + usage block on each)
         │
-        ▼  scripts/build_enriched_yaml.py
-data/dictionary_enriched.yaml     (948 entries + usage block on each)
+        └─ source 2: antigravity python script in the file's TAIL
+                     (entries_raw = [...], 835 entries — 351 genuinely new)
+                     ▼  scripts/merge_and_export_json.py --secondary-from-python
+                  data/antigravity_entries.json    (835 entries, usage-filled)
+                                    ▼
+        data/bahraini_dictionary_unified.json  (1299 = 948 + 351, unified product)
 ```
 
-Run both steps:
+Run all steps:
 
 ```bash
 cd ~/ahmad-agent/dialect
 source ~/ahmad-agent/.venv/bin/activate
 python3 scripts/extract_dictionary.py
 python3 scripts/build_enriched_yaml.py data/dictionary_raw.yaml data/dictionary_enriched.yaml
+python3 scripts/merge_and_export_json.py          # uses data/antigravity_entries.json if present
 ```
+
+To re-extract the secondary source from the raw file's tail script:
+
+```bash
+# extract the script tail, then:
+python3 scripts/merge_and_export_json.py --secondary-from-python <script.py>
+```
+
+## The two sources in the raw file (discovered 2026-10-13)
+
+The raw paste is NOT just duplicated JSON. It contains:
+
+| Block | What | Count |
+|---|---|---|
+| fences 1–2 | dictionary JSON (identical copies) | 948 unique each |
+| fence 3 | metadata-only stub | 0 entries |
+| file tail | complete antigravity enrichment script with `entries_raw` | **835 entries — 351 new** |
+
+The 351 new terms include common ones the primary source lacks: `وايد`,
+`حلطمة`, `لاويش`, `صه`, `عيار`, `بقعة`, `حنفروش`, `مطعطع`…
+(`كشتة`/`كشخة` exist as `كشته`/`كشخه` — orthographic variants, not gaps.)
+Extraction uses `ast.literal_eval` — never `eval`.
 
 ## Output format
 
@@ -41,32 +74,37 @@ entries:
   synonyms:
   - كوفنه
   usage:
-    lexical_tone: aggressive     # how the WORD sounds (positive | negative | neutral | aggressive)
+    lexical_tone: aggressive     # how the WORD sounds (positive | negative | neutral | aggressive | friendly)
     lexical_class: threat        # what the WORD is (describe | question | greeting | praise |
                                  # curse | threat | dismiss | insult)
     speaker_intent: context-dependent  # actual intent needs sentence context — NOT word-derivable
-    strength: medium             # high | medium  (only for threat/curse/insult)
-    origin_type: english         # english | hindi | italian | persian | russian | turkish
+    strength: medium             # high | medium (only for threat/curse/insult/dismiss)
+    origin_type: english         # english | hindi | italian | persian | russian | turkish | french
                                  # (only for loanwords)
 ```
 
-**Semantic boundary (added 2026-10-13):** `lexical_tone` and `lexical_class`
-describe the WORD, not the speaker. "أبسطه = ضربه" classifies the word; it does
-NOT establish that a speaker using it intends violence (could be quotation,
-joke, report, or question). Never train on these labels as intent ground truth.
+**Semantic boundary:** `lexical_tone` and `lexical_class` describe the WORD,
+not the speaker. "أبسطه = ضربه" classifies the word; it does NOT establish
+that a speaker using it intends violence (could be quotation, joke, report,
+or question). Never train on these labels as intent ground truth.
 
-## Statistics (verified run, 2026-10-13, post-review fixes)
+## Statistics (verified run, 2026-10-13, post-review v2)
 
-- **948 unique entries** extracted from 1,896 occurrences (the raw file contains 2 identical copies)
-- Field coverage: term 948, meaning 948, examples 948, synonyms 948, dialect_region 11, origin 55, notes 5
-- Usage distribution after all fixes:
+- **Primary source:** 948 unique entries from 1,896 occurrences (2 identical copies)
+- **Secondary source:** 835 entries → **+351 new** (4 normalized-duplicate variants absorbed)
+- **Unified total:** **1299 entries** · **0 null fields** (sparse fields omitted, not null)
+- Field coverage: term 1299, meaning 1299, examples (source-carried), synonyms (source-carried),
+  dialect_region 11, origin 55, notes 5
+- Usage distribution (primary source, all fixes applied):
   - lexical_tone: neutral 919 / negative 18 / aggressive 7 / positive 4
-  - lexical_class: describe 908 / insult 18 / dismiss 5 / curse 5 / praise 4 / question 5 / threat 2 / greeting 1
-  - origin_type (with source-field fallback): english 44, hindi 5, persian 4, french 2, italian 2, turkish 2, russian 1 = **60 total** (was 29 pattern-only)
+  - lexical_class: describe 908 / insult 18 / dismiss 5 / curse 5 / praise 4 /
+    question 5 / threat 2 / greeting 1
+  - origin_type (with source-field fallback): english 44, hindi 5, persian 4,
+    french 2, italian 2, turkish 2, russian 1 = **60 total** (was 29 pattern-only)
 
 ## Runtime access — dialect/engine.py
 
-The review gap (no loader connecting the artifacts to the inference path) is
+The wiring gap (no loader connecting the artifacts to the inference path) is
 closed by `engine.py`:
 
 ```python
@@ -79,67 +117,97 @@ engine.stats()                                # → counts + distributions
 ```
 
 Engine capabilities: exact + normalized + synonym lookup · concept resolution
-by ID and by alias · rejected-terms guard · context-block injection ·
-per-word lexical annotation. Smoke test: `python3 engine.py "<message>"`.
+by ID and by alias · rejected-terms guard (all spellings) · whole-word +
+phrase + clitic matching · context-block injection with notes/examples/
+synonyms/origin/region · bare-term-wins on paren-variant collisions.
+Smoke test: `python3 engine.py "<message>"`.
 
-## Known fixes applied (2026-10-13, post-review)
+`scripts/ollama_bridge.py` delegates ALL dialect logic to `DialectEngine` —
+one matching implementation, one schema, zero drift.
+
+## Known fixes applied (2026-10-13, post-review v2)
 
 **Review round 1 (word-boundary):** plain substring matching (`k in text`)
 produced mechanical false positives on Arabic words that *contain* a keyword:
 `بلبله` (faucet) = insult, `جابله` (tomorrow) = insult, `أيسي` (aircon) =
 question, `أدنات` (day of threat) = greeting. Fix: Arabic word-boundary regex
-`(?<![\u0621-\u064A])kw(?![\u0621-\u064A])` + removal of ambiguous keywords
-("أهل", "سلم", "عيد", "وعيد", "هل", "كيف").
+`(?<![\u0621-\u064A])kw(?![\u0621-\u064A])` + removal of ambiguous keywords.
 
 **Review round 2 (2026-10-13):**
 
-1. `origin_type` now falls back to the source's own `origin` field (e.g.
-   "الروسية - Ctakanh" → russian) when no pattern matches — 55 entries carry
-   the field; pattern-only recovered 29, fallback recovers 60 total.
-2. Loanword patterns fixed: dead madda-form patterns (آيسي/آيدين) now have
-   plain-alef twins (أيسي/أيدين — the live forms); dead duplicates removed.
-3. Ontology dangling refs resolved: AGENT_RUNTIME, SECURE_PROTOCOL,
-   INTENT_ANNOTATION, USER_ASSISTANT are now defined concepts (20 total).
-4. `semantic_fidelity.md` §9 now marks each planned file explicitly as
-   موجود / غير موجود بعد (مخطط) — no hallucination bait.
-5. Remaining keyword errors fixed: "شكر" (matched sugar سكر), "كريم" (matched
-   ice cream عسكريم), "حلو" (matched sweet water ماي بيلر), "كف" (matched
-   palm كف اليد / slap كف راشدي), "سقط"/"طيح" (matched literal falling
-   أنشدخ/صفرة). All 8 verified clean.
+1. `origin_type` falls back to the source's own `origin` field (55 entries
+   carry it; pattern-only recovered 29, fallback recovers 60 total).
+2. Loanword patterns: dead madda-form patterns replaced by plain-alef twins.
+3. Ontology dangling refs resolved (20 concepts, all defined).
+4. `semantic_fidelity.md` §9 marks each planned file as موجود / غير موجود.
+5. 8 keyword errors fixed (شكر/كريم/حلو/كف/سقط/طيح + 3 more) — all clean.
+
+**Review round 3 (2026-10-13, v2 engine):**
+
+1. **Secondary source merged (was absent at build time):** the antigravity
+   script in the raw file's tail was extracted (`ast.literal_eval`) and
+   merged: 948 → **1299** entries.
+2. **Schema unification:** both sources now emit the same `usage` schema
+   (lexical_tone/lexical_class/speaker_intent). The old generic analyzer
+   emitted `{tone, intent}` — dead keys. `ollama_bridge.py` no longer reads
+   them; it delegates to `DialectEngine`.
+3. **Per-word normalization:** `normalize_term` normalizes each word
+   independently — `طايح النصبة` now matches itself (the ة→ه rule was
+   anchored at the end of the whole string).
+4. **Null fields dropped:** 2,773 nulls removed — absent means absent.
+5. **Source order preserved:** no codepoint sort; entries keep source order.
+6. **Bare-term-wins on collision:** `مطعم (بضم الميم)` no longer steals the
+   `مطعم` phrase key.
+7. **Full context payload:** `enrich_context` injects notes / examples /
+   synonyms / origin / region, and alerts on rejected terms in all their
+   spellings (عزوز / زيزو / غزيزو).
+8. **Reproducible build:** `build_engine_v2.py` regenerates the engine from
+   `engine_v1_substring.py.bak` — verified byte-identical output.
+9. **Tests:** 16/16 dialect regression tests (dialect/test_dialect_engine.py)
+   + full repo suite **270 passed / 3 skipped**.
 
 **Known limitations (still honest):**
 
-1. **Keyword rules ≠ semantics.** `describe` covers 908/948 entries because
-   most dictionary entries are nouns/objects with no emotive markers. This is
-   correct behavior — not every word carries tone. But the *boundaries* are
-   keyword-derived, not model-derived. A 1B local model or the 188 DPO pairs
-   should review edge cases before this feeds training.
-2. **`strength` only fires for threat/curse/insult.** Descriptive weakness
-   ("ضعيف البنية بسبب مرض") stays `describe`, not `insult` — by design.
+1. **Keyword rules ≠ semantics.** `describe` covers ~908/948 entries because
+   most dictionary entries are nouns/objects with no emotive markers. The
+   *boundaries* are keyword-derived, not model-derived. A local model or the
+   DPO pairs should review edge cases before training.
+2. **`strength` only fires for threat/curse/insult/dismiss** — by design.
 3. **`speaker_intent` is always "context-dependent"** — the dictionary
    deliberately does not claim to know what a speaker means.
-4. **`dialect_region` (11) and `origin` (55) fields are sparse** in the source
-   itself, not lost in extraction.
-5. **The 2 duplicate copies in the raw file are identical** (948 unique terms
-   both times) — extraction dedupes by first occurrence.
+4. **`dialect_region` (11) and `origin` (55) are sparse in the source
+   itself**, not lost in extraction.
+5. **The 2 dictionary copies in the raw file are identical** (948 unique
+   terms both times) — extraction dedupes by first occurrence.
+6. **The engine is NOT wired into `src/ahmad/`** — `enrich_context()` must be
+   called from the conversation/provider path, and `semantic_fidelity.md`
+   loaded as a system prompt. The loader exists; the runtime call site does
+   not (yet). This is the next wiring step, not a data problem.
 
 ## Files
 
 ```
 dialect/
 ├── README.md                          # this file
-├── TASK_PROMPT.md                     # self-contained task spec for model comparison
+├── TASK_PROMPT.md                     # self-contained task spec (v3 schema) for model comparison
 ├── ontology.yaml                      # semantic concept registry (L2) — stable IDs, definitions, aliases
+├── engine.py                          # runtime loader (canonical) — whole-word matching + full payload
+├── engine_v2.py                       # compatibility re-export of engine.py
+├── engine_v1_substring.py.bak         # pre-review engine (substring matching) — build source of truth
+├── build_engine_v2.py                 # regenerates engine.py from the .bak (verified byte-identical)
+├── test_dialect_engine.py             # 16 regression tests (engine + dictionary + ontology)
 ├── raw/
 │   └── bahraini_dictionary_raw.txt    # 499KB source paste (do not edit)
 ├── scripts/
 │   ├── extract_dictionary.py          # raw text → clean YAML (brace-matched JSON extraction)
 │   ├── build_enriched_yaml.py         # clean YAML → enriched YAML (lexical usage blocks)
-│   └── merge_and_export_json.py       # sources → unified JSON (antigravity loader ready, source absent)
+│   ├── merge_and_export_json.py       # sources → unified JSON (secondary extractable via --secondary-from-python)
+│   └── ollama_bridge.py               # Ollama client — delegates all dialect logic to DialectEngine
 └── data/
     ├── dictionary_raw.yaml            # 948 entries, 4254 lines
     ├── dictionary_enriched.yaml       # 948 entries + usage, 7155 lines
-    └── bahraini_dictionary_unified.json  # 948 entries, unified product (~325KB)
+    ├── antigravity_entries.json       # 835 secondary-source entries (351 new merged in)
+    └── bahraini_dictionary_unified.json  # 1299 entries, unified product (~375KB)
 ```
 
 Related: `../prompts/semantic_fidelity.md` — the agent system prompt built

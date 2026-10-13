@@ -1,0 +1,203 @@
+#!/usr/bin/env python3
+"""
+test_dialect_engine.py — اختبارات حماية (regression) لطبقة اللهجة (engine_v2 + القاموس + ontology)
+
+يشغل بـ pytest من داخل dialect/:
+    cd ~/ahmad-agent/dialect
+    python3 build_engine_v2.py          # يبني engine_v2.py من engine.py
+    python3 -m pytest test_dialect_engine.py -q
+
+أو بدونه:
+    python3 test_dialect_engine.py
+"""
+from __future__ import annotations
+
+import importlib.util
+import json
+import subprocess
+import sys
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
+
+DICT = HERE / "data" / "bahraini_dictionary_unified.json"
+ONTO = HERE / "ontology.yaml"
+
+TONE_ENUM = {"neutral", "positive", "negative", "aggressive", "friendly"}
+CLASS_ENUM = {"describe", "question", "greeting", "praise", "curse", "threat", "dismiss", "insult"}
+STRENGTH_ENUM = {"low", "medium", "high"}
+
+
+def _load_engine(module_name: str = "engine_v2"):
+    path = HERE / f"{module_name}.py"
+    if not path.exists():
+        raise AssertionError(f"{path} مو موجود — شغّل: python3 build_engine_v2.py")
+    spec = importlib.util.spec_from_file_location(module_name, path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def _engine():
+    return _load_engine().DialectEngine()
+
+
+def _terms(ctx: str) -> list:
+    return [ln.split("]")[0].lstrip("- [") for ln in ctx.splitlines() if ln.startswith("- [")]
+
+
+# ── 1) لا إصابات substring كاذبة ─────────────────────────────────────────────
+
+def test_no_substring_false_positives():
+    e = _engine()
+    benign = "يجب أن أدغدغ الشعور مع البزازة والطقس والصهريج والتتبع"
+    assert e.enrich_context(benign) == "", _terms(e.enrich_context(benign))
+
+
+def test_no_false_positive_from_greeting_substring():
+    e = _engine()
+    # «عساكم» كانت تطلع من داخل «عساكم»/«كم» — الجملة التالية ما فيها مصطلح
+    assert "كم" not in _terms(e.enrich_context("عساكم السعادة دوم"))
+
+
+def test_no_false_positive_baar():
+    e = _engine()
+    # «بار» كانت تطلع من داخل «يا زعيم وشخبارك»
+    assert "بار" not in _terms(e.enrich_context("هلا يا زعيم وشخبارك"))
+
+
+# ── 2) العبارات المركّبة ──────────────────────────────────────────────────────
+
+def test_multiword_phrase_matches():
+    e = _engine()
+    assert "طايح النصبة" in _terms(e.enrich_context("يقولون طايح النصبة عليه"))
+
+
+def test_multiword_phrase_with_spelling_variant():
+    e = _engine()
+    # «ام» بدون همزة — التطبيع لازم يوحّدها
+    hits = _terms(e.enrich_context("صادته ام الديفان وهو صغير"))
+    assert any("الديفان" in h for h in hits), hits
+
+
+def test_phrase_beats_its_parts_in_order():
+    e = _engine()
+    hits = _terms(e.enrich_context("لا تخلط ماي بيلر مع عسكريم"))
+    assert hits and hits[0] == "ماي بيلر", hits
+    assert "سكر" not in hits and "كر" not in hits, hits
+
+
+# ── 3) اللواصق ────────────────────────────────────────────────────────────────
+
+def test_prefix_clitic_stripped():
+    e = _engine()
+    assert "شخبارك" in _terms(e.enrich_context("هلا يا زعيم وشخبارك"))
+
+
+# ── 4) الحقول الدلالية تصل للسياق ─────────────────────────────────────────────
+
+def test_notes_and_examples_are_injected():
+    e = _engine()
+    ctx = e.enrich_context("أدنات يوم باكسر ضلوعك")
+    assert "تقال في سياق التهديد" in ctx, ctx
+    assert "مثال:" in ctx, ctx
+
+
+def test_synonyms_injected():
+    e = _engine()
+    ctx = e.enrich_context("عطني أبشار")
+    assert "أبشار" in ctx
+
+
+# ── 5) ontology ───────────────────────────────────────────────────────────────
+
+def test_concept_alias_resolves():
+    e = _engine()
+    ctx = e.enrich_context("احنا نبني الوكيل")
+    assert "AHMAD.CONCEPT.AHNA" in ctx, ctx
+
+
+def test_rejected_terms_alert():
+    e = _engine()
+    ctx = e.enrich_context("هلا يا عزيز برو")
+    assert "مرفوضة" in ctx, ctx
+
+
+def test_ontology_has_no_dangling_refs():
+    import yaml
+
+    onto = yaml.safe_load(ONTO.read_text(encoding="utf-8"))
+    ids = {c["concept_id"] for c in onto["concepts"]}
+    dangling = []
+    for c in onto["concepts"]:
+        for ref in c.get("not_equivalent_to") or []:
+            if ref.get("concept_id") not in ids:
+                dangling.append((c["concept_id"], ref.get("concept_id")))
+    assert not dangling, dangling
+
+
+# ── 6) مخطط البيانات ──────────────────────────────────────────────────────────
+
+def test_schema_consistency():
+    doc = json.loads(DICT.read_text(encoding="utf-8"))
+    entries = doc["entries"]
+    assert doc["metadata"]["entry_count"] == len(entries) == 1299
+    for e in entries:
+        u = e.get("usage") or {}
+        assert u.get("lexical_tone") in TONE_ENUM, (e["term"], u)
+        assert u.get("lexical_class") in CLASS_ENUM, (e["term"], u)
+        if u.get("strength"):
+            assert u["strength"] in STRENGTH_ENUM, (e["term"], u)
+        # لا مفاتيح قديمة ميتة
+        assert "tone" not in u and "intent" not in u, (e["term"], u)
+
+
+def test_no_null_fields():
+    doc = json.loads(DICT.read_text(encoding="utf-8"))
+    nulls = [(e["term"], k) for e in doc["entries"] for k, v in e.items() if v is None]
+    assert not nulls, nulls[:5]
+
+
+def test_reference_cases_are_clean():
+    """الحالات الـ14 من TASK_PROMPT — لازم describe/neutral ما عدا هلا."""
+    doc = json.loads(DICT.read_text(encoding="utf-8"))
+    idx = {e["term"]: e for e in doc["entries"]}
+    for t in ["بلبله", "جابله", "أيسي", "أدنات", "صيري", "ونقه", "صفرة", "أنشدخ", "عسكريم", "ماي بيلر", "كف راشدي"]:
+        if t not in idx:
+            continue
+        u = idx[t]["usage"]
+        assert u["lexical_class"] == "describe", (t, u)
+        assert u["lexical_tone"] in ("neutral", "aggressive"), (t, u)
+    if "هلا" in idx:
+        assert idx["هلا"]["usage"]["lexical_class"] == "greeting"
+
+
+# ── 7) إعادة التشغيل deterministic ───────────────────────────────────────────
+
+def test_merge_is_deterministic():
+    script = HERE / "scripts" / "merge_and_export_json.py"
+    if not script.exists():
+        return
+    before = DICT.read_bytes()
+    subprocess.run([sys.executable, str(script)], cwd=str(HERE), check=True,
+                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    after = DICT.read_bytes()
+    assert before == after, "إعادة تشغيل سكربت الدمج غيّرت المخرج — determinism مكسور"
+
+
+if __name__ == "__main__":
+    fns = [v for k, v in sorted(globals().items()) if k.startswith("test_") and callable(v)]
+    failed = 0
+    for fn in fns:
+        try:
+            fn()
+            print(f"PASS  {fn.__name__}")
+        except AssertionError as exc:
+            failed += 1
+            print(f"FAIL  {fn.__name__} — {str(exc)[:160]}")
+        except Exception as exc:  # noqa: BLE001
+            failed += 1
+            print(f"ERROR {fn.__name__} — {type(exc).__name__}: {str(exc)[:160]}")
+    print(f"\n{len(fns) - failed}/{len(fns)} نجحت")
+    raise SystemExit(1 if failed else 0)

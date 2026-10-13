@@ -1,0 +1,7155 @@
+entries:
+- term: أبشار
+  meaning: شرشف السرير
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: أبسطه
+  meaning: ضربه
+  examples: []
+  synonyms:
+  - كوفنه
+  usage:
+    tone: aggressive
+    intent: describe
+- term: اتوايق
+  meaning: يطل على شيء
+  examples: []
+  synonyms: []
+  dialect_region: الدراز
+  usage:
+    tone: neutral
+    intent: describe
+- term: أجست
+  meaning: ضبط
+  examples: []
+  synonyms: []
+  origin: الإنجليزية - Adjust
+  usage:
+    tone: neutral
+    intent: describe
+    origin_type: english
+- term: أدنات
+  meaning: يوم من الأيام (للوعيد والتهديد)
+  examples:
+  - أدنات يوم باكسر ضلوعك
+  synonyms: []
+  notes: تقال في سياق التهديد
+  usage:
+    tone: neutral
+    intent: describe
+- term: أدنات زرنوق
+  meaning: ممر ضيق (مثل الزرنوق)
+  examples: []
+  synonyms:
+  - زرنوق
+  - داعوس
+  usage:
+    tone: neutral
+    intent: describe
+- term: ادبغه
+  meaning: أشبعه ضرباً
+  examples: []
+  synonyms:
+  - أبسطه
+  - كوفنه
+  usage:
+    tone: neutral
+    intent: describe
+- term: ادلف
+  meaning: اذهب عني
+  examples: []
+  synonyms:
+  - انهب
+  dialect_region: بوري
+  usage:
+    tone: neutral
+    intent: dismiss
+- term: ادقم
+  meaning: شخص سقطت أسنانه (يقلب السين ثاءً)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: ادبيبو
+  meaning: حشرة صغيرة تتواجد في الأرز المخزون
+  examples: []
+  synonyms:
+  - بقره
+  - دبيبو
+  usage:
+    tone: neutral
+    intent: describe
+- term: أذنات
+  meaning: ممر (مثل أدنات زرنوق)
+  examples: []
+  synonyms:
+  - أدنات زرنوق
+  - زرنوق
+  - داعوس
+  usage:
+    tone: neutral
+    intent: describe
+- term: أرجلع
+  meaning: اجلس على الأرض
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: اركد
+  meaning: اهدأ
+  examples: []
+  synonyms:
+  - صير رايض
+  usage:
+    tone: neutral
+    intent: describe
+- term: أزغده
+  meaning: مسكه بوضع يده عليه، أو أمسكه من بلاعيمه
+  examples: []
+  synonyms:
+  - ازنطه
+  usage:
+    tone: neutral
+    intent: describe
+- term: اسراوة
+  meaning: الدود الذي يتواجد في ثمرة اللوز
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: أستكانه
+  meaning: كأس صغيرة لشرب الشاي
+  examples: []
+  synonyms: []
+  origin: الروسية - Ctakanh
+  usage:
+    tone: neutral
+    intent: describe
+- term: الأسطام
+  meaning: ملعقة كبيرة تستخدم في استخراج الطعام من القدر
+  examples: []
+  synonyms:
+  - ملاس
+  - خاشوقة
+  - قفشة
+  usage:
+    tone: neutral
+    intent: describe
+- term: أصلخه
+  meaning: أصابه ضربة بالكرة في وجهه أو جسده
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: أصه
+  meaning: كلمة زجر للكلب
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: أضربه
+  meaning: أغلقه بقوة
+  examples: []
+  synonyms:
+  - أغلقه
+  usage:
+    tone: neutral
+    intent: describe
+- term: اطبقه
+  meaning: أمسكه أو أوصله
+  examples: []
+  synonyms:
+  - أزغده
+  - جوده
+  usage:
+    tone: neutral
+    intent: describe
+- term: أطم
+  meaning: اسكت
+  examples: []
+  synonyms:
+  - انطم
+  - أنجب
+  usage:
+    tone: neutral
+    intent: dismiss
+- term: أغضاره
+  meaning: إناء صغير للطبخ (ملة)
+  examples: []
+  synonyms:
+  - غضارة
+  usage:
+    tone: neutral
+    intent: describe
+- term: أغو
+  meaning: الطفل الصغير
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: أفكري
+  meaning: كلبجة (أداة توضع في يد المسجون)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: أفهقه
+  meaning: فتحه بقوة حتى كسره
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: أقرطم
+  meaning: أخذ الشيء بالقوة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: أقلط
+  meaning: ادخل أو تفضل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: أكوه
+  meaning: هذا هو (للمذكر)، أكيها (للمؤنث)
+  examples: []
+  synonyms:
+  - هكو
+  - كاهوة
+  usage:
+    tone: neutral
+    intent: describe
+- term: ألحج
+  meaning: الحقه
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: ألفد
+  meaning: أصبح لزجاً
+  examples: []
+  synonyms:
+  - لفد
+  usage:
+    tone: neutral
+    intent: describe
+- term: ألو
+  meaning: بطاطس
+  examples: []
+  synonyms: []
+  origin: الهندية (محرفة عن علي وليم)
+  usage:
+    tone: neutral
+    intent: describe
+- term: أم الديفان
+  meaning: حالة من التيه أو فقدان الإحساس بالمكان؛ تستخدمه الأمهات لإخافة الأطفال
+  examples: []
+  synonyms: []
+  notes: تطلق على من دار رأسه فجأة أو ضاع
+  usage:
+    tone: neutral
+    intent: describe
+- term: أم الفتايل
+  meaning: الجولة الصغيرة (فرن صغير يوضع عليه القدر)
+  examples: []
+  synonyms:
+  - الجولة
+  usage:
+    tone: neutral
+    intent: describe
+- term: أم كشة
+  meaning: التي لم تمشط شعرها
+  examples: []
+  synonyms:
+  - ام طرة
+  usage:
+    tone: neutral
+    intent: describe
+- term: أم طرة
+  meaning: التي لم تمشط شعرها
+  examples: []
+  synonyms:
+  - ام كشة
+  usage:
+    tone: neutral
+    intent: describe
+- term: أمبكر
+  meaning: الثياب المخططة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: أمبلتع
+  meaning: شخص قليل الحياء طويل اللسان، أو يتكلم بطلاقة
+  examples: []
+  synonyms:
+  - مبلتع
+  notes: قد تأتي بمعنى وقح أو بمعنى فصيح
+  usage:
+    tone: neutral
+    intent: describe
+- term: أمخرخش
+  meaning: شخص مجنون، غبي، أو غير صاحي (فيوزاته ضاربة)
+  examples: []
+  synonyms:
+  - امصرقع
+  - مخرخش
+  - مشولعة
+  usage:
+    tone: negative
+    intent: insult
+    strength: medium
+- term: أمدربح
+  meaning: متين على قصير (شخص قصير لكنه قوي)
+  examples: []
+  synonyms:
+  - امدلقم
+  usage:
+    tone: neutral
+    intent: describe
+- term: أمسيان
+  meaning: المغرب
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: أمصرقع
+  meaning: شخص مجنون
+  examples: []
+  synonyms:
+  - امخرخش
+  usage:
+    tone: negative
+    intent: insult
+    strength: medium
+- term: أمصن
+  meaning: شخص ذو رائحة كريهة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: أمطعطع
+  meaning: شخص ضعيف البنية بسبب مرض أو شيخوخة؛ أو شيء قليل السُمك
+  examples:
+  - الورقة أمطعطع
+  synonyms:
+  - مطعطع
+  - مرطرط
+  usage:
+    tone: neutral
+    intent: describe
+- term: أمعجعج
+  meaning: يمسك الشيء بقوة ولا يريد التخلي عنه
+  examples: []
+  synonyms:
+  - معجعج
+  usage:
+    tone: neutral
+    intent: describe
+- term: أمقطن
+  meaning: انتهت مدته (حزر)
+  examples: []
+  synonyms:
+  - مخلص قرميته
+  usage:
+    tone: neutral
+    intent: describe
+- term: أميود
+  meaning: ماسك
+  examples: []
+  synonyms:
+  - اميود
+  usage:
+    tone: neutral
+    intent: describe
+- term: أمزوزي
+  meaning: خمول وكسول، يحب النوم
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: أملبق
+  meaning: أخفى الشيء
+  examples: []
+  synonyms:
+  - لبق
+  usage:
+    tone: neutral
+    intent: describe
+- term: أملعه
+  meaning: فرط جزءاً من جسمه
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: أمفهي
+  meaning: أحمق أو غبي لا يفهم
+  examples: []
+  synonyms:
+  - مفهي
+  usage:
+    tone: negative
+    intent: insult
+    strength: medium
+- term: أنتيكه
+  meaning: غريب
+  examples: []
+  synonyms: []
+  origin: الإنجليزية - Antique
+  usage:
+    tone: neutral
+    intent: describe
+- term: أنجب
+  meaning: اسكت
+  examples: []
+  synonyms:
+  - انطم
+  - أطم
+  usage:
+    tone: neutral
+    intent: dismiss
+- term: أنجعس
+  meaning: نام متمددا
+  examples: []
+  synonyms:
+  - انجعس
+  - يخمد
+  - ينجعس
+  usage:
+    tone: neutral
+    intent: describe
+- term: أنجله
+  meaning: قلبه أو طرحه أرضاً
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: أنشد
+  meaning: اسأل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: أنشدخ
+  meaning: سقط من مكانه الطبيعي
+  examples: []
+  synonyms:
+  - طاح
+  usage:
+    tone: neutral
+    intent: threat
+    strength: medium
+- term: أنقشعي
+  meaning: اذهبي (للمرأة)
+  examples: []
+  synonyms:
+  - انكشعي
+  - روحي
+  usage:
+    tone: neutral
+    intent: describe
+- term: أنهب
+  meaning: اذهب عني
+  examples: []
+  synonyms:
+  - ادلف
+  dialect_region: بوري
+  usage:
+    tone: neutral
+    intent: dismiss
+- term: أنوس
+  meaning: 'أثق (عادةً تنفي: ما أنوس = لا أثق)'
+  examples:
+  - ما أنوس فيه
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: أوتي
+  meaning: مكواة
+  examples: []
+  synonyms: []
+  origin: الفارسية
+  usage:
+    tone: neutral
+    intent: describe
+- term: أوهيه
+  meaning: حرورة أو لهيب النار
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: أيدين
+  meaning: اليود
+  examples: []
+  synonyms: []
+  origin: الإنجليزية - Iodine
+  usage:
+    tone: neutral
+    intent: describe
+- term: أيسي
+  meaning: مكيف الهواء
+  examples: []
+  synonyms:
+  - كونديشن
+  origin: الإنجليزية - AC (ربما اختصار)
+  usage:
+    tone: neutral
+    intent: describe
+- term: باب البحرين
+  meaning: الفتحة الكبيرة بين الأسنان (خاصة مكان ضرسين)
+  examples: []
+  synonyms:
+  - فجمه
+  usage:
+    tone: neutral
+    intent: describe
+- term: بادقير
+  meaning: رأس القدو (أداة)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: بار
+  meaning: القوة
+  examples: []
+  synonyms: []
+  origin: الفارسية
+  usage:
+    tone: neutral
+    intent: describe
+    origin_type: persian
+- term: بارظ
+  meaning: مزاج
+  examples: []
+  synonyms:
+  - مقاقة
+  notes: أكثر ما يستخدمها أهل السنة
+  usage:
+    tone: neutral
+    intent: describe
+- term: بارح
+  meaning: رياح ساخنة محملة بالأتربة الحمراء (تهيج المجانين)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: بانكة
+  meaning: مروحة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: بته
+  meaning: لعبة الورق (مثل البالوت)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: بجي
+  meaning: الإنسان القصير
+  examples: []
+  synonyms:
+  - قصلة
+  usage:
+    tone: neutral
+    intent: describe
+- term: بخورة
+  meaning: شخص لا يحتفظ بالسر (ينشر كل شيء)
+  examples: []
+  synonyms:
+  - يخوره
+  usage:
+    tone: neutral
+    intent: describe
+- term: بدحة
+  meaning: 'سمكة ضعيفة (تقال في المثل: إذا سمنت البدحة = في عيد البِشّ)'
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: بذمة
+  meaning: غداً
+  examples: []
+  synonyms:
+  - بكره
+  - الجابله (بمعنى بكره)
+  usage:
+    tone: neutral
+    intent: describe
+- term: بربوق
+  meaning: شخص يتظاهر بالفهم وهو جاهل
+  examples: []
+  synonyms: []
+  usage:
+    tone: negative
+    intent: insult
+    strength: medium
+- term: برستي
+  meaning: بيت قديم مصنوع من الخوص والسعف
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: برغي
+  meaning: مسمار حلزوني
+  examples: []
+  synonyms: []
+  origin: التركية
+  usage:
+    tone: neutral
+    intent: describe
+    origin_type: turkish
+- term: بركن
+  meaning: أوقف السيارة في الموضع المخصص
+  examples: []
+  synonyms: []
+  origin: الإنجليزية - Park (محرفة)
+  usage:
+    tone: neutral
+    intent: describe
+- term: برنوص
+  meaning: لحاف
+  examples: []
+  synonyms:
+  - برنص
+  usage:
+    tone: neutral
+    intent: describe
+- term: برنص
+  meaning: بطانية
+  examples: []
+  synonyms:
+  - برنوص
+  usage:
+    tone: neutral
+    intent: describe
+- term: بروي
+  meaning: مكعبات أطفال صغيرة للعب
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: بريج
+  meaning: إبريق
+  examples: []
+  synonyms:
+  - غوري
+  - سماور
+  usage:
+    tone: neutral
+    intent: describe
+- term: بز
+  meaning: قطعة قماش قديمة للتنظيف
+  examples: []
+  synonyms:
+  - بيز
+  usage:
+    tone: neutral
+    intent: describe
+- term: بست
+  meaning: باص
+  examples: []
+  synonyms: []
+  origin: الإنجليزية - Bus
+  usage:
+    tone: neutral
+    intent: describe
+    origin_type: english
+- term: بستوك
+  meaning: بسكويت
+  examples: []
+  synonyms: []
+  origin: الإنجليزية - Biscuit
+  usage:
+    tone: neutral
+    intent: describe
+    origin_type: english
+- term: بصطه
+  meaning: بسطة، مكان يجلس فيه الأصدقاء ويسولفون
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: بطبوطة
+  meaning: دراجة نارية (موتر سيكل)
+  examples: []
+  synonyms:
+  - ترمبه
+  - موتر سيكل
+  usage:
+    tone: neutral
+    intent: describe
+- term: بطل
+  meaning: افتح (بفتح الباء وكسر الطاء)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: بطيت
+  meaning: تأخرت
+  examples:
+  - لا تبطي = لا تتأخر
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: بعد
+  meaning: 'خلّص (مثل: قدر)'
+  examples: []
+  synonyms:
+  - قدر
+  - نفق
+  usage:
+    tone: neutral
+    intent: describe
+- term: بقر
+  meaning: حشرة السوس التي تعيش مع الرز
+  examples: []
+  synonyms:
+  - بقره
+  - دبيبو
+  - ادبيبو
+  usage:
+    tone: neutral
+    intent: describe
+- term: بقه
+  meaning: بقى
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: بكله
+  meaning: قذلة (سبّة)
+  examples: []
+  synonyms:
+  - عرعور
+  usage:
+    tone: neutral
+    intent: describe
+- term: بلبل
+  meaning: الشخص الذي يتكلم بطلاقة
+  examples: []
+  synonyms:
+  - لبلب
+  usage:
+    tone: neutral
+    intent: describe
+- term: بلبله
+  meaning: حنفية الماء
+  examples: []
+  synonyms:
+  - نل
+  usage:
+    tone: neutral
+    intent: describe
+- term: بلنك
+  meaning: سرير معدني مرتفع عن الأرض
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: بوك
+  meaning: محفظة يد صغيرة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: بوكس بويمعه
+  meaning: ضربة قوية بقبضة اليد
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: بوم
+  meaning: قارب شراعي
+  examples: []
+  synonyms: []
+  origin: الإنجليزية - Boom
+  usage:
+    tone: neutral
+    intent: describe
+    origin_type: english
+- term: بوز
+  meaning: الفم
+  examples: []
+  synonyms: []
+  origin: الفارسية
+  usage:
+    tone: neutral
+    intent: describe
+    origin_type: persian
+- term: بوشلاخ
+  meaning: كذاب يختلق القصص
+  examples: []
+  synonyms:
+  - شلاخ
+  - عباب
+  usage:
+    tone: negative
+    intent: insult
+    strength: medium
+- term: بيت منعل
+  meaning: بيت صبت أرضه بالإسمنت أو الجص
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: بيديو
+  meaning: فيديو
+  examples: []
+  synonyms: []
+  origin: الإنجليزية - Video
+  usage:
+    tone: neutral
+    intent: describe
+- term: بيز
+  meaning: قطعة قماش للتنظيف
+  examples: []
+  synonyms:
+  - بز
+  usage:
+    tone: neutral
+    intent: describe
+    origin_type: english
+- term: بيلجان
+  meaning: باذنجان
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: تت
+  meaning: كلمة تستخدم لطرد القطط
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: تخته
+  meaning: كرسي
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: تخثول
+  meaning: لا يستطيع الحركة من شدة التعب أو الكسل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: تدندق
+  meaning: يختلس النظرات
+  examples: []
+  synonyms:
+  - تطل
+  dialect_region: عالي
+  usage:
+    tone: neutral
+    intent: describe
+- term: ترمبه
+  meaning: دراجة نارية
+  examples: []
+  synonyms:
+  - بطبوطة
+  - موتر سيكل
+  usage:
+    tone: neutral
+    intent: describe
+- term: تزاغي
+  meaning: يغش في اللعب
+  examples: []
+  synonyms:
+  - يزوغل
+  usage:
+    tone: neutral
+    intent: describe
+- term: تزكرت
+  meaning: تزين، كشخ
+  examples: []
+  synonyms:
+  - متزكرت
+  - كشخه
+  - متزبر
+  usage:
+    tone: neutral
+    intent: describe
+- term: تزمر
+  meaning: زمر، غنى
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: تسحلق
+  meaning: تسلق
+  examples: []
+  synonyms:
+  - تعلبق
+  - يتجلبه
+  usage:
+    tone: neutral
+    intent: describe
+- term: تسخم
+  meaning: تشتم
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: تشلخ
+  meaning: تمزق
+  examples: []
+  synonyms:
+  - انشق
+  usage:
+    tone: neutral
+    intent: describe
+- term: تفرفت
+  meaning: تفتت إلى أجزاء
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: تفك
+  meaning: مسدس
+  examples: []
+  synonyms:
+  - طخ
+  - تفق
+  usage:
+    tone: neutral
+    intent: describe
+- term: تفق
+  meaning: مسدس
+  examples: []
+  synonyms:
+  - تفك
+  - طخ
+  usage:
+    tone: neutral
+    intent: describe
+- term: تقزيرة
+  meaning: مؤقتاً
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: تقرفض
+  meaning: تساقط الشعر
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: تكندر
+  meaning: تطرف أو طورف (أصبح كندراً)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: تلح
+  meaning: غبي
+  examples: []
+  synonyms:
+  - دثوي
+  - طمطم
+  - طمبحلة
+  - إمخرخش
+  dialect_region: المحرق والرفاع
+  usage:
+    tone: negative
+    intent: insult
+    strength: medium
+- term: تله
+  meaning: سحبه
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: تلفزيون
+  meaning: جهاز التلفاز
+  examples: []
+  synonyms: []
+  origin: الإنجليزية - Television
+  usage:
+    tone: neutral
+    intent: describe
+- term: تلفون
+  meaning: هاتف
+  examples: []
+  synonyms: []
+  origin: الإنجليزية - Telephone
+  usage:
+    tone: neutral
+    intent: describe
+- term: تمبه
+  meaning: كرة (كرة القدم)
+  examples: []
+  synonyms:
+  - التنبة
+  usage:
+    tone: neutral
+    intent: describe
+- term: تميل عليك
+  meaning: طاح حظك (دعاء بالسوء)
+  examples: []
+  synonyms:
+  - طاح حظك
+  - قرادة
+  usage:
+    tone: neutral
+    intent: curse
+    strength: medium
+- term: تنبة
+  meaning: كرة القدم
+  examples: []
+  synonyms:
+  - تمبه
+  usage:
+    tone: neutral
+    intent: describe
+- term: تنسم
+  meaning: تنفس
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: تنهزر
+  meaning: تسخر وتطنز
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: تنك
+  meaning: معدن يشبه الألمنيوم
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: توت
+  meaning: توت (فاكهة)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: توحه
+  meaning: احذفه
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: تيب
+  meaning: لاصق
+  examples: []
+  synonyms: []
+  origin: الإنجليزية - Tape
+  usage:
+    tone: neutral
+    intent: describe
+- term: تير
+  meaning: إطار السيارة
+  examples: []
+  synonyms: []
+  origin: الإنجليزية - Tire
+  usage:
+    tone: neutral
+    intent: describe
+- term: ثوب
+  meaning: فستان
+  examples: []
+  synonyms:
+  - قون
+  - نفنوف
+  usage:
+    tone: neutral
+    intent: describe
+- term: جابله
+  meaning: بكره (غداً)؛ وقد تأتي بمعنى أمس حسب السياق
+  examples: []
+  synonyms:
+  - بكره
+  - بذمة
+  notes: 'المعنى الأكثر شيوعاً: غداً'
+  usage:
+    tone: neutral
+    intent: describe
+- term: جانص
+  meaning: فرصة
+  examples: []
+  synonyms: []
+  origin: الإنجليزية - Chance
+  usage:
+    tone: neutral
+    intent: describe
+- term: جب
+  meaning: اسكت
+  examples: []
+  synonyms:
+  - انجب
+  - انطم
+  origin: الهندية
+  usage:
+    tone: neutral
+    intent: dismiss
+- term: جعبو
+  meaning: النملة السوداء الكبيرة
+  examples: []
+  synonyms:
+  - جعبور
+  - جعبول
+  - قروص
+  usage:
+    tone: neutral
+    intent: describe
+- term: جدي
+  meaning: هكذا
+  examples:
+  - جديها = هكذا
+  synonyms:
+  - هنمونه
+  usage:
+    tone: neutral
+    intent: describe
+- term: جدر
+  meaning: حائط
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: جرخانة
+  meaning: ماكينة خياطة
+  examples: []
+  synonyms:
+  - سانجة
+  usage:
+    tone: neutral
+    intent: describe
+- term: جفرة
+  meaning: حفرة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: جكس
+  meaning: شعر كيرلي (مجعد)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: جيكرة
+  meaning: قبيحة الشكل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: جيق
+  meaning: إناء الشراب (عصير أو شربات)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: جمبازي
+  meaning: كذاب، محتال، ماكر
+  examples: []
+  synonyms:
+  - كلكجي
+  - لوتي
+  dialect_region: المحرق
+  usage:
+    tone: negative
+    intent: insult
+    strength: medium
+- term: جندود
+  meaning: المخزن الذي تحت الدرج
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: جنجر
+  meaning: زنجبيل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: جوتي
+  meaning: 'انتباه، اهتمام (تقال في النفي: ضربي الدنيا جوتي = لا تعيري الدنيا اهتماماً)'
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: جودة
+  meaning: امسك
+  examples:
+  - جوده = امسكه
+  synonyms:
+  - جوّد
+  usage:
+    tone: neutral
+    intent: describe
+- term: جولة
+  meaning: الفرن
+  examples: []
+  synonyms:
+  - ام الفتايل
+  usage:
+    tone: neutral
+    intent: describe
+- term: جون
+  meaning: فستان
+  examples: []
+  synonyms:
+  - قون
+  - نفنوف
+  - ثوب
+  usage:
+    tone: neutral
+    intent: describe
+- term: جيبه
+  meaning: جيبه
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: حايف
+  meaning: الخبز المعفن
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: حبيبه
+  meaning: قليل
+  examples: []
+  synonyms:
+  - نتفه
+  - اقطيرة
+  usage:
+    tone: neutral
+    intent: describe
+- term: حجالة
+  meaning: آخر العنقود في العائلة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: حدر
+  meaning: تحت
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: حرز
+  meaning: خزانة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: حزاه
+  meaning: قصة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: حسابي
+  meaning: حسبالي = كنت أعتقد
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: حفيز
+  meaning: مكتب (Office)
+  examples: []
+  synonyms: []
+  origin: الإنجليزية - Office (محرفة)
+  usage:
+    tone: neutral
+    intent: describe
+- term: حلجة
+  meaning: لعبة بالحصى الصغير
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: حناية غمسة
+  meaning: غمر قدم الرجل أو كف اليد بالحناء
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: dismiss
+- term: حنطور
+  meaning: عربة يجرها حصان
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: حواية
+  meaning: رغبة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: حوي
+  meaning: الحوش الكبير
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: حياوي
+  meaning: يستحي
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: خاشوقة
+  meaning: ملعقة (عند أهل البلاد)
+  examples: []
+  synonyms:
+  - ملاس
+  - الأسطام
+  - قفشة
+  usage:
+    tone: neutral
+    intent: describe
+- term: خانة
+  meaning: 'فائدة (في النفي: ما له خانة = لا فائدة منه)'
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: خبصة
+  meaning: فوضى
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: ختربش
+  meaning: تخربش
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: خد
+  meaning: خذ
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: خرمس
+  meaning: ظلام دامس
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: خزوة
+  meaning: عار
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: خشم
+  meaning: أنف
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: خصفة
+  meaning: بساط صغير مهلهل من خوص النخيل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: خضارة
+  meaning: خضروات
+  examples: []
+  synonyms:
+  - ميوه
+  usage:
+    tone: neutral
+    intent: describe
+- term: خط
+  meaning: شط (بحر)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: خلق
+  meaning: قماش
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: خمبة
+  meaning: شخص جبان وضعيف أو سمين
+  examples: []
+  synonyms: []
+  usage:
+    tone: negative
+    intent: insult
+    strength: medium
+- term: خمق
+  meaning: ماء مختلط برمل أو طين
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: خنته
+  meaning: عطره
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: خندريس
+  meaning: لم يتم اكتشاف معنى لها بعد
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: خنه
+  meaning: عطر
+  examples: []
+  synonyms: []
+  origin: التركية
+  usage:
+    tone: neutral
+    intent: describe
+- term: خنفروش
+  meaning: حلاوة معروفة
+  examples: []
+  synonyms: []
+  origin: الفارسية
+  usage:
+    tone: neutral
+    intent: describe
+    origin_type: persian
+- term: خنينة
+  meaning: رائحة زكية
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: خولنج
+  meaning: وجع في الظهر
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: خيزرانة
+  meaning: عصا للضرب والعقاب
+  examples: []
+  synonyms:
+  - الخيرزانة
+  usage:
+    tone: neutral
+    intent: describe
+- term: دابر
+  meaning: ظهر
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: داحس
+  meaning: شرير
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: داخلة
+  meaning: داخل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: دال
+  meaning: عدس
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: دالوب
+  meaning: عاصفة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: دامج
+  meaning: بارد أو خامل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: دبابة
+  meaning: نعال نسائي قديم من المطاط (أبو صبعة أو زنوبة)
+  examples: []
+  synonyms:
+  - قبقاب
+  usage:
+    tone: neutral
+    intent: describe
+- term: دبيبو
+  meaning: حشرة السوس التي تعيش مع الرز
+  examples: []
+  synonyms:
+  - بقره
+  - ادبيبو
+  usage:
+    tone: neutral
+    intent: describe
+- term: دبيج
+  meaning: ركض
+  examples: []
+  synonyms:
+  - يدبج
+  - ركض
+  usage:
+    tone: neutral
+    intent: describe
+- term: دثوي
+  meaning: غبي
+  examples: []
+  synonyms:
+  - تلح
+  - طمطم
+  - طمبحلة
+  dialect_region: المحرق والرفاع
+  usage:
+    tone: negative
+    intent: insult
+    strength: medium
+- term: دجيج
+  meaning: رقيق، ناعم
+  examples: []
+  synonyms:
+  - لبيب
+  usage:
+    tone: neutral
+    intent: describe
+- term: دجه
+  meaning: عتبة (الدرجة أمام البيت)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: دختر
+  meaning: دكتور
+  examples: []
+  synonyms: []
+  origin: الإنجليزية - Doctor (محرفة)
+  usage:
+    tone: neutral
+    intent: describe
+- term: دخل
+  meaning: دخل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: دراجة
+  meaning: دراجة هوائية
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: دربغانه
+  meaning: طريق غير معبد (رمل)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: دريشه
+  meaning: نافذة أو شباك
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: دروازة
+  meaning: الباب الخارجي للمنزل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: دزدان
+  meaning: شنطة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: دس
+  meaning: ادفع
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: دسمال
+  meaning: منديل
+  examples: []
+  synonyms:
+  - رومال
+  usage:
+    tone: neutral
+    intent: describe
+- term: دعفل به
+  meaning: رماه، طرده، أفلته
+  examples: []
+  synonyms:
+  - دعفل
+  usage:
+    tone: neutral
+    intent: describe
+- term: دعله
+  meaning: لا يفهم ولا يحسن التصرف
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: دغري
+  meaning: مباشرة
+  examples: []
+  synonyms:
+  - سيده
+  usage:
+    tone: neutral
+    intent: describe
+- term: دف
+  meaning: قفص الصدر
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: دفن
+  meaning: دفن
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: دقدقة
+  meaning: أصوات متتالية
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: دك دك
+  meaning: ذكي
+  examples: []
+  synonyms:
+  - فلته
+  - ذكي
+  usage:
+    tone: positive
+    intent: praise
+- term: دكتورة
+  meaning: طبيبة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: دكّان
+  meaning: محل صغير
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: دلدول
+  meaning: طويل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: دم
+  meaning: دم
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: دمدم
+  meaning: شايب كبير
+  examples: []
+  synonyms:
+  - دمدام
+  usage:
+    tone: neutral
+    intent: describe
+- term: دندره
+  meaning: إزعاج
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: دندش
+  meaning: دندن
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: دون
+  meaning: قريب
+  examples:
+  - أدناة الدون = أقل شيء
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: دويحه
+  meaning: دائرة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: دياج
+  meaning: دجاج
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: ديكور
+  meaning: زخرفة
+  examples: []
+  synonyms: []
+  origin: الإنجليزية - Decoration
+  usage:
+    tone: neutral
+    intent: describe
+    origin_type: english
+- term: دينه
+  meaning: دين (معاملة)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: ذرب
+  meaning: حاد اللسان
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: رابع
+  meaning: رفيق
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: راجع
+  meaning: رجع
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: رادار
+  meaning: جهاز مراقبة السرعة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: راندبوت
+  meaning: دوار (roundabout)
+  examples: []
+  synonyms: []
+  origin: الإنجليزية - Roundabout
+  usage:
+    tone: neutral
+    intent: describe
+    origin_type: english
+- term: ربشة
+  meaning: شخص لا يهدأ، دائم الحركة، مشاغب
+  examples: []
+  synonyms:
+  - ربشه
+  usage:
+    tone: neutral
+    intent: describe
+- term: ربل
+  meaning: مطاط أو بلاستيك
+  examples: []
+  synonyms: []
+  origin: الإنجليزية - Rubber
+  usage:
+    tone: neutral
+    intent: describe
+- term: رتن
+  meaning: تحدث بلغة غير مفهومة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: رجل
+  meaning: رجل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: رزة
+  meaning: شخصية محترمة ووقورة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: رستة
+  meaning: شارع
+  examples: []
+  synonyms: []
+  origin: الإنجليزية - Street (محرفة)
+  usage:
+    tone: neutral
+    intent: describe
+- term: رطبة
+  meaning: رطبة (تمر)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: رطعه
+  meaning: عظامه لينة لا تتحمل الصعاب
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: رعاد
+  meaning: رعد
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: رغد
+  meaning: عيشة رغدة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: رفيع
+  meaning: نحيل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: رقعة
+  meaning: 'وجه (تقال في النفي: لا تراويني رقعة ويهك = لا أراك مرة أخرى)'
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: رقم
+  meaning: عدد
+  examples: []
+  synonyms:
+  - نمرة
+  usage:
+    tone: neutral
+    intent: describe
+- term: رنق
+  meaning: نوع أو صنف
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: روتي
+  meaning: خبز
+  examples: []
+  synonyms: []
+  origin: الهندية
+  usage:
+    tone: neutral
+    intent: describe
+    origin_type: hindi
+- term: روزنة
+  meaning: رف في الجدار (فتحة توضع عليها الأشياء)
+  examples: []
+  synonyms:
+  - شلف
+  - روشنه
+  usage:
+    tone: neutral
+    intent: describe
+- term: روشنه
+  meaning: حفرة في الطوفة (جدار) لوضع الأغراض
+  examples: []
+  synonyms:
+  - روزنة
+  - شلف
+  usage:
+    tone: neutral
+    intent: describe
+- term: ريوق
+  meaning: إفطار (أكل على الريق)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: زبالة
+  meaning: قمامة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: زبرة
+  meaning: كشخة (أناقة)
+  examples: []
+  synonyms:
+  - كشخه
+  - متزبر
+  usage:
+    tone: neutral
+    intent: describe
+- term: زتات
+  meaning: بسرعة وعجل
+  examples:
+  - زتاتك = أسرع
+  synonyms:
+  - زتك
+  - حامي
+  usage:
+    tone: neutral
+    intent: describe
+- term: زحمة
+  meaning: ازدحام
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: زخرفة
+  meaning: زينة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: زراد
+  meaning: صانع الدروع
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: زرنوق
+  meaning: طريق ضيق بين بيتين أو ممر ضيق
+  examples: []
+  synonyms:
+  - داعوس
+  - أدنات زرنوق
+  usage:
+    tone: neutral
+    intent: describe
+- term: زطي
+  meaning: بخيل، شحيح
+  examples: []
+  synonyms:
+  - لجة
+  usage:
+    tone: neutral
+    intent: describe
+- term: زعل
+  meaning: زعل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: زفورة
+  meaning: رائحة السمك القوية
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: زفيزف
+  meaning: يتحرك بسرعة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: زكر
+  meaning: ذكر
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: زلاطة
+  meaning: سلطة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: زلق
+  meaning: زلقة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: زلغ
+  meaning: تسلخ جزء من الجلد وظهر الدم
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: زملوق
+  meaning: ضعيف
+  examples: []
+  synonyms:
+  - زملوق
+  - سلسوول
+  usage:
+    tone: neutral
+    intent: describe
+- term: زمران
+  meaning: زعلان (غضبان) وماد البوز
+  examples: []
+  synonyms:
+  - زعلان
+  usage:
+    tone: neutral
+    intent: describe
+- term: زمبور
+  meaning: النحلة السوداء
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: زنب
+  meaning: ذنب
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: زنجفره
+  meaning: فانيلة (قميص داخلي)
+  examples: []
+  synonyms:
+  - فنيلة
+  usage:
+    tone: neutral
+    intent: describe
+- term: زهر
+  meaning: زهر
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: زهب
+  meaning: ذهب
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: زهبة
+  meaning: انطلق بسرعة جنونية
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: زهيوي
+  meaning: صرصور
+  examples: []
+  synonyms:
+  - شرياص
+  usage:
+    tone: neutral
+    intent: describe
+- term: زيله
+  meaning: الدلو الذي توضع فيه الأوساخ
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: سابعة
+  meaning: ظهر الإنسان
+  examples: []
+  synonyms:
+  - ظهر
+  usage:
+    tone: neutral
+    intent: describe
+- term: ساتول
+  meaning: طابور، صف من الناس
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: ساخط
+  meaning: غسل الأواني بالماء فقط
+  examples:
+  - أحمد ساخط الكأس وشرب ماي
+  synonyms:
+  - يساخط
+  usage:
+    tone: neutral
+    intent: describe
+- term: ساطور
+  meaning: سكين كبير
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: سالمة
+  meaning: سلامة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: سالمي
+  meaning: نوع من الأسماك
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: سانجة
+  meaning: ماكينة خياطة
+  examples: []
+  synonyms:
+  - جرخانة
+  usage:
+    tone: neutral
+    intent: describe
+- term: سايل
+  meaning: سائل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: سبانة
+  meaning: مفتاح ربط
+  examples: []
+  synonyms: []
+  origin: الإنجليزية - Spanner
+  usage:
+    tone: neutral
+    intent: describe
+    origin_type: english
+- term: سبت
+  meaning: سلة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: سبع
+  meaning: غسل (سبع يدك = اغسل يدك)
+  examples: []
+  synonyms:
+  - سبعه
+  usage:
+    tone: neutral
+    intent: describe
+- term: سبيتار
+  meaning: مستشفى
+  examples: []
+  synonyms: []
+  origin: الإنجليزية - Hospital (تحريف بعيد)
+  usage:
+    tone: neutral
+    intent: describe
+    origin_type: english
+- term: سجادة
+  meaning: سجادة صلاة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: سجم
+  meaning: سرير مرتفع عن سطح الأرض
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: سحاب
+  meaning: سحاب
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: سحك
+  meaning: انزلق
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: سخم
+  meaning: سب
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: سدر
+  meaning: سد
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: سده
+  meaning: سد
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: سراق
+  meaning: لص
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: سرده
+  meaning: برودة (سبرة باردة = طقس بارد)
+  examples: []
+  synonyms:
+  - سبره
+  - سريده
+  usage:
+    tone: neutral
+    intent: describe
+- term: سريده
+  meaning: برودة
+  examples: []
+  synonyms:
+  - سبره
+  - سرده
+  usage:
+    tone: neutral
+    intent: describe
+- term: سريع
+  meaning: سريع
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: سعتر
+  meaning: زعتر
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: سفانة
+  meaning: أول العذق من النخلة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: سكر
+  meaning: سكر (تحلية)
+  examples: []
+  synonyms:
+  - شكر
+  usage:
+    tone: neutral
+    intent: describe
+- term: سكروب
+  meaning: مفك براغي
+  examples: []
+  synonyms: []
+  origin: الإنجليزية - Screwdriver
+  usage:
+    tone: neutral
+    intent: describe
+    origin_type: english
+- term: سكسبال
+  meaning: فول سوداني غير مقشر
+  examples: []
+  synonyms:
+  - كسكبال
+  usage:
+    tone: neutral
+    intent: describe
+- term: سلاية
+  meaning: شوكة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: سلوق
+  meaning: بلح النخيل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: سلوقة
+  meaning: ضربة بالإصبع على الرأس
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: سلسوول
+  meaning: ضعيف جداً
+  examples: []
+  synonyms:
+  - زملوق
+  - مرطرط
+  usage:
+    tone: neutral
+    intent: describe
+- term: سلع
+  meaning: قطع
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: سلق
+  meaning: طويل القامة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: سماور
+  meaning: إبريق شاي
+  examples: []
+  synonyms:
+  - غوري
+  - بريج
+  usage:
+    tone: neutral
+    intent: describe
+- term: سمبوسة
+  meaning: سمبوسة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: سمح
+  meaning: سمح
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: سمر
+  meaning: سمر (لون البشرة)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: سمع
+  meaning: سمع
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: سمك
+  meaning: سمك
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: سموم
+  meaning: حر شديد بدون نسمة هواء
+  examples: []
+  synonyms:
+  - السموم
+  usage:
+    tone: neutral
+    intent: describe
+- term: سنا
+  meaning: سن
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: سنانير
+  meaning: قطط
+  examples: []
+  synonyms:
+  - قطاوه
+  - سنور
+  usage:
+    tone: neutral
+    intent: describe
+- term: سنبل
+  meaning: فول سوداني مقشر
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: سنتين
+  meaning: سنتان
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: سندارة
+  meaning: ضجيج وعوار رأس
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: سنطور
+  meaning: منبه
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: سنطوانة
+  meaning: عامود (عمود البيت)
+  examples: []
+  synonyms:
+  - سنطوانة
+  usage:
+    tone: neutral
+    intent: describe
+- term: سنق
+  meaning: مغسل الحمام
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: سنور
+  meaning: قط
+  examples: []
+  synonyms:
+  - قطاوه
+  - سنانير
+  usage:
+    tone: neutral
+    intent: describe
+- term: سواد
+  meaning: سواد
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: سوسة
+  meaning: شخص نمّام يفتعل المشاكل بين الناس
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: سيف
+  meaning: سيف
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: سيسبانة
+  meaning: بعوضة أو دودة صغيرة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: سيت
+  meaning: مقعد السيارة
+  examples: []
+  synonyms: []
+  origin: الإنجليزية - Seat
+  usage:
+    tone: neutral
+    intent: describe
+    origin_type: english
+- term: سيده
+  meaning: مستقيم، مباشرة
+  examples: []
+  synonyms:
+  - دغري
+  origin: الهندية
+  usage:
+    tone: neutral
+    intent: describe
+    origin_type: hindi
+- term: سيارة
+  meaning: سيارة
+  examples: []
+  synonyms:
+  - موتر
+  usage:
+    tone: neutral
+    intent: describe
+- term: شاخت اركبك
+  meaning: دعاء على الشخص بظهور معالم الشيخوخة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: curse
+    strength: medium
+- term: شال عليه
+  meaning: اهرب، أركض بسرعة
+  examples: []
+  synonyms:
+  - شيل عليه
+  - هرب
+  usage:
+    tone: neutral
+    intent: describe
+- term: شبحني
+  meaning: نظرني
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: شبر
+  meaning: شبر (وحدة قياس)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: شبي
+  meaning: شبيه
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: شتوي
+  meaning: شتاء
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: شث
+  meaning: شث (نبات)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: شجر
+  meaning: شجر
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: شح
+  meaning: بخل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: شخص
+  meaning: شخص
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: شخبارك
+  meaning: ما أخبارك؟
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: شخه
+  meaning: شخه (صوت)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: شدرك
+  meaning: ماذا بك؟
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: question
+- term: شر
+  meaning: شر
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: شربت
+  meaning: عصير
+  examples: []
+  synonyms: []
+  origin: الهندية
+  usage:
+    tone: neutral
+    intent: describe
+    origin_type: hindi
+- term: شرياص
+  meaning: صرصور
+  examples: []
+  synonyms:
+  - زهيوي
+  usage:
+    tone: neutral
+    intent: describe
+- term: شعر
+  meaning: شعر
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: شغل
+  meaning: عمل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: شف
+  meaning: انظر
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: شفة
+  meaning: شفة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: شق
+  meaning: شق
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: شقة
+  meaning: شقة سكنية
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: شكر
+  meaning: سكر (تحلية)
+  examples: []
+  synonyms:
+  - سكر
+  usage:
+    tone: positive
+    intent: describe
+- term: شلاخ
+  meaning: كذاب يروي قصصاً مختلقة
+  examples: []
+  synonyms:
+  - بوشلاخ
+  - عباب
+  usage:
+    tone: negative
+    intent: insult
+    strength: medium
+- term: شلاشن
+  meaning: ورق لاصق (لاصق شفاف)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: شلف
+  meaning: رف
+  examples: []
+  synonyms:
+  - روزنة
+  - روشنه
+  usage:
+    tone: neutral
+    intent: describe
+- term: شله
+  meaning: التراب المختلط مع المطر
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: شليلة
+  meaning: خليط
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: شمروخ
+  meaning: فرع واحد من ساق سعفة النخيل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: شمّ
+  meaning: شمّ
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: شموخ
+  meaning: كبرياء
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: شنا
+  meaning: سباحة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: شنب
+  meaning: شارب
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: شنقايل
+  meaning: ماذا؟ (شنو)
+  examples: []
+  synonyms:
+  - ويش
+  - عجل ويش
+  usage:
+    tone: neutral
+    intent: question
+- term: شوب
+  meaning: سخونة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: شوك
+  meaning: شوك
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: شياب
+  meaning: كبار السن
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: شيل عليه
+  meaning: اهرب
+  examples: []
+  synonyms:
+  - شال عليه
+  - اهرب
+  usage:
+    tone: neutral
+    intent: describe
+- term: صاخة
+  meaning: هدوء
+  examples: []
+  synonyms:
+  - سهده
+  - صخه
+  usage:
+    tone: neutral
+    intent: describe
+- term: صادته أم الديفان
+  meaning: أصابته حالة من التيه
+  examples: []
+  synonyms:
+  - أم الديفان
+  usage:
+    tone: neutral
+    intent: describe
+- term: صاهي
+  meaning: هواء حار
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: صبغة
+  meaning: لون
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: صحن
+  meaning: صحن
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: صخه
+  meaning: هدوء
+  examples: []
+  synonyms:
+  - سهده
+  - صاخة
+  usage:
+    tone: neutral
+    intent: describe
+- term: صدمة
+  meaning: زكام (إنفلونزا) - يقال صدمة حزرة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: صرة
+  meaning: حزمة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: صريف
+  meaning: صوت
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: صفارة
+  meaning: صفارة
+  examples: []
+  synonyms: []
+  usage:
+    tone: aggressive
+    intent: describe
+- term: صفرة
+  meaning: إغماء (طاح صفرة = سقط مغشياً عليه)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: threat
+    strength: medium
+- term: صفرية
+  meaning: قدر الطبخ (إناء)
+  examples: []
+  synonyms:
+  - قدر
+  usage:
+    tone: neutral
+    intent: describe
+- term: صلدمة
+  meaning: جبهة عريضة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: صلعت
+  meaning: صلع
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: صلعوطة
+  meaning: أقرع (شخص أصلع)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: صلم
+  meaning: ضرب
+  examples: []
+  synonyms: []
+  usage:
+    tone: aggressive
+    intent: threat
+    strength: medium
+- term: صليب
+  meaning: قوي
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: صماخ
+  meaning: أذن
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: صمعة
+  meaning: شمعة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: صمية
+  meaning: صخرة كبيرة على شاطئ البحر
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: صندوق
+  meaning: ثلاجة (قديماً) أو صندوق خشبي
+  examples: []
+  synonyms:
+  - فلاجة
+  usage:
+    tone: neutral
+    intent: describe
+- term: صنقل
+  meaning: سلسلة حديدية
+  examples: []
+  synonyms: []
+  origin: الفرنسية - Sangle
+  usage:
+    tone: neutral
+    intent: describe
+- term: صهاريج
+  meaning: خزانات ماء
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: صير رايض
+  meaning: صر عاقلاً، اهدأ
+  examples: []
+  synonyms:
+  - اركد
+  usage:
+    tone: neutral
+    intent: describe
+- term: صيري
+  meaning: سلم خشب
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: ضارب بوز
+  meaning: متضايق أو معكر المزاج
+  examples: []
+  synonyms:
+  - مادر بوز
+  - زمران
+  usage:
+    tone: neutral
+    intent: describe
+- term: ضربي الدنيا جوتي
+  meaning: لا تعيري الدنيا اهتماماً
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: ضفدع
+  meaning: ضفدع
+  examples: []
+  synonyms:
+  - فشدغة
+  usage:
+    tone: neutral
+    intent: describe
+- term: طابن
+  meaning: خامر، متواجد في مكان ولم يتحرك
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: طاح صفرة
+  meaning: سقط مغشياً عليه
+  examples: []
+  synonyms:
+  - أغمي عليه
+  usage:
+    tone: neutral
+    intent: threat
+    strength: medium
+- term: طاح حظك
+  meaning: سقط حظك (دعاء بالسوء)
+  examples: []
+  synonyms:
+  - تميل عليك
+  - قرادة
+  usage:
+    tone: neutral
+    intent: curse
+    strength: medium
+- term: طاسة
+  meaning: إناء معدني (صحن غزير)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: طاقم
+  meaning: مجموعة
+  examples: []
+  synonyms: []
+  origin: اليونانية - Taqhma
+  usage:
+    tone: neutral
+    intent: describe
+- term: طاولة
+  meaning: منضدة
+  examples: []
+  synonyms:
+  - ميز
+  origin: الإيطالية - Tovola
+  usage:
+    tone: neutral
+    intent: describe
+    origin_type: italian
+- term: طايح النصبة
+  meaning: دعاء على شخص (أصابه النصب)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: curse
+    strength: medium
+- term: طب
+  meaning: طيب
+  examples: []
+  synonyms: []
+  usage:
+    tone: positive
+    intent: praise
+- term: طبيشة
+  meaning: غطاء قارورة المشروبات الغازية (الطبيشة)؛ أيضاً نوع من القواقع البحرية
+  examples: []
+  synonyms:
+  - لوقة
+  usage:
+    tone: neutral
+    intent: describe
+- term: طخ
+  meaning: بصق أو سرق (بمعنى أخذ بسرعة)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: طراحة
+  meaning: بساط سميك يوضع على السرير
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: طربال
+  meaning: غطاء (مشمع)
+  examples: []
+  synonyms: []
+  origin: الإنجليزية - Tarpaulin
+  usage:
+    tone: neutral
+    intent: describe
+- term: طرفة
+  meaning: طرفة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: طري
+  meaning: طري
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: طش
+  meaning: رش
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: طفش
+  meaning: ضجر
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: طلق
+  meaning: طلق
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: طمطم
+  meaning: غبي أو ممتلئ (مطمطم = مشحون متروس)
+  examples: []
+  synonyms:
+  - دثوي
+  - تلح
+  - طمبحلة
+  usage:
+    tone: negative
+    intent: insult
+    strength: medium
+- term: طنبور
+  meaning: آلة موسيقية
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: طنجح
+  meaning: انتفخ، وصل حده
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: طوالي
+  meaning: طوال الوقت
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: طوبة
+  meaning: لبنة (طوب)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: طوي
+  meaning: بئر ماء
+  examples: []
+  synonyms:
+  - الطوي
+  usage:
+    tone: neutral
+    intent: describe
+- term: طيارة
+  meaning: غرفة غير مسقفة من سعف النخيل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: ظل
+  meaning: ظل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: ظلم
+  meaning: ظلم
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: عار
+  meaning: عار
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: عاقور
+  meaning: دودة النخلة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: عباب
+  meaning: كثير الكذب
+  examples: []
+  synonyms:
+  - شلاخ
+  - بوشلاخ
+  usage:
+    tone: neutral
+    intent: describe
+- term: عبيط
+  meaning: غبي
+  examples: []
+  synonyms: []
+  usage:
+    tone: negative
+    intent: insult
+    strength: medium
+- term: عتبة
+  meaning: عتبة الباب
+  examples: []
+  synonyms:
+  - دجه
+  usage:
+    tone: neutral
+    intent: describe
+- term: عجبرة
+  meaning: دخان
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: عجل ويش
+  meaning: ماذا؟ (شنو)
+  examples: []
+  synonyms:
+  - ويش
+  - شنقايل
+  usage:
+    tone: neutral
+    intent: question
+- term: عجوز
+  meaning: عجوز
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: عدة
+  meaning: مقعد مسطح يوضع على ظهر الحمار
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: عذر
+  meaning: عذر
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: عرج
+  meaning: عرج
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: عرر
+  meaning: عار
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: عرعور
+  meaning: ذنب الدجاج؛ وتطلق أيضاً على القذلة (السبّة)
+  examples: []
+  synonyms:
+  - بكله
+  usage:
+    tone: neutral
+    intent: describe
+- term: عرسية
+  meaning: هريسة دجاج (طبق)
+  examples: []
+  synonyms:
+  - هريسة
+  usage:
+    tone: neutral
+    intent: describe
+- term: عروة
+  meaning: أذون الكوب (البيالة)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: عريف
+  meaning: عريف
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: عز
+  meaning: عز
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: عسكة
+  meaning: فرع واحد من عذق النخلة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: عسكريم
+  meaning: آيس كريم
+  examples: []
+  synonyms: []
+  usage:
+    tone: positive
+    intent: describe
+    origin_type: english
+- term: عصاعص
+  meaning: المتبقي من السيجارة (عقب السيجارة)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: عصفور
+  meaning: طائر صغير
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: عضارة
+  meaning: صحن الشوربة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: عفر
+  meaning: يمكن، ربما
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: عفطي
+  meaning: شخص صغير ماكر وشرير
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: عقب
+  meaning: بعد
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: عقف
+  meaning: شخص قوي الجسم صلب
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: عكاسة
+  meaning: كاميرا
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: عكوس
+  meaning: صور (جمع عكس)
+  examples: []
+  synonyms:
+  - عكس
+  usage:
+    tone: neutral
+    intent: describe
+- term: عكس
+  meaning: صورة (خذلي عكس = صورني)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: علبة
+  meaning: علبة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: علثة
+  meaning: حاجة (شيء)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: على كتر
+  meaning: على صوب أو على جانب
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: عمبلوص
+  meaning: سيارة إسعاف
+  examples: []
+  synonyms: []
+  origin: الإنجليزية - Ambulance
+  usage:
+    tone: neutral
+    intent: describe
+- term: عمود
+  meaning: عمود
+  examples: []
+  synonyms:
+  - سنطوانة
+  usage:
+    tone: neutral
+    intent: describe
+- term: عنصوص
+  meaning: حصى يظهر من جراء دفان البحر
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: عنقيشة
+  meaning: بذرة أو نواة الفاكهة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: عوق
+  meaning: جرح في الجسم
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: عيال
+  meaning: أولاد
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: غب غب
+  meaning: غبي
+  examples: []
+  synonyms:
+  - غبي
+  - بهيمة
+  usage:
+    tone: negative
+    intent: insult
+    strength: medium
+- term: غبشه
+  meaning: الصباح الباكر (من غبشه)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: غجة
+  meaning: طعن
+  examples: []
+  synonyms: []
+  usage:
+    tone: aggressive
+    intent: describe
+- term: غدر
+  meaning: غدر
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: غرشة
+  meaning: زجاجة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: غزل
+  meaning: غزل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: غسق
+  meaning: ظلام
+  examples: []
+  synonyms:
+  - خرمس
+  usage:
+    tone: neutral
+    intent: describe
+- term: غش
+  meaning: غش
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: غضارة
+  meaning: إناء طبخ زجاجي (صَحن غزير)
+  examples: []
+  synonyms:
+  - طاسة
+  - أغضاره
+  usage:
+    tone: neutral
+    intent: describe
+- term: غضبة
+  meaning: قطعة خشبية لغلق الباب
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: غطا
+  meaning: غطاء
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: غفل
+  meaning: غفلة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: غلق الوقت
+  meaning: تأخر الوقت
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: غليظة
+  meaning: غلظة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: غلغض
+  meaning: أدخل الشيء في مكان حتى اختفى
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: غمز
+  meaning: غمز
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: غنجه
+  meaning: صينية
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: غوري
+  meaning: إبريق معدني لغلي الحليب أو الشاي
+  examples: []
+  synonyms:
+  - سماور
+  - بريج
+  usage:
+    tone: neutral
+    intent: describe
+- term: غيطلة
+  meaning: نقعت ماء (ماء غاطس)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: غيلمة
+  meaning: سلحفاة
+  examples: []
+  synonyms:
+  - قيلمه
+  usage:
+    tone: neutral
+    intent: describe
+- term: فجأة
+  meaning: فجأة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: فجيتون عليي وايد
+  meaning: اشتقت لكم كثيراً
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: فجة
+  meaning: فتحة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: فجمه
+  meaning: فتحة بين الأسنان الأمامية (باب البحرين إذا كانت كبيرة)
+  examples: []
+  synonyms:
+  - باب البحرين
+  usage:
+    tone: neutral
+    intent: describe
+- term: فد
+  meaning: شعر (فد راسه = شعر رأسه)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: فراشة
+  meaning: فراشة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: فرم
+  meaning: فرن
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: فز
+  meaning: فز (قفز)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: فشة
+  meaning: فضة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: فصدغة
+  meaning: ضفدعة
+  examples: []
+  synonyms:
+  - ضفدع
+  usage:
+    tone: neutral
+    intent: describe
+- term: فطيس
+  meaning: معركة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: فلتة
+  meaning: شخص عجيب لا مثيل له، أو ذكي
+  examples: []
+  synonyms:
+  - دك دك
+  usage:
+    tone: positive
+    intent: praise
+- term: فلل
+  meaning: فك (مثلاً فلل الحبال = حل الحبال)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: فنقش
+  meaning: مات وتوفي
+  examples: []
+  synonyms:
+  - مات
+  usage:
+    tone: neutral
+    intent: describe
+- term: فنيلة
+  meaning: قميص داخلي (فانيلة)
+  examples: []
+  synonyms:
+  - زنجفره
+  usage:
+    tone: neutral
+    intent: describe
+    origin_type: english
+- term: فودر
+  meaning: مسحوق (صابون)
+  examples: []
+  synonyms: []
+  origin: الإنجليزية - Powder
+  usage:
+    tone: neutral
+    intent: describe
+- term: فوق
+  meaning: فوق
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: فيديو
+  meaning: فيديو
+  examples: []
+  synonyms:
+  - بيديو
+  usage:
+    tone: neutral
+    intent: describe
+- term: قبقاب
+  meaning: نعال (خاصة النسوان)
+  examples: []
+  synonyms:
+  - دبابة
+  - كبكاب
+  usage:
+    tone: neutral
+    intent: describe
+- term: قبضة
+  meaning: قبضة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: قحم الباب
+  meaning: قفل الباب
+  examples: []
+  synonyms: []
+  dialect_region: الحد
+  usage:
+    tone: neutral
+    intent: describe
+- term: قدر
+  meaning: خلّص، انتهى
+  examples: []
+  synonyms:
+  - نفق
+  - بعد
+  - خلص
+  usage:
+    tone: neutral
+    intent: describe
+- term: قردي
+  meaning: شخص سيء السمعة متلاعب
+  examples: []
+  synonyms:
+  - لوفري
+  usage:
+    tone: neutral
+    intent: describe
+- term: قرصة
+  meaning: قرصة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: قرص
+  meaning: خبز (الرغيف)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: قروص
+  meaning: النملة السوداء الصغيرة التي تقرص، أو الجعبول الصغير
+  examples: []
+  synonyms:
+  - جعبو
+  - جعبور
+  - جعبول
+  usage:
+    tone: neutral
+    intent: describe
+- term: قرعة
+  meaning: قرعة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: قرن
+  meaning: قرن (زاوية)
+  examples: []
+  synonyms:
+  - قرنة
+  usage:
+    tone: neutral
+    intent: describe
+- term: قرنة
+  meaning: الزاوية
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: قريظة
+  meaning: قليل، أو بعد شوي
+  examples: []
+  synonyms:
+  - نتفه
+  - اقطيرة
+  usage:
+    tone: neutral
+    intent: describe
+- term: قز
+  meaning: قز (نوع من الحرير)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: قصد
+  meaning: قصد
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: قصلة
+  meaning: شخص قصير القامة
+  examples: []
+  synonyms:
+  - بجي
+  usage:
+    tone: neutral
+    intent: describe
+- term: قض
+  meaning: قضى
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: قطار
+  meaning: قطار
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: قطاوة
+  meaning: قطط
+  examples: []
+  synonyms:
+  - سنانير
+  - سنور
+  usage:
+    tone: neutral
+    intent: describe
+- term: قطعة
+  meaning: قطعة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: قطيع
+  meaning: حمام (طير)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: قطين
+  meaning: قطن
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: قعد
+  meaning: جلس
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: قفا
+  meaning: 'قفا الرقبة (يقال: عطني أم قفاك = أعطني ظهرك واذهب)'
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: قفشة
+  meaning: ملعقة
+  examples: []
+  synonyms:
+  - ملاس
+  - خاشوقة
+  usage:
+    tone: neutral
+    intent: describe
+- term: قلاص
+  meaning: كأس
+  examples: []
+  synonyms:
+  - كلاص
+  usage:
+    tone: neutral
+    intent: describe
+- term: قلب
+  meaning: قلب
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: قلج
+  meaning: صعب
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: قلع
+  meaning: أزال
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: قلقص
+  meaning: قص جناحي الطير لئلا يطير
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: قلم
+  meaning: قلم
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: قن
+  meaning: قن (وعاء)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: قنديل
+  meaning: قنديل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: قنفذ
+  meaning: قنفذ
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: قنوع
+  meaning: قنوع
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: قهاوي
+  meaning: مقاهي
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: قون
+  meaning: فستان
+  examples: []
+  synonyms:
+  - نفنوف
+  - ثوب
+  - جون
+  usage:
+    tone: neutral
+    intent: describe
+- term: قوي
+  meaning: قوي
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: قير
+  meaning: قار
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: قيع
+  meaning: قاع
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: كاب شلقلقي
+  meaning: صحن
+  examples: []
+  synonyms:
+  - صحن
+  dialect_region: درازية
+  usage:
+    tone: neutral
+    intent: describe
+    origin_type: english
+- term: كاتشب
+  meaning: صلصة طماطم
+  examples: []
+  synonyms: []
+  origin: الإنجليزية - Ketchup
+  usage:
+    tone: neutral
+    intent: describe
+    origin_type: english
+- term: كاروب
+  meaning: ابن النخلة (الفسيلة)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: كاعودة
+  meaning: أداة جلوس للنساء من الخوص
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: كافر
+  meaning: كافر
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: كبكاب
+  meaning: نعال نسائي
+  examples: []
+  synonyms:
+  - قبقاب
+  - دبابة
+  usage:
+    tone: neutral
+    intent: describe
+- term: كبوس
+  meaning: قبعة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: كبي
+  meaning: كب
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: كتر
+  meaning: كثير
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: كتفه
+  meaning: كتفه
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: كث
+  meaning: كثر
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: كثيب
+  meaning: كثيب رمل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: كحل
+  meaning: كحل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: كدف
+  meaning: الجزء السميك من سعفة النخيل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: كر
+  meaning: أداة لركوب النخلة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: كرسي
+  meaning: كرسي
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: كرفتة
+  meaning: معطف
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: كرفاية
+  meaning: سرير
+  examples: []
+  synonyms:
+  - سرير
+  usage:
+    tone: neutral
+    intent: describe
+- term: كرم
+  meaning: كرم
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: كروان
+  meaning: طائر
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: كز
+  meaning: كز (ضغط)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: كسكبال
+  meaning: فول سوداني غير مقشر
+  examples: []
+  synonyms:
+  - سكسبال
+  usage:
+    tone: neutral
+    intent: describe
+- term: كشخه
+  meaning: أناقة، ترتيب (كشخة)
+  examples: []
+  synonyms:
+  - تزكرت
+  - زبرة
+  - متزبر
+  usage:
+    tone: neutral
+    intent: describe
+- term: كشمة
+  meaning: نظارة
+  examples: []
+  synonyms:
+  - نظارة
+  usage:
+    tone: neutral
+    intent: describe
+- term: كشته
+  meaning: طلعة، رحلة، نزهة
+  examples: []
+  synonyms:
+  - رحلة
+  usage:
+    tone: neutral
+    intent: describe
+- term: كعكعة
+  meaning: وقاء يوضع على الرأس لحمل الأثقال
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: كف راشدي
+  meaning: ضربة على قفا الرقبة (كف حلاقة)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: dismiss
+- term: كفه
+  meaning: وعاء صغير من الخوص
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: كلاص
+  meaning: كأس
+  examples: []
+  synonyms:
+  - قلاص
+  usage:
+    tone: neutral
+    intent: describe
+- term: كلكجي
+  meaning: كذاب، محتال، ماكر
+  examples: []
+  synonyms:
+  - جمبازي
+  - لوتي
+  dialect_region: المحرق
+  usage:
+    tone: negative
+    intent: insult
+    strength: medium
+- term: كم
+  meaning: كم
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: كمد
+  meaning: كمد (حزن)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: كنز
+  meaning: كنز
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: كنع
+  meaning: منع
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: كندة
+  meaning: قطعة كبيرة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: كنه
+  meaning: كنه (حقيقة)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: كنديشن
+  meaning: مكيف هواء
+  examples: []
+  synonyms:
+  - أيسي
+  origin: الإنجليزية - Conditioner
+  usage:
+    tone: neutral
+    intent: describe
+    origin_type: english
+- term: كوب
+  meaning: كوب
+  examples: []
+  synonyms: []
+  origin: الإنجليزية - Cup
+  usage:
+    tone: neutral
+    intent: describe
+- term: كوتشينة
+  meaning: سيارة صغيرة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: كوفنه
+  meaning: ضربه ضرباً مبرحاً
+  examples: []
+  synonyms:
+  - أبسطه
+  - ادبغه
+  usage:
+    tone: aggressive
+    intent: describe
+- term: كولي
+  meaning: عامل بناء
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: كونة
+  meaning: حفرة صغيرة تحفر للأرض للعبة التيلة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: كوّة
+  meaning: فتحة صغيرة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: كوّع
+  meaning: ارجع من حيث أتيت (لفة على شكل حرف U)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: كيب
+  meaning: كيس
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: كيبل
+  meaning: سلك (كابل)
+  examples: []
+  synonyms: []
+  origin: الإنجليزية - Cable
+  usage:
+    tone: neutral
+    intent: describe
+    origin_type: english
+- term: كيري ميري
+  meaning: اللف والدوران
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+    origin_type: english
+- term: كيص
+  meaning: متين (قوي)
+  examples: []
+  synonyms:
+  - متين
+  usage:
+    tone: neutral
+    intent: describe
+- term: لا توطوط
+  meaning: لا تقترب من هذا المكان بتاتاً
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: لابج عليك
+  meaning: طايح عليك (يناسبك هذا الشيء)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: لابس
+  meaning: لابس
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: لاث
+  meaning: مثل لايث = شيء مفلوت لا أحد يهتم به
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: لبلب
+  meaning: شخص يتكلم بطلاقة
+  examples: []
+  synonyms:
+  - بلبل
+  usage:
+    tone: neutral
+    intent: describe
+- term: لبق
+  meaning: خبأ الشيء
+  examples: []
+  synonyms:
+  - أملبق
+  usage:
+    tone: neutral
+    intent: describe
+- term: لبه
+  meaning: شطة (لبلبة فوق ظهره = ضربه)
+  examples: []
+  synonyms: []
+  usage:
+    tone: aggressive
+    intent: describe
+- term: لبيب
+  meaning: ناعم (شعر ناعم)
+  examples: []
+  synonyms:
+  - دجيج
+  usage:
+    tone: neutral
+    intent: describe
+- term: لجة
+  meaning: بخيل
+  examples: []
+  synonyms:
+  - زطي
+  usage:
+    tone: neutral
+    intent: describe
+- term: لحاف
+  meaning: لحاف
+  examples: []
+  synonyms:
+  - برنوص
+  usage:
+    tone: neutral
+    intent: describe
+- term: لخه
+  meaning: ضربة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: لدغ
+  meaning: لدغ
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: لز
+  meaning: لزق
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: لسان
+  meaning: لسان
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: لطم
+  meaning: لطم
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: لظى
+  meaning: لهب
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: لعب
+  meaning: لعب
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: لغم
+  meaning: غم
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: لفد
+  meaning: شيء كريه يتلصق باليد (مثل الحلاوة)
+  examples: []
+  synonyms:
+  - لفوذه
+  usage:
+    tone: neutral
+    intent: describe
+- term: لفوذه
+  meaning: شيء لزج يتلصق
+  examples: []
+  synonyms:
+  - لفد
+  usage:
+    tone: neutral
+    intent: describe
+- term: لفى
+  meaning: وصل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: لكز
+  meaning: لكز
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: لماع
+  meaning: مبيض الثياب
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: لن
+  meaning: لن
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: لوبي
+  meaning: لوبي
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: لوتي
+  meaning: كذاب، عيار
+  examples: []
+  synonyms:
+  - كلكجي
+  - جمبازي
+  dialect_region: المحرق
+  usage:
+    tone: negative
+    intent: insult
+    strength: medium
+- term: لوف
+  meaning: شخص وسخ مقرف
+  examples: []
+  synonyms:
+  - لوفري
+  usage:
+    tone: negative
+    intent: insult
+    strength: medium
+- term: لوفري
+  meaning: شخص سيء السمعة متلاعب، صايع وراعي مشاكل
+  examples: []
+  synonyms:
+  - قردي
+  - لوف
+  usage:
+    tone: neutral
+    intent: describe
+- term: لوفر
+  meaning: ناس مخرطية (مشاغبون)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: لوقة
+  meaning: غطاء قارورة البيبسي أو المشروبات الغازية
+  examples: []
+  synonyms:
+  - طبيشة
+  usage:
+    tone: neutral
+    intent: describe
+- term: لوسة
+  meaning: شخص حشري (كثير التدخل)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: لون
+  meaning: لون
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: ليه
+  meaning: لماذا
+  examples: []
+  synonyms:
+  - ورا
+  - لاويش
+  - عجل ويش
+  usage:
+    tone: neutral
+    intent: question
+- term: ما أنوس
+  meaning: لا أثق
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: ما اعبر
+  meaning: لا أقدر أو لا أستطيع
+  examples: []
+  synonyms:
+  - ما اقدر
+  usage:
+    tone: neutral
+    intent: describe
+- term: ما يتقابون
+  meaning: شخصان لا يلتقيان أبداً
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مادر بوز
+  meaning: متضايق أو معكر المزاج
+  examples: []
+  synonyms:
+  - ضارب بوز
+  - زمران
+  usage:
+    tone: neutral
+    intent: describe
+- term: ماخوذ
+  meaning: مأخوذ
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: ماسخ
+  meaning: ماسخ
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مالت عليك
+  meaning: طاح حظك
+  examples: []
+  synonyms:
+  - تميل عليك
+  usage:
+    tone: neutral
+    intent: describe
+- term: ماميش
+  meaning: غير موجود
+  examples: []
+  synonyms:
+  - موجود
+  usage:
+    tone: neutral
+    intent: describe
+- term: ماكري
+  meaning: قطعة معدنية لغلق الباب
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: ماي
+  meaning: ماء
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: ماي بيلر
+  meaning: ماء حلو (عذب)
+  examples: []
+  synonyms: []
+  usage:
+    tone: positive
+    intent: praise
+    origin_type: english
+- term: متخربط
+  meaning: متخربط
+  examples: []
+  synonyms:
+  - متدوده
+  usage:
+    tone: neutral
+    intent: describe
+- term: متختخ
+  meaning: شخص سمين
+  examples: []
+  synonyms:
+  - سمين
+  usage:
+    tone: neutral
+    intent: describe
+- term: متدوده
+  meaning: شخص حائر ضاعت منه الحيلة، متخربط
+  examples: []
+  synonyms:
+  - متسودن
+  - متخربط
+  usage:
+    tone: neutral
+    intent: describe
+- term: متربع
+  meaning: نوع من الجلوس (عادة أمام مائدة الطعام)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: متزكرت
+  meaning: متزين، كاشخ
+  examples: []
+  synonyms:
+  - تزكرت
+  - كشخه
+  usage:
+    tone: neutral
+    intent: describe
+- term: متزبر
+  meaning: كاشخ (متزبر)
+  examples: []
+  synonyms:
+  - متزكرت
+  - كشخه
+  usage:
+    tone: neutral
+    intent: describe
+- term: متشقق
+  meaning: فرحان جداً
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: متفق
+  meaning: متفق
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مثل
+  meaning: مثل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مجثي
+  meaning: باهت، متقشر، رايح لونه
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مجحف
+  meaning: مجحف
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مجرد
+  meaning: مجرد
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مجرفس
+  meaning: مكفّس (منكمش)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مجلس
+  meaning: مجلس
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مجندس
+  meaning: منحني الوجه أو الظهر
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: محبس
+  meaning: خاتم
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: محبوك
+  meaning: محبوك
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: محتمي
+  meaning: محتمي
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: محظور
+  meaning: محظور
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: محفوظ
+  meaning: محفوظ
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: محندب
+  meaning: ظهره ملتوي من الكبر
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: محيوب
+  meaning: ممنوع من شيء
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مخبوط
+  meaning: مخبوط
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مخدة
+  meaning: وسادة
+  examples: []
+  synonyms:
+  - موسدة
+  usage:
+    tone: neutral
+    intent: describe
+- term: مخلخل
+  meaning: مخلخل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مخنوق
+  meaning: مخنوق
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مدربان
+  meaning: طريق مسقف بين بيتين
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مدري
+  meaning: لا أدري
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مدروي
+  meaning: مقلوب (لبس مدروي = مقلوب)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مدعوس
+  meaning: مدعوس
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مدقة
+  meaning: مدقة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مدّة
+  meaning: سجادة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مذعور
+  meaning: مذعور
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مراغة
+  meaning: تجمع لماء المطر
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مراية
+  meaning: مرآة
+  examples: []
+  synonyms:
+  - منظرة
+  usage:
+    tone: neutral
+    intent: describe
+- term: مرجحانة
+  meaning: أرجوحة (دورفة)
+  examples: []
+  synonyms:
+  - دورفة
+  usage:
+    tone: neutral
+    intent: describe
+- term: مرحة
+  meaning: مرح
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مرر
+  meaning: مرر
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مرطرط
+  meaning: جسمه لين بلا قوة
+  examples: []
+  synonyms:
+  - أمطعطع
+  - سلسوول
+  usage:
+    tone: neutral
+    intent: describe
+- term: مرعوص
+  meaning: شيء محشور بين شيئين، أو وجه طويل ضيق
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مرية
+  meaning: قلادة عنق (خرز)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مز
+  meaning: مز
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مزاج
+  meaning: مزاج
+  examples: []
+  synonyms:
+  - بارظ
+  usage:
+    tone: neutral
+    intent: describe
+- term: مزخرف
+  meaning: مزخرف
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مزكم
+  meaning: مصاب بالزكام
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مسدس
+  meaning: مسدس
+  examples: []
+  synonyms:
+  - تفك
+  - طخ
+  usage:
+    tone: neutral
+    intent: describe
+- term: مسرح
+  meaning: مسرح
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مسطر
+  meaning: مسطر
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مسطول
+  meaning: مسطول
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مسقف
+  meaning: مسقف
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مسقعة
+  meaning: طبق مسقعة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مسك
+  meaning: مسك
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مسن
+  meaning: مسن
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مسودن
+  meaning: رأسه يدور (دوار)
+  examples: []
+  synonyms:
+  - متدوده
+  - أم الديفان
+  usage:
+    tone: neutral
+    intent: describe
+- term: مشاغب
+  meaning: مشاغب
+  examples: []
+  synonyms:
+  - ربشة
+  usage:
+    tone: neutral
+    intent: describe
+- term: مشخال
+  meaning: مصفى
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مشرع
+  meaning: مكان شرب الماء
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مشط
+  meaning: مشط
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مشعوذ
+  meaning: مشعوذ
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مشكاب
+  meaning: صحن مشجر (منقوش)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مشمر
+  meaning: عباءة أو جلباب (تستخدمه النساء قديماً عند الخروج)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مشولعة
+  meaning: غير صاحية، غبية، هبلة
+  examples: []
+  synonyms:
+  - امخرخش
+  - مفهي
+  usage:
+    tone: negative
+    intent: insult
+    strength: medium
+- term: مصاب
+  meaning: مصاب
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مصر
+  meaning: مصر
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مصطبة
+  meaning: مصطبة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مصفر
+  meaning: مصفر
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مضاربة
+  meaning: شجار
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مضروبة
+  meaning: عرسية مسبطة (مضروبة)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مضراب
+  meaning: ملعقة خشب كبيرة لضرب الهريسة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مطر
+  meaning: مطر
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مطح
+  meaning: مطح
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مطفوق
+  meaning: عجول ومرتبك
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مطعم (بضم الميم)
+  meaning: مكان رمي القمامة (مزبلة)
+  examples: []
+  synonyms: []
+  usage:
+    tone: aggressive
+    intent: describe
+- term: مطنوخ
+  meaning: مطنوخ
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مظلوم
+  meaning: مظلوم
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: معارة
+  meaning: أغراض كثيرة متراكمة في مكان واحد
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: معتوه
+  meaning: معتوه
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: معدن
+  meaning: معدن
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: معركة
+  meaning: معركة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: معكرونة
+  meaning: معكرونة
+  examples: []
+  synonyms: []
+  origin: الإيطالية - Macaronia
+  usage:
+    tone: neutral
+    intent: describe
+    origin_type: italian
+- term: معنطز
+  meaning: معاند ومناحس
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: معيي
+  meaning: مخالف ورافض
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مغثي
+  meaning: شخص توه ناهض من النوم ليس في نشاط
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مغرور
+  meaning: مغرور
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مفتاح
+  meaning: مفتاح
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مفتون
+  meaning: مفتون
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مفر
+  meaning: مفر
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مقاقة
+  meaning: بارض (مزاج)
+  examples: []
+  synonyms:
+  - بارظ
+  - مزاج
+  usage:
+    tone: neutral
+    intent: describe
+- term: مقبس
+  meaning: مبخرة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مقتبل
+  meaning: مقتبل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مقحوم
+  meaning: مقفول بقفل حديدي
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مقشرة
+  meaning: مقشرة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مقشحة
+  meaning: قطعة بلاستيك أو معدن لجمع الأوساخ (مقشة)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مقلب
+  meaning: مقلب (دقة)
+  examples: []
+  synonyms:
+  - دقه
+  usage:
+    tone: neutral
+    intent: describe
+- term: مقود
+  meaning: مقود السيارة
+  examples: []
+  synonyms:
+  - سكان
+  usage:
+    tone: neutral
+    intent: describe
+- term: مكسي
+  meaning: فستان طويل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مكع
+  meaning: أزال
+  examples: []
+  synonyms:
+  - قلع
+  usage:
+    tone: neutral
+    intent: describe
+- term: مكفوف
+  meaning: مكفوف
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مكنسة
+  meaning: مكنسة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: ملا
+  meaning: ملأ
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: ملاس
+  meaning: ملعقة كبيرة (خاصة لهريس)
+  examples: []
+  synonyms:
+  - الأسطام
+  - خاشوقة
+  - قفشة
+  usage:
+    tone: neutral
+    intent: describe
+- term: ملبس
+  meaning: ملبس
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: ملتات
+  meaning: التوى أو انجفس
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: ملعقة
+  meaning: ملعقة
+  examples: []
+  synonyms:
+  - خاشوقة
+  usage:
+    tone: neutral
+    intent: describe
+- term: ملكوت
+  meaning: ملتوي (مثل الأسبرنقات)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: ملوح
+  meaning: مملوح = وسيم
+  examples: []
+  synonyms:
+  - وسيم
+  usage:
+    tone: neutral
+    intent: describe
+- term: مليح
+  meaning: جميل
+  examples: []
+  synonyms: []
+  usage:
+    tone: positive
+    intent: praise
+- term: ممزق
+  meaning: ممزق
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: من اسمه
+  meaning: من اسمه
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: من وهل
+  meaning: من وقت أو باكراً
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: منبر
+  meaning: منبر
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: منتن
+  meaning: منتن
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: منجاة
+  meaning: منجاة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: منحوس
+  meaning: منحوس
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: مندهش
+  meaning: مندهش
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: منز
+  meaning: مهد أو سرير الطفل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: منزلة
+  meaning: منزلة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: منسرد
+  meaning: نائم على ظهره
+  examples: []
+  synonyms:
+  - منسدح
+  usage:
+    tone: neutral
+    intent: describe
+- term: منظرة
+  meaning: مرآة
+  examples: []
+  synonyms:
+  - مراية
+  origin: الإنجليزية - Mirror (محرفة)
+  usage:
+    tone: neutral
+    intent: describe
+- term: منعرج
+  meaning: منعرج
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: منفر
+  meaning: منفر
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: منفذ
+  meaning: منفذ
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: منفرد
+  meaning: منفرد
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: منفعل
+  meaning: منفعل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: منقار
+  meaning: منقار
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: منقطع
+  meaning: منقطع
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: منكوب
+  meaning: منكوب
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: منهوب
+  meaning: منهوب
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: منهل
+  meaning: منهل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: موتر
+  meaning: سيارة
+  examples: []
+  synonyms:
+  - سيارة
+  origin: الإنجليزية - Motor
+  usage:
+    tone: neutral
+    intent: describe
+    origin_type: english
+- term: موسدة
+  meaning: وسادة
+  examples: []
+  synonyms:
+  - مخدة
+  usage:
+    tone: neutral
+    intent: describe
+- term: موش
+  meaning: ليس (مثل ماميش)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: ميز
+  meaning: طاولة أو درج
+  examples: []
+  synonyms:
+  - طاولة
+  usage:
+    tone: neutral
+    intent: describe
+- term: ميش
+  meaning: موجود
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: ميهود
+  meaning: تعبان أو مريض
+  examples: []
+  synonyms:
+  - مجهود
+  usage:
+    tone: neutral
+    intent: describe
+- term: ناب
+  meaning: ناب
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: ناتج
+  meaning: ناتج
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: ناخذ
+  meaning: نأخذ
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نادم
+  meaning: نادم
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نازل
+  meaning: نازل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: ناسي
+  meaning: ناسي
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: ناشف
+  meaning: ناشف
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: ناصية
+  meaning: ناصية
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: ناضج
+  meaning: ناضج
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: ناطر
+  meaning: منتظر
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نافذة
+  meaning: نافذة
+  examples: []
+  synonyms:
+  - دريشه
+  usage:
+    tone: neutral
+    intent: describe
+- term: ناكص
+  meaning: ناكص
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نال
+  meaning: نال
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نام
+  meaning: نام
+  examples: []
+  synonyms:
+  - يخمد
+  - ينجعس
+  usage:
+    tone: neutral
+    intent: describe
+- term: نايز
+  meaning: تجهز وابرز
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نبطي
+  meaning: نبطي
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نبع
+  meaning: نبع
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نبل
+  meaning: نبل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نتف
+  meaning: نتف
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نتفه
+  meaning: شيء صغير الحجم (قليل)
+  examples: []
+  synonyms:
+  - قريظة
+  - اقطيرة
+  usage:
+    tone: neutral
+    intent: describe
+- term: نثر
+  meaning: نثر
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نجاب
+  meaning: وضع الأرز في الصحون
+  examples:
+  - نجبت الأم الغداء
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نجس
+  meaning: نجس
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نجف
+  meaning: نجف
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نحاس
+  meaning: نحاس
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نحف
+  meaning: نحف
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نخاخ
+  meaning: نخاخ
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نخلة
+  meaning: نخلة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نخية
+  meaning: ضعيف البنية لا يدافع عن نفسه
+  examples: []
+  synonyms:
+  - أمطعطع
+  usage:
+    tone: neutral
+    intent: describe
+- term: نذل
+  meaning: نذل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نزق
+  meaning: نزق
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نزلة
+  meaning: نزلة برد
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نزيف
+  meaning: نزيف
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نزيل
+  meaning: نزيل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نسبة
+  meaning: نسبة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نستعليق
+  meaning: نستعليق
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نشل
+  meaning: نشل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نشوة
+  meaning: نشوة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نصاب
+  meaning: نصاب
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نصبة
+  meaning: نصبة (طايح النصبة)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نضارة
+  meaning: نضارة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نظافة
+  meaning: نظافة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نظام
+  meaning: نظام
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نظير
+  meaning: نظير
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نعاس
+  meaning: نعاس
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نعش
+  meaning: نعش
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نعمة
+  meaning: نعمة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نعناع
+  meaning: نعناع
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نغصة
+  meaning: الأكلة التي تتمناها لصديق عزيز
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نفاخة
+  meaning: بالونة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نفنوف
+  meaning: فستان
+  examples: []
+  synonyms:
+  - قون
+  - ثوب
+  usage:
+    tone: neutral
+    intent: describe
+- term: نفق
+  meaning: خلص، انتهى
+  examples: []
+  synonyms:
+  - قدر
+  - بعد
+  usage:
+    tone: neutral
+    intent: describe
+- term: نقش
+  meaning: نقش
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نقطة
+  meaning: طائر يحلق عالياً في السماء (يبدو كنقطة)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نكت
+  meaning: نسكب (نكت الماء = سكبته)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نل
+  meaning: حنفية الماء
+  examples: []
+  synonyms:
+  - بلبله
+  usage:
+    tone: neutral
+    intent: describe
+- term: نمرة
+  meaning: رقم
+  examples: []
+  synonyms:
+  - رقم
+  usage:
+    tone: neutral
+    intent: describe
+- term: نمونة
+  meaning: مثال، عادات الشخص (نمونته طيبة)
+  examples: []
+  synonyms:
+  - مثال
+  usage:
+    tone: neutral
+    intent: describe
+- term: نوبة
+  meaning: مرة (نوبة الثانية = مرة ثانية)
+  examples: []
+  synonyms:
+  - مرة
+  usage:
+    tone: neutral
+    intent: describe
+- term: نوتة
+  meaning: دفتر (Note book)
+  examples: []
+  synonyms: []
+  origin: الإنجليزية - Note
+  usage:
+    tone: neutral
+    intent: describe
+- term: نوط
+  meaning: عملة ورقية
+  examples: []
+  synonyms: []
+  origin: الإنجليزية - Note
+  usage:
+    tone: neutral
+    intent: describe
+- term: نول
+  meaning: أجرة النقل
+  examples: []
+  synonyms: []
+  origin: الفرنسية - Nolis
+  usage:
+    tone: neutral
+    intent: describe
+- term: نيس
+  meaning: نيس
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: نيشان
+  meaning: علامة أو إشارة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: هايم
+  meaning: شخص يمشي على غير هدى، يذهب ويجيء بلا هدف
+  examples: []
+  synonyms:
+  - يهيم
+  usage:
+    tone: neutral
+    intent: describe
+- term: هانمونه
+  meaning: هكذا (للتشبيه)
+  examples: []
+  synonyms:
+  - جدي
+  - هنمونة
+  usage:
+    tone: neutral
+    intent: describe
+- term: هاي
+  meaning: هذه
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: هب
+  meaning: هب
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: هباء
+  meaning: هباء
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: هبال
+  meaning: غبي
+  examples: []
+  synonyms: []
+  usage:
+    tone: negative
+    intent: insult
+    strength: medium
+- term: هبط
+  meaning: نزل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: هبيط
+  meaning: منخفض
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: هبيلة
+  meaning: غبية
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: هجر
+  meaning: هجر
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: هجير
+  meaning: هجير
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: هجوم
+  meaning: هجوم
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: حد
+  meaning: حد
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: حدود
+  meaning: حدود
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: حذر
+  meaning: حذر (بالنسبة للهجة تعني تحت)
+  examples: []
+  synonyms:
+  - حدر
+  usage:
+    tone: neutral
+    intent: describe
+- term: هدر
+  meaning: تكلم بكثرة (يهدر)
+  examples: []
+  synonyms:
+  - هرج
+  usage:
+    tone: neutral
+    intent: describe
+- term: هرار
+  meaning: كلام عديم الفائدة، عمل لا فائدة منه
+  examples: []
+  synonyms:
+  - هرج
+  - هريج
+  usage:
+    tone: neutral
+    intent: describe
+- term: هرج
+  meaning: كلام فارغ
+  examples: []
+  synonyms:
+  - هرار
+  usage:
+    tone: neutral
+    intent: describe
+- term: هرن
+  meaning: بوري السيارة (المنبه)
+  examples: []
+  synonyms: []
+  origin: الإنجليزية - Horn
+  usage:
+    tone: neutral
+    intent: describe
+- term: هريج
+  meaning: هراء (بلا هريج = بلا كلام فارغ)
+  examples: []
+  synonyms:
+  - هرار
+  usage:
+    tone: neutral
+    intent: describe
+- term: هز
+  meaning: هز
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: هست
+  meaning: هل يوجد (هست فلان؟)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: هش
+  meaning: هش
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: هضي
+  meaning: هذا
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: هضو
+  meaning: هذا
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: هفهف
+  meaning: هفهف
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: هق
+  meaning: هكذا
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: هكو
+  meaning: هذا هو (للمذكر)
+  examples: []
+  synonyms:
+  - أكوه
+  usage:
+    tone: neutral
+    intent: describe
+- term: هلا
+  meaning: مرحباً
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: greeting
+- term: هليلج
+  meaning: هليلج
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: هم
+  meaning: هم
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: همزة
+  meaning: قبضة الأكل (أي حفنة)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: همش
+  meaning: تعال (بكسر الهاء)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: هميج
+  meaning: عيش لين (طري)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: هنمونة
+  meaning: هكذا (مثل هانمونه)
+  examples: []
+  synonyms:
+  - هانمونه
+  - جدي
+  usage:
+    tone: neutral
+    intent: describe
+- term: هوى
+  meaning: هوى
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: هوه (بتشديد الواو)
+  meaning: النوم (تقال للأطفال عند الإراقة)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: هوز
+  meaning: خرطوم الماء
+  examples: []
+  synonyms: []
+  origin: الإنجليزية - Hose
+  usage:
+    tone: neutral
+    intent: describe
+- term: هي
+  meaning: ذهب وانطلق
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: هياط
+  meaning: هياط
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: هيب
+  meaning: هيب
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: هيج
+  meaning: هيج
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: واير
+  meaning: سلك
+  examples: []
+  synonyms: []
+  origin: الإنجليزية - Wire
+  usage:
+    tone: neutral
+    intent: describe
+- term: ودام
+  meaning: اللحم أو السمك أو الدجاج بعد طهوه
+  examples: []
+  synonyms:
+  - لودام
+  usage:
+    tone: neutral
+    intent: describe
+- term: ودر
+  meaning: الوجه المقرح
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: ورا
+  meaning: لماذا (عند أهل السنة)
+  examples: []
+  synonyms:
+  - ليه
+  - لاويش
+  usage:
+    tone: neutral
+    intent: question
+- term: وزة
+  meaning: وزة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: وسط
+  meaning: وسط
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: وصلة
+  meaning: وصلة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: وضع
+  meaning: وضع
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: وعل
+  meaning: وعل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: وفر
+  meaning: وفر
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: وقت
+  meaning: وقت
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: وقف
+  meaning: حر شديد بدون هواء (الوقف)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: وكل
+  meaning: وكل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: ولع
+  meaning: ولع
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: ولف
+  meaning: ولف
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: ونقه
+  meaning: فلت الشيء وأوصله بعيداً
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: وهابي
+  meaning: وهابي
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: ويه على إفادي
+  meaning: آه ياقلبي (تعبير تحسر وشفقة)
+  examples: []
+  synonyms:
+  - وي على إفادي
+  usage:
+    tone: neutral
+    intent: describe
+- term: يالبو
+  meaning: شخص غشيم (قليل الخبرة)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: يالمبغول
+  meaning: يا شيطان (تقال للأطفال المشاغبين)
+  examples: []
+  synonyms:
+  - يالهيس
+  usage:
+    tone: neutral
+    intent: curse
+    strength: medium
+- term: يبعر
+  meaning: يصارخ ويرفع صوته
+  examples: []
+  synonyms:
+  - يزبر
+  - يزعق
+  usage:
+    tone: neutral
+    intent: describe
+- term: يتخادنون
+  meaning: يتآمرون ويتفقون على مكيدة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: يتجلبه
+  meaning: يتسلق
+  examples: []
+  synonyms:
+  - تعلبق
+  - تسحلق
+  usage:
+    tone: neutral
+    intent: describe
+- term: يتحلطم
+  meaning: يتذمر ويتكلم مع نفسه بسبب عدم الرضا
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: يتسحرق
+  meaning: يعصب أو يثور على شخص
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: يتنحنح
+  meaning: يستأذن قبل الدخول (صوت احم احم)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: يتولول
+  meaning: يتألم بشدة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: يجوكم
+  meaning: يغامر
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: يحن
+  meaning: يصر على الشيء
+  examples: []
+  synonyms:
+  - يزن
+  usage:
+    tone: neutral
+    intent: describe
+- term: يخوزر
+  meaning: يصوب عينيه على طرفها نحو شيء معين
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: يخمد
+  meaning: ينام
+  examples: []
+  synonyms:
+  - ينجعس
+  - نام
+  usage:
+    tone: neutral
+    intent: describe
+- term: يخوره
+  meaning: شخص لا يحتفظ بالسر (ينشره)
+  examples: []
+  synonyms:
+  - بخورة
+  usage:
+    tone: neutral
+    intent: describe
+- term: يخلبص
+  meaning: يخوف أو يروع
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: threat
+    strength: medium
+- term: يدبج
+  meaning: يركض
+  examples: []
+  synonyms:
+  - دبيج
+  - ركض
+  usage:
+    tone: neutral
+    intent: describe
+- term: يدغ
+  meaning: يشرب
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: يدوي
+  meaning: صوت يرن في الأذن
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: يزامط
+  meaning: يتباهى أمام الآخرين بما لديه
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: يزبر
+  meaning: يصرخ (تزبر الأم على ولدها)
+  examples: []
+  synonyms:
+  - يبعر
+  - يزعق
+  usage:
+    tone: neutral
+    intent: describe
+- term: يزرط
+  meaning: يبلع بدون مضغ
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: يزعق
+  meaning: ينادي بأعلى صوته
+  examples: []
+  synonyms:
+  - يزبر
+  usage:
+    tone: neutral
+    intent: describe
+- term: يزن
+  meaning: يصر على الشيء
+  examples: []
+  synonyms:
+  - يحن
+  usage:
+    tone: neutral
+    intent: describe
+- term: يزوغل
+  meaning: يغش في اللعب
+  examples: []
+  synonyms:
+  - تزاغي
+  usage:
+    tone: neutral
+    intent: describe
+- term: يساخط
+  meaning: يغسل الأواني بالماء فقط
+  examples: []
+  synonyms:
+  - ساخط
+  usage:
+    tone: neutral
+    intent: describe
+- term: يسنى
+  meaning: يبكي الطفل الرضيع بكاء شديداً (فطس)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: يشيل
+  meaning: يحمل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: يصخ
+  meaning: يهدأ
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: يصل
+  meaning: ينقط أو يتساقط (يخر)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: يضرب
+  meaning: يضرب
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: يطالع
+  meaning: ينظر
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: يعل
+  meaning: يعل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: يغاوش
+  meaning: يعانده من أمامه
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: يغش
+  meaning: يغش
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: يفتح
+  meaning: يفتح
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: يفر
+  meaning: يهرب
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: يقحص
+  meaning: يعمل حركات بالسيارة (مثل السحك واللف)
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: يقص
+  meaning: يقص
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: يقمة
+  meaning: شربة واحدة من الماء أو الشراب
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: يكس
+  meaning: يكس
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: يلبس
+  meaning: يلبس
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: يلبي
+  meaning: يتكلم كثيراً
+  examples: []
+  synonyms:
+  - يهدر
+  usage:
+    tone: neutral
+    intent: describe
+- term: يلق
+  meaning: يلمع
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: يمج
+  meaning: يغسل الثياب بالماء فقط
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: يمشي في الساس
+  meaning: شخص خجول يمشي وحده لا يرفع رأسه
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: ينابك
+  meaning: حضرتك أو شخصك الكريم
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: ينبر
+  meaning: يفتش ويبحث
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: ينجعس
+  meaning: ينام متمددا
+  examples: []
+  synonyms:
+  - يخمد
+  - نام
+  usage:
+    tone: neutral
+    intent: describe
+- term: ينقشع
+  meaning: ينصرف
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: يهتمل
+  meaning: يهمل
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe
+- term: يهدر
+  meaning: يتكلم بكثرة
+  examples: []
+  synonyms:
+  - يلبي
+  usage:
+    tone: neutral
+    intent: describe
+- term: يهيم
+  meaning: يمشي بلا هدف
+  examples: []
+  synonyms:
+  - هايم
+  usage:
+    tone: neutral
+    intent: describe
+- term: ييْفَه
+  meaning: رائحة خايسة، والييفة = الجثة الهامدة
+  examples: []
+  synonyms: []
+  usage:
+    tone: neutral
+    intent: describe

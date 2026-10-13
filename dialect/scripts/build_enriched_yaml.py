@@ -215,7 +215,15 @@ def detect_origin_type(term: str) -> str | None:
 
 
 def enrich_entry(entry: dict) -> dict:
-    """Add usage analysis to a single dictionary entry."""
+    """Add lexical analysis to a single dictionary entry.
+
+    IMPORTANT SEMANTIC BOUNDARY (added 2026-10-13 after review):
+    The fields produced here describe the WORD (lexical class), not the
+    SPEAKER'S INTENT in a sentence. `أبسطه` = "ضربه" describes what the word
+    means — it does NOT establish that a speaker using it intends to hit
+    anyone (it may be quotation, joke, report, or question). Do not train a
+    model to treat these labels as intent ground truth.
+    """
     term = entry.get("term", "")
     meaning = entry.get("meaning", "")
 
@@ -224,7 +232,11 @@ def enrich_entry(entry: dict) -> dict:
     strength = detect_strength(term, meaning, intent)
     origin_type = detect_origin_type(term)
 
-    usage = {"tone": tone, "intent": intent}
+    usage = {
+        "lexical_tone": tone,          # how the WORD sounds (positive/negative/neutral/aggressive)
+        "lexical_class": intent,       # what the WORD is (describe/question/greeting/praise/curse/threat/dismiss/insult)
+        "speaker_intent": "context-dependent",  # actual intent requires sentence context — NOT derivable from the word alone
+    }
     if strength:
         usage["strength"] = strength
     if origin_type:

@@ -41,13 +41,19 @@ entries:
   synonyms:
   - كوفنه
   usage:
-    tone: aggressive       # positive | negative | neutral | aggressive
-    intent: threat         # describe | question | greeting | praise | curse |
-                           # threat | dismiss | insult
-    strength: medium       # high | medium  (only for threat/curse/insult)
-    origin_type: english   # english | hindi | italian | persian | russian | turkish
-                           # (only for loanwords)
+    lexical_tone: aggressive     # how the WORD sounds (positive | negative | neutral | aggressive)
+    lexical_class: threat        # what the WORD is (describe | question | greeting | praise |
+                                 # curse | threat | dismiss | insult)
+    speaker_intent: context-dependent  # actual intent needs sentence context — NOT word-derivable
+    strength: medium             # high | medium  (only for threat/curse/insult)
+    origin_type: english         # english | hindi | italian | persian | russian | turkish
+                                 # (only for loanwords)
 ```
+
+**Semantic boundary (added 2026-10-13):** `lexical_tone` and `lexical_class`
+describe the WORD, not the speaker. "أبسطه = ضربه" classifies the word; it does
+NOT establish that a speaker using it intends violence (could be quotation,
+joke, report, or question). Never train on these labels as intent ground truth.
 
 ## Statistics (verified run, 2026-10-13)
 
@@ -98,12 +104,20 @@ they collide with common words; "شيطان" added to curse markers.
 ```
 dialect/
 ├── README.md                          # this file
+├── TASK_PROMPT.md                     # self-contained task spec for model comparison
+├── ontology.yaml                      # semantic concept registry (L2) — stable IDs, definitions, aliases
 ├── raw/
 │   └── bahraini_dictionary_raw.txt    # 499KB source paste (do not edit)
 ├── scripts/
 │   ├── extract_dictionary.py          # raw text → clean YAML (brace-matched JSON extraction)
-│   └── build_enriched_yaml.py         # clean YAML → enriched YAML (usage blocks)
+│   ├── build_enriched_yaml.py         # clean YAML → enriched YAML (lexical usage blocks)
+│   └── merge_and_export_json.py       # sources → unified JSON (antigravity loader ready, source absent)
 └── data/
     ├── dictionary_raw.yaml            # 948 entries, 4254 lines
-    └── dictionary_enriched.yaml       # 948 entries + usage, 7155 lines
+    ├── dictionary_enriched.yaml       # 948 entries + usage, 7155 lines
+    └── bahraini_dictionary_unified.json  # 948 entries, unified product (~325KB)
 ```
+
+Related: `../prompts/semantic_fidelity.md` — the agent system prompt built
+from this registry (interpretation protocol, priority order, clarification
+policy, evidence discipline).

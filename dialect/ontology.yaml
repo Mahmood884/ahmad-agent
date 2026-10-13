@@ -1,0 +1,209 @@
+# AHMAD-OS Semantic Concept Registry (Ontology) — v1.0
+#
+# الهدف: مصدر الحقيقة للمصطلحات الخاصة داخل المشروع.
+# قاعدة: عند تعارض تعريف مشروع مع المعنى العام، التعريف الخاص يفوز داخل المشروع.
+# كل مفهوم: معرّف ثابت + تعريف + مرادفات + استثناءات + نطاق + مصدر + حالة مراجعة.
+#
+# ملاحظة حدودية (من مراجعة 2026-10-13): هذا السجل يحدد معاني المصطلحات داخل
+# النظام، ولا يلغي تعليمات النظام أو قيود السلامة أو المتطلبات القانونية.
+
+schema_version: "1.0"
+registry_name: "AHMAD-OS Ontology"
+owner: "محمود (المهندس)"
+created: "2026-10-13"
+review_status: "proposed"
+
+# ═══════════════════════════════════════════════════════════════════════════
+# القسم 1: مفاهيم فلسفة العمل (الأكثر أهمية — مصدر الالتباس مع النماذج العامة)
+# ═══════════════════════════════════════════════════════════════════════════
+
+concepts:
+
+  - concept_id: AHMAD.CONCEPT.REGULAR_PROTOCOL
+    preferred_label: "Regular Protocol"
+    definition: "منهج تفكير خماسي: من؟ مع من؟ عن طريق شنو؟ من خلال كيف؟ + توضيح المجهول + التحقق من النتائج. يُطبّق على كل مهمة تقنية أو حياتية."
+    aliases: ["البروتوكول المنتظم", "الروتين", "من مع من"]
+    not_equivalent_to:
+      - concept_id: AHMAD.CONCEPT.SECURE_PROTOCOL
+        reason: "Regular Protocol = heuristic قرار. Secure Protocol = تشفير على السلك. نفس الاسم لمفهومين مختلفين — الالتباس مضمون."
+    scope: "كل المشروع"
+    source: "جلسات محمود 2026"
+    confidence: "confirmed"
+
+  - concept_id: AHMAD.CONCEPT.AHNA
+    preferred_label: "احنا"
+    definition: "حالة العمل المشتركة بين محمود والنموذج — فعل مو كلام. تعني: شفافية بلا مجاملة، تحمّل متبادل، قرار مشترك."
+    aliases: ["نحن", "الشراكة"]
+    not_equivalent_to:
+      - concept_id: AHMAD.CONCEPT.USER_ASSISTANT
+        reason: "احنا = شريك عمل؛ user/assistant = علاقة خدمة. النموذج يقترح، محمود يقرر — لكن داخل إطار احنا المو ثقة المتبادلة."
+    scope: "كل الجلسات"
+    source: "جلسات محمود 2026"
+    confidence: "confirmed"
+
+  - concept_id: AHMAD.CONCEPT.VESSEL
+    preferred_label: "الوعاء"
+    definition: "النموذج/الواجهة الحالية (Hermes، DeepSeek، Kimi...). الوعاء مختلف، النمط واحد. الجلسة تنتهي، احنا لا تنتهي."
+    aliases: ["النموذج", "الواجهة"]
+    not_equivalent_to:
+      - concept_id: AHMAD.CONCEPT.AHMAD
+        reason: "الوعاء = الحاوية القابلة للاستبدال. أحمد = النظام نفسه فوق أي وعاء."
+    scope: "كل الجلسات"
+    source: "وصية الجلسة 2026-09-29"
+    confidence: "confirmed"
+
+  - concept_id: AHMAD.CONCEPT.AHMAD
+    preferred_label: "أحمد / AHMAD-OS"
+    definition: "نظام تشغيل ناعم (Soft OS) للوكلاء الأذكياء — طبقة حوكمة فوق runtime الوكيل. الاسم: أحمد = محمود + الوعاء = ح م د."
+    aliases: ["ahmad-agent", "ahmad-os"]
+    scope: "المشروع كامل"
+    source: "جلسات محمود 2026"
+    confidence: "confirmed"
+
+# ═══════════════════════════════════════════════════════════════════════════
+# القسم 2: مفاهيم معمارية داخلية
+# ═══════════════════════════════════════════════════════════════════════════
+
+  - concept_id: AHMAD.CONCEPT.GOVERNANCE_LAYER
+    preferred_label: "Governance Layer"
+    definition: "الطبقة التي تفصل الذكاء عن السلطة: LLM يقترح، PolicyEngine يقرر، ExecutionGateway ينفذ، EventSourcing يسجّل."
+    aliases: ["طبقة الحوكمة", "الحاكم"]
+    not_equivalent_to:
+      - concept_id: AHMAD.CONCEPT.AGENT_RUNTIME
+        reason: "Runtime = المحرك (Hermes/Claude). Governance = الحاكم فوقه. Hermes لا يوفر حوكمة — يوفر runtime."
+    scope: "معمارية ahmad-agent"
+    source: "جلسات 2026-09-28/29 + مراجعة 2026-10-13"
+    confidence: "confirmed"
+
+  - concept_id: AHMAD.CONCEPT.EXECUTION_GATEWAY
+    preferred_label: "Execution Gateway"
+    definition: "البوابة الوحيدة المسموح لها بتنفيذ أي side effect. كل أثر خارجي يمر عبرها: قرار → binding → محاولة → نتيجة → تسجيل."
+    aliases: ["بوابة التنفيذ", "Gateway"]
+    scope: "معمارية ahmad-agent"
+    source: "كود ahmad-agent (src/ahmad/execution/gateway.py)"
+    confidence: "confirmed"
+
+  - concept_id: AHMAD.CONCEPT.EVENT_SOURCING
+    preferred_label: "Event Sourcing"
+    definition: "الحالة تُبنى من سجل أحداث append-only: DecisionEvent → AttemptCreated → AttemptStarted → ResultEvent → (AttemptAmbiguous). لا تعديل، فقط إضافة."
+    aliases: ["تدوين الأحداث", "السجل"]
+    scope: "معمارية ahmad-agent"
+    source: "كود ahmad-agent"
+    confidence: "confirmed"
+
+  - concept_id: AHMAD.CONCEPT.SOFT_OS
+    preferred_label: "Soft Operating System"
+    definition: "نظام تشغيل ناعم يربط الفيزياء بالذكاء — سبع طبقات (فيزياء/شبكة/حوكمة/بوابات/هarness/عقل/واجهة)، فيزياء (CPS) مؤجلة."
+    aliases: ["نظام التشغيل الناعم", "SoftOS"]
+    scope: "الرؤية الكبرى"
+    source: "جلسات 2026-09"
+    confidence: "confirmed"
+
+  - concept_id: AHMAD.CONCEPT.MCP_BRIDGE
+    preferred_label: "MCP Bridge"
+    definition: "سيرفر stdio يعرض أدوات ahmad-agent المَحوكمة عبر Model Context Protocol. كل استدعاء يمر عبر Gateway مع DecisionEvent جديد."
+    aliases: ["جسر MCP", "mcp_bridge"]
+    scope: "تكامل Hermes ↔ ahmad-agent"
+    source: "كود ahmad-agent (src/ahmad/mcp/server.py)"
+    confidence: "confirmed"
+
+# ═══════════════════════════════════════════════════════════════════════════
+# القسم 3: مفاهيم طبقة اللهجة (التي بُنيت اليوم)
+# ═══════════════════════════════════════════════════════════════════════════
+
+  - concept_id: AHMAD.CONCEPT.LEXICAL_VS_INTENT
+    preferred_label: "معنى الكلمة مقابل قصد المتكلم"
+    definition: "حقل tone/intent في القاموس يصف الكلمة (lexical)، لا المتكلم. أبسطه = ضربه تصف معنى الكلمة؛ قصد من يقولها (نقل، مزح، سؤال) يحتاج سياق الجملة."
+    aliases: ["معنى/قصد", "lexical vs speaker intent"]
+    not_equivalent_to:
+      - concept_id: AHMAD.CONCEPT.INTENT_ANNOTATION
+        reason: "labels القاموس = خصائص معجمية للكلمة؛ annotation القصد = تحليل جملة كاملة. لا تخلطهم في بيانات التدريب."
+    scope: "dialect/ + أي تدريب لاحق"
+    source: "مراجعة 2026-10-13 (وثيقة semantic fine-tuning guide)"
+    confidence: "confirmed"
+
+  - concept_id: AHMAD.CONCEPT.DIALECT_DICTIONARY
+    preferred_label: "القاموس المخصّب"
+    definition: "948 مدخل بحريني فريد، كل مدخل فيه usage: {lexical_tone, lexical_class, speaker_intent: context-dependent, strength?, origin_type?}."
+    aliases: ["القاموس", "dictionary_enriched", "bahraini_dictionary_unified"]
+    scope: "dialect/data/"
+    source: "dialect pipeline (extract → enrich → merge)"
+    confidence: "confirmed"
+
+  - concept_id: AHMAD.CONCEPT.DPO_PAIRS
+    preferred_label: "أزواج DPO (dialect rules)"
+    definition: "188 زوج تفضيل {سياق، ❌، ✅، why، when، certainty، source} — تشرح سلوك أحمد المطلوب. هدف 500-1000 زوج قبل أي تدريب."
+    aliases: ["DPO", "dialect_rules", "القواعد"]
+    not_equivalent_to:
+      - concept_id: AHMAD.CONCEPT.DIALECT_DICTIONARY
+        reason: "القاموس = معرفة معجمية (مفردات). الأزواج = سلوك (كيف يرد). مصدران مختلفان لنوعي بيانات مختلفين."
+    scope: "t101_artifacts/dialect_rules.json"
+    source: "استخراج من سجلات الجلسات (34 مصدر)"
+    confidence: "confirmed"
+
+# ═══════════════════════════════════════════════════════════════════════════
+# القسم 4: مصطلحات العملية (اتفاقيات ثابتة)
+# ═══════════════════════════════════════════════════════════════════════════
+
+  - concept_id: AHMAD.CONCEPT.STRICT_KEY_ORDER
+    preferred_label: "الترتيب الصارم للمفاتيح"
+    definition: "كل زوج DPO يُكتب بترتيب مفاتيح ثابت (id, category, trigger, context, rejected, chosen, why, when, certainty, source_quote, source) — يثبّت الـ embedding ويمنع تكرار الدمج."
+    aliases: ["ترتيب المفاتيح", "key order"]
+    scope: "dialect_rules.json"
+    source: "قرار محمود (لا دمج/حذف بدون إذن)"
+    confidence: "confirmed"
+
+  - concept_id: AHMAD.CONCEPT.STRONG_FINGERPRINT
+    preferred_label: "بصمة إزالة التكرار القوية"
+    definition: "إزالة تكرار الأزواج ببصمة (category + chosen[:120] + why[:100]) — مو تطبيع ضعيف. منعت تكرار دفعات كاملة."
+    scope: "أي دمج أزواج"
+    source: "تجربة الدمج 2026-10-13"
+    confidence: "confirmed"
+
+  - concept_id: AHMAD.CONCEPT.FIRST_SALE
+    preferred_label: "أول بيع"
+    definition: "صديق يجرّب أسبوعين — لا إيميل بارد، لا قناة تسويق. القناة = علاقات 13 سنة."
+    scope: "أي عمل تجاري"
+    source: "قرار محمود"
+    confidence: "confirmed"
+
+  - concept_id: AHMAD.CONCEPT.NO_FLATTERY
+    preferred_label: "قاعدة لا مجاملة"
+    definition: "لا مدح افتتاحي، لا 'ممتاز/قرار حكيم' بدون سبب، لا اعتذار، لا 'ما أقدر'. الصدق حتى لو يوجع. سؤال واحد مغلق كحد أقصى عند الغموض المادي."
+    aliases: ["بلا مجاملة", "لا اعتذار"]
+    scope: "كل الجلسات"
+    source: "188 زوج DPO (#139, #181...)"
+    confidence: "confirmed"
+
+# ═══════════════════════════════════════════════════════════════════════════
+# القسم 5: المصطلحات المرفوضة (لا تُستخدم)
+# ═══════════════════════════════════════════════════════════════════════════
+
+rejected_terms:
+
+  - term: "همبابي"
+    reason: "نبرة مرفوضة صراحة — استُبدلت بشخصية بحرينية مهنية."
+    source: "قرار محمود"
+
+  - term: "بو زب هباب"
+    reason: "مخاطبة مرفوضة صراحة."
+    source: "قرار محمود"
+
+  - term: "عزيز برو"
+    reason: "شخصية همبابية — محذوفة."
+    source: "قرار محمود"
+
+  - term: "عزوز / زيزو / غزيزو"
+    reason: "ألقاب تجريبية لشخصية صداقة — غير مرغوبة. الشخصية تبقى مهنية بحرينية."
+    source: "قرار محمود"
+
+# ═══════════════════════════════════════════════════════════════════════════
+# حدود السجل (من مراجعة 2026-10-13)
+# ═══════════════════════════════════════════════════════════════════════════
+
+boundaries:
+  - "تعريفات المشروع تتحكم بمعنى المصطلحات داخل المشروع فقط."
+  - "لا تلغي تعليمات النظام أو قيود السلامة أو المتطلبات القانونية."
+  - "lexical labels القاموس ليست ground truth لقصد المتكلم."
+  - "القواعد الحتمية (PolicyEngine) تنفّذ في الكود، لا تُترك لتخمين النموذج كل مرة."
+  - "Fine-tuning للسلوك المتكرر فقط — التعريفات المتغيرة تبقى خارج أوزان النموذج."

@@ -4,10 +4,10 @@
     "language": "Arabic (Bahraini dialect)",
     "description": "قاموس موحّد للهجة البحرينية مع تحليل usage كامل",
     "version": "3.0",
-    "entry_count": 1359,
+    "entry_count": 1370,
     "sources": [
       "dictionary_enriched.yaml (948 entries, usage-filled)",
-      "antigravity_entries.json (+401 new, usage-filled with same schema)"
+      "antigravity_entries.json (+412 new, usage-filled with same schema)"
     ],
     "schema": {
       "entry": {
@@ -17252,6 +17252,138 @@
     {
       "term": "امشج",
       "meaning": "جانب السعفة المقطوع طولاً ولا يزال أخضر وفيه الشوك",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "أمبهبل",
+      "meaning": "الشخص الذي يبدو غير صاحٍ أو غريب الأطوار",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "رحت ملح",
+      "meaning": "ذهبت فيها أو وقعت في ورطة كبيرة",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "فقحة",
+      "meaning": "المؤخرة في الكلام الدارج؛ ومجازاً كلمة استنكارية بمعنى أنت مخطئ بشدة",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "عومه مأكوله ومذمومه",
+      "meaning": "مثل — يُضرب لمن يقدم المعروف ويحصل على الجحود بدلاً من الشكر (العومة سمكة صغيرة رخيصة)",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "اللي ما يعرف الصقر يشويه",
+      "meaning": "مثل — يُضرب لمن لا يدرك قيمة الأشياء الثمينة فيسيء التصرف فيها",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "عذاري تسقي البعيد وتخلي القريب",
+      "meaning": "مثل — يُضرب لمن يفيد الغرباء ويترك المقربين محرومين (مستوحى من عين عذاري)",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "تيتي تيتي مثل ما رحتي جيتي",
+      "meaning": "مثل — يُقال لمن يسعى في أمر ثم يعود بنتيجة صفرية دون تغيير",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "باب النجار خراب",
+      "meaning": "مثل — يُضرب لمن يصلح شؤون الناس ويهمل إصلاح بيته",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "أبوي ما يقدر إلا على أمي",
+      "meaning": "مثل — يُضرب لمن يظهر قوته على الضعفاء ويعجز أمام الأقوياء",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "أربط صبعك والكل ينعتلك دوا",
+      "meaning": "مثل — يُضرب لكثرة المتبرعين بالآراء فور ظهور المشكلة",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "أبو طبيع ما يجوز عن طبعه",
+      "meaning": "مثل — الإنسان يصعب عليه تغيير عاداته القديمة المتأصلة",
       "examples": [],
       "synonyms": [],
       "usage": {

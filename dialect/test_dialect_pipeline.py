@@ -142,7 +142,7 @@ def test_ontology_has_no_dangling_refs():
 def test_schema_consistency():
     doc = json.loads(DICT.read_text(encoding="utf-8"))
     entries = doc["entries"]
-    assert doc["metadata"]["entry_count"] == len(entries) == 1359
+    assert doc["metadata"]["entry_count"] == len(entries) == 1370
     for e in entries:
         u = e.get("usage") or {}
         assert u.get("lexical_tone") in TONE_ENUM, (e["term"], u)
@@ -252,3 +252,21 @@ def test_clitic_stripped_phrase_first_token():
     assert "ثقيل طينه" in hits, hits
     # and the bare phrase still matches
     assert "ثقيل طينه" in _terms(e.enrich_context("ثقيل طينه"))
+
+
+# ── 10) proverbs + batch 3 ──────────────────────────────────────────────────
+
+def test_proverbs_match_as_phrases():
+    """أمثال شعبية متعددة الكلمات تُطابق كعبارات كاملة."""
+    e = _engine()
+    for prov in ["باب النجار خراب", "أبو طبيع ما يجوز عن طبعه", "عذاري تسقي البعيد وتخلي القريب"]:
+        assert prov in _terms(e.enrich_context(f"قالوا لي {prov}")), prov
+
+
+def test_batch3_terms_present():
+    doc = json.loads(DICT.read_text(encoding="utf-8"))
+    idx = {e["term"] for e in doc["entries"]}
+    for t in ["أمبهبل", "رحت ملح", "فقحة", "عومه مأكوله ومذمومه",
+              "اللي ما يعرف الصقر يشويه", "تيتي تيتي مثل ما رحتي جيتي",
+              "أبوي ما يقدر إلا على أمي", "أربط صبعك والكل ينعتلك دوا"]:
+        assert t in idx, t

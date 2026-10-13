@@ -44,6 +44,53 @@ def normalize_term(term: str) -> str:
     return t
 
 
+# ── Token-level matching (no raw substring matching) ──────────────────────────
+# سبب الإصلاح: `term in message` كان يطابق "لون" داخل "شلونك". المطابقة الآن
+# على مستوى الكلمة الكاملة (token) بعد التطبيع، مع حدود كلمة صريحة.
+_TOKEN_RE = re.compile(r"[\w\u064B-\u0652\u0640-]+")
+_PAREN_RE = re.compile(r"\([^)]*\)")  # "مطعم (بضم الميم)" → "مطعم"
+_AR_PREFIXES = ("وال", "بال", "كال", "فال", "ولل", "لل", "ال", "و", "ف", "ب", "ل", "ك")
+_AR_SUFFIXES = ("كم", "هم", "ها", "نا", "ني", "ات", "ون", "ين", "ك", "ه", "ي")
+_MIN_STEM_LEN = 3  # لا نقبل جذعاً أقصر من 3 حروف بعد إزالة اللواصق
+
+
+def tokenize(text: str) -> list[str]:
+    """Split text into normalized word tokens (Arabic-folded, Latin casefolded)."""
+    out: list[str] = []
+    for raw in _TOKEN_RE.findall(text):
+        tok = normalize_term(raw.strip("-_")).casefold()
+        if tok:
+            out.append(tok)
+    return out
+
+
+def _phrase_key(text: str) -> tuple[str, ...]:
+    return tuple(tokenize(_PAREN_RE.sub(" ", text)))
+
+
+def _clitic_stems(tok: str) -> list[str]:
+    """Candidate stems of an Arabic token after stripping common clitics.
+
+    Tried only when the whole token is not itself a known term. Never returns
+    the token itself, and never a stem shorter than _MIN_STEM_LEN.
+    """
+    if not tok or not ("\u0621" <= tok[0] <= "\u064A"):
+        return []
+    stems: list[str] = []
+    for pre in (*_AR_PREFIXES, ""):
+        if pre and not tok.startswith(pre):
+            continue
+        for suf in (*_AR_SUFFIXES, ""):
+            if suf and not tok.endswith(suf):
+                continue
+            if not pre and not suf:
+                continue
+            stem = tok[len(pre) : len(tok) - len(suf)]
+            if len(stem) >= _MIN_STEM_LEN and stem not in stems:
+                stems.append(stem)
+    return stems
+
+
 class DialectEngine:
     """Runtime access layer for the dialect dictionary + ontology."""
 
@@ -62,6 +109,11 @@ class DialectEngine:
         self._concepts: dict[str, dict] = {}
         self._alias_index: dict[str, dict] = {}
         self._rejected: set[str] = set()
+        # token-tuple indexes used by enrich_context (word-boundary matching)
+        self._term_phrases: dict[tuple[str, ...], dict] = {}
+        self._label_phrases: dict[tuple[str, ...], dict] = {}
+        self._term_lengths: list[int] = []
+        self._label_lengths: list[int] = []
 
         self._load()
 
@@ -81,6 +133,9 @@ class DialectEngine:
             self._norm_index[normalize_term(term)] = e
             for syn in e.get("synonyms") or []:
                 self._synonym_index.setdefault(syn, e)
+            key = _phrase_key(term)
+            if key:
+                self._term_phrases.setdefault(key, e)
 
         onto = yaml.safe_load(self._onto_path.read_text(encoding="utf-8"))
         for c in onto.get("concepts", []):
@@ -89,8 +144,14 @@ class DialectEngine:
                 self._concepts[cid] = c
             for alias in c.get("aliases") or []:
                 self._alias_index[normalize_term(alias)] = c
+            label_key = _phrase_key(c.get("preferred_label", ""))
+            if label_key:
+                self._label_phrases.setdefault(label_key, c)
         for r in onto.get("rejected_terms", []):
             self._rejected.add(r.get("term", ""))
+
+        self._term_lengths = sorted({len(k) for k in self._term_phrases}, reverse=True)
+        self._label_lengths = sorted({len(k) for k in self._label_phrases}, reverse=True)
 
     # ── Dictionary lookups ────────────────────────────────────────────────────
     def lookup(self, term: str) -> dict | None:
@@ -123,41 +184,81 @@ class DialectEngine:
         return word in self._rejected
 
     # ── Context injection ─────────────────────────────────────────────────────
+    @staticmethod
+    def _scan(
+        tokens: list[str],
+        index: dict[tuple[str, ...], dict],
+        lengths: list[int],
+        allow_clitics: bool,
+    ) -> list[dict]:
+        """Whole-word matches in message order; longest phrase first.
+
+        Exact token match always wins. Clitic-stripped stems are tried only
+        when the token itself is not a known term.
+        """
+        hits: list[dict] = []
+        i, n_tok = 0, len(tokens)
+        while i < n_tok:
+            matched: tuple[dict, int] | None = None
+            for n in lengths:
+                if i + n <= n_tok:
+                    hit = index.get(tuple(tokens[i : i + n]))
+                    if hit is not None:
+                        matched = (hit, n)
+                        break
+            if matched is None and allow_clitics:
+                for stem in _clitic_stems(tokens[i]):
+                    hit = index.get((stem,))
+                    if hit is not None:
+                        matched = (hit, 1)
+                        break
+            if matched is None:
+                i += 1
+            else:
+                hits.append(matched[0])
+                i += matched[1]
+        return hits
+
     def enrich_context(self, user_message: str, max_terms: int = 5) -> str:
         """Build a context block for the system prompt from a user message.
 
-        Scans the message for known dialect terms AND project-concept
-        aliases. Returns an Arabic block describing what was found —
-        lexical info only (never speaker intent, which stays
+        Scans the message for known dialect terms AND project concepts using
+        whole-word (token) matching — never raw substring matching, so
+        "شلونك" does not match "لون". Returns an Arabic block describing what
+        was found — lexical info only (never speaker intent, which stays
         context-dependent).
         """
         found: list[str] = []
         seen: set[str] = set()
+        tokens = tokenize(user_message)
 
         # dialect terms
-        for term, entry in self._entries.items():
+        for entry in self._scan(tokens, self._term_phrases, self._term_lengths, True):
             if len(found) >= max_terms:
                 break
-            if term in user_message and term not in seen:
-                u = entry.get("usage", {})
-                found.append(
-                    f"- [{term}] {entry.get('meaning','')} "
-                    f"(نبرة الكلمة: {u.get('lexical_tone','?')}، "
-                    f"نوعها: {u.get('lexical_class','?')})"
-                )
-                seen.add(term)
+            term = entry.get("term", "")
+            if term in seen:
+                continue
+            u = entry.get("usage", {})
+            found.append(
+                f"- [{term}] {entry.get('meaning','')} "
+                f"(نبرة الكلمة: {u.get('lexical_tone','?')}، "
+                f"نوعها: {u.get('lexical_class','?')})"
+            )
+            seen.add(term)
 
-        # project concept aliases
-        for alias_norm, concept in self._alias_index.items():
+        # project concepts (matched by preferred_label, as before)
+        for concept in self._scan(tokens, self._label_phrases, self._label_lengths, False):
             if len(found) >= max_terms:
                 break
             label = concept.get("preferred_label", "")
-            if label in user_message and label not in seen:
-                found.append(
-                    f"- [{concept.get('concept_id','')}] "
-                    f"{label}: {concept.get('definition','')[:80]}"
-                )
-                seen.add(label)
+            if label in seen:
+                continue
+            found.append(
+                f"- [{concept.get('concept_id','')}] "
+                f"{label}: {concept.get('definition','')[:80]}"
+            )
+            seen.add(label)
 
         if not found:
             return ""

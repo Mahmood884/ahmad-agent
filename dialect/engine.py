@@ -206,7 +206,9 @@ class DialectEngine:
         """Whole-word matches in message order; longest phrase first.
 
         Exact token match always wins. Clitic-stripped stems are tried only
-        when the token itself is not a known term.
+        when the token itself is not a known term. For phrases (n>1), the
+        clitic-stripped FIRST token is also tried: "وثقيل طينه" matches the
+        phrase ("ثقيل", "طينه") because وثقيل → و + ثقيل.
         """
         hits: list[dict] = []
         i, n_tok = 0, len(tokens)
@@ -214,10 +216,21 @@ class DialectEngine:
             matched: tuple[dict, int] | None = None
             for n in lengths:
                 if i + n <= n_tok:
+                    # exact phrase first
                     hit = index.get(tuple(tokens[i : i + n]))
                     if hit is not None:
                         matched = (hit, n)
                         break
+                    # then: clitic-strip the FIRST token of the phrase
+                    if allow_clitics and n > 1:
+                        for stem in _clitic_stems(tokens[i]):
+                            key = (stem,) + tuple(tokens[i + 1 : i + n])
+                            hit = index.get(key)
+                            if hit is not None:
+                                matched = (hit, n)
+                                break
+                        if matched is not None:
+                            break
             if matched is None and allow_clitics:
                 for stem in _clitic_stems(tokens[i]):
                     hit = index.get((stem,))

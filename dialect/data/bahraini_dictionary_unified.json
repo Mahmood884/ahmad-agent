@@ -4,10 +4,10 @@
     "language": "Arabic (Bahraini dialect)",
     "description": "قاموس موحّد للهجة البحرينية مع تحليل usage كامل",
     "version": "3.0",
-    "entry_count": 1335,
+    "entry_count": 1359,
     "sources": [
       "dictionary_enriched.yaml (948 entries, usage-filled)",
-      "antigravity_entries.json (+377 new, usage-filled with same schema)"
+      "antigravity_entries.json (+401 new, usage-filled with same schema)"
     ],
     "schema": {
       "entry": {
@@ -16963,6 +16963,295 @@
     {
       "term": "يتهردق",
       "meaning": "يتهدم — يقال: تهردقت البناية",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "الحوطة",
+      "meaning": "المزرعة التي فيها قعدة يقعدون فيها",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "الدوبي",
+      "meaning": "الكواي",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "الكاري كرندنه",
+      "meaning": "راحت عليّ — تعني القاري قرى عندنا",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "الهوا شقاقي",
+      "meaning": "إذا زاد جنون الواحد يقولون شكله الهواء شقاقي",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "براطم",
+      "meaning": "شفايف",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "بربرووو",
+      "meaning": "واحد ما يفهم",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "تنكه",
+      "meaning": "واحد ما يفهم — بمعنى غشيم",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "ثقيل طينه",
+      "meaning": "صفة تطلق على ثقيل الدم الذي لا يتقبله الناس",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "خووووز",
+      "meaning": "تباعد",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "رنك",
+      "meaning": "مثل",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "زبدوه",
+      "meaning": "سكتوه — صكوا عليه",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "سيكل",
+      "meaning": "دراجة",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "صمايل",
+      "meaning": "تذكرت",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "طمبل",
+      "meaning": "غشيم",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "غيابوه",
+      "meaning": "الخشيشة",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "فرصخ",
+      "meaning": "طلع روحه",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "لا تصبغني",
+      "meaning": "صفة تطلق على الشخص الكثير المجاملات الذي يتودد ليحصل على هدفه",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "مزكرت",
+      "meaning": "متعدل",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "ملغلغ",
+      "meaning": "مشحون ماي",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "مهتوّل",
+      "meaning": "مهتول في الشوارع",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "نفر",
+      "meaning": "واحد أو شخص واحد",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "وكيح",
+      "meaning": "شيطان",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "curse",
+        "speaker_intent": "context-dependent",
+        "strength": "medium"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "ويع",
+      "meaning": "كل شيء قبيح أو قذر تشمئز له النفس",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية"
+    },
+    {
+      "term": "امشج",
+      "meaning": "جانب السعفة المقطوع طولاً ولا يزال أخضر وفيه الشوك",
       "examples": [],
       "synonyms": [],
       "usage": {

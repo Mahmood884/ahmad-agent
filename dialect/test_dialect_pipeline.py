@@ -142,7 +142,7 @@ def test_ontology_has_no_dangling_refs():
 def test_schema_consistency():
     doc = json.loads(DICT.read_text(encoding="utf-8"))
     entries = doc["entries"]
-    assert doc["metadata"]["entry_count"] == len(entries) == 1335
+    assert doc["metadata"]["entry_count"] == len(entries) == 1359
     for e in entries:
         u = e.get("usage") or {}
         assert u.get("lexical_tone") in TONE_ENUM, (e["term"], u)
@@ -241,3 +241,14 @@ def test_warmth_ontology_concept_exists():
     onto = yaml.safe_load(ONTO.read_text(encoding="utf-8"))
     ids = {c["concept_id"] for c in onto["concepts"]}
     assert "AHMAD.CONCEPT.GREETING_WARMTH" in ids
+
+
+# ── 9) clitic-stripped first token of a phrase (وثقيل طينه) ──────────────────
+
+def test_clitic_stripped_phrase_first_token():
+    """وثقيل طينه must match the phrase (ثقيل، طينه) — و is a clitic."""
+    e = _engine()
+    hits = _terms(e.enrich_context("هذا طمبل ما يفهم وثقيل طينه"))
+    assert "ثقيل طينه" in hits, hits
+    # and the bare phrase still matches
+    assert "ثقيل طينه" in _terms(e.enrich_context("ثقيل طينه"))

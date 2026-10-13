@@ -33,9 +33,9 @@ raw/bahraini_dictionary_raw.txt   (499KB — FOUR sources, see below)
         │            data/greeting_warmth_curated.yaml  (11 entries — HIGHEST precedence)
         │
         └─ source 4: WhatsApp-group corpus "قاموس أهل البحرين" (2026-10-13)
-                     data/whatsapp_corpus_curated.yaml    (32 new entries, usage auto-filled)
+                     data/whatsapp_corpus_curated.yaml    (57 entries from 3 batches, +51 net-new)
                                     ▼
-        data/bahraini_dictionary_unified.json  (1335 = 948 + 351 + 11 + 26 net-new)
+        data/bahraini_dictionary_unified.json  (1359 = 948 + 351 + 11 + 51 net-new)
 ```
 
 Run all steps:
@@ -99,8 +99,11 @@ or question). Never train on these labels as intent ground truth.
 - **Primary source:** 948 unique entries from 1,896 occurrences (2 identical copies)
 - **Secondary source (antigravity):** 835 entries → **+351 new**
 - **Curated warmth scale (user):** 11 entries (1 overrides primary `هلا`)
-- **WhatsApp corpus:** 263 pairs parsed → 231 already covered (87% coverage — verified) → **+26 net-new** (32 written, 6 already present)
-- **Unified total:** **1335 entries** · **0 null fields** (sparse fields omitted, not null)
+- **WhatsApp corpus (3 batches):** ~700 pairs parsed → ~640 already covered → **+51 net-new** (57 written)
+- Batch 1: 263 pairs → 87% coverage → +26 net-new
+- Batch 2 (مصطلحات بحرانية): 25 net-new (طمبل، تنكه، ثقيل طينه، صمايل، لوفري...)
+- Batch 3 (forum comments): pure noise — 0 terms extracted (filtered)
+- **Unified total:** **1359 entries** · **0 null fields** (sparse fields omitted, not null)
 - Field coverage: term 1335, meaning 1335, examples (source-carried), synonyms (source-carried),
   dialect_region 11, origin 55, notes 5
 - Usage distribution:
@@ -215,8 +218,8 @@ dialect/
     ├── dictionary_enriched.yaml       # 948 entries + usage, 7155 lines
     ├── antigravity_entries.json       # 835 secondary-source entries (351 new merged in)
     ├── greeting_warmth_curated.yaml   # 11 curated warmth-scale entries (user — HIGHEST precedence)
-    ├── whatsapp_corpus_curated.yaml   # 32 entries from the WhatsApp corpus (+26 net-new)
-    └── bahraini_dictionary_unified.json  # 1335 entries, unified product
+    ├── whatsapp_corpus_curated.yaml   # 57 entries from 3 WhatsApp batches (+51 net-new)
+    └── bahraini_dictionary_unified.json  # 1359 entries, unified product
 ```
 
 Related: `../prompts/semantic_fidelity.md` — the agent system prompt built

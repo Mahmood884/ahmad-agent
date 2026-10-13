@@ -107,6 +107,50 @@ concepts:
     source: "كود ahmad-agent (src/ahmad/mcp/server.py)"
     confidence: "confirmed"
 
+  - concept_id: AHMAD.CONCEPT.AGENT_RUNTIME
+    preferred_label: "Agent Runtime"
+    definition: "المحرك القابل للاستبدال الذي يشغّل الوكيل: Hermes (primary)، Claude Code، Codex، أو Ollama محلي. ahmad-agent تتعامل معه كـ runtime فوق طبقة الحوكمة — لا كأساس."
+    aliases: ["runtime", "المحرك"]
+    not_equivalent_to:
+      - concept_id: AHMAD.CONCEPT.GOVERNANCE_LAYER
+        reason: "Runtime ينفّذ داخل الجلسة؛ Governance يقرر ما يُسمح بتنفيذه. Runtime قابل للتبديل، الحوكمة ثابتة."
+    scope: "معمارية ahmad-agent"
+    source: "قرار معماري 2026-09-29 (Runtime قابل للاستبدال)"
+    confidence: "confirmed"
+
+  - concept_id: AHMAD.CONCEPT.SECURE_PROTOCOL
+    preferred_label: "Secure Protocol"
+    definition: "طبقة التشفير/التوقيع على السلك بين العقد (كانت HMAC + secret — فيها ثغرة معروفة، والتوصية Tailscale + REST + JWT بدلاً منها)."
+    aliases: ["بروتوكول التأمين"]
+    not_equivalent_to:
+      - concept_id: AHMAD.CONCEPT.REGULAR_PROTOCOL
+        reason: "Regular Protocol = منهج تفكير من 5 أسئلة. Secure Protocol = تشفير على الشبكة. نفس كلمة 'protocol' لمفهومين مختلفين تماماً."
+    scope: "طبقة Federation (مؤجلة)"
+    source: "مراجعة أمنية 2026-09"
+    confidence: "inferred"
+
+  - concept_id: AHMAD.CONCEPT.INTENT_ANNOTATION
+    preferred_label: "Intent Annotation"
+    definition: "تعليق توضيحي على جملة كاملة يحدد قصد المتكلم فيها — مختلف عن lexical_class الذي يصف الكلمة معزولة. القاموس الحالي لا ينتج intent annotations؛ ينتج خصائص معجمية فقط."
+    aliases: ["تعليق القصد", "speech act annotation"]
+    not_equivalent_to:
+      - concept_id: AHMAD.CONCEPT.LEXICAL_VS_INTENT
+        reason: "lexical_class = خاصية للكلمة في القاموس. Intent annotation = تحليل جملة في سياق. الثاني يحتاج بيانات من نوع UtteranceExample، غير موجودة بعد."
+    scope: "بيانات التدريب المستقبلية (L3)"
+    source: "مراجعة 2026-10-13 (وثيقة semantic fine-tuning guide)"
+    confidence: "confirmed"
+
+  - concept_id: AHMAD.CONCEPT.USER_ASSISTANT
+    preferred_label: "علاقة User/Assistant"
+    definition: "النموذج الافتراضي للتعامل: مستخدم يطلب، مساعد ينفذ. احنا تتجاوزه: شفافية بلا مجاملة، قرار مشترك، وتحمّل متبادل — بس تبقى قاعدة القرار النهائي لمحمود (AI يقترح، الإنسان يقرر)."
+    aliases: ["علاقة الخدمة", "المستخدم والمساعد"]
+    not_equivalent_to:
+      - concept_id: AHMAD.CONCEPT.AHNA
+        reason: "user/assistant = علاقة خدمة رسمية. احنا = شراكة عمل بثقة. الفرق الجوهري: في احنا النموذج يصحّح رأي محمود ويقول لا وقت اللزوم."
+    scope: "كل الجلسات"
+    source: "188 زوج DPO + وصية الجلسة"
+    confidence: "confirmed"
+
 # ═══════════════════════════════════════════════════════════════════════════
 # القسم 3: مفاهيم طبقة اللهجة (التي بُنيت اليوم)
 # ═══════════════════════════════════════════════════════════════════════════

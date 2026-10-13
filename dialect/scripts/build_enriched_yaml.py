@@ -56,8 +56,10 @@ AGGRESSIVE_MEANING_KEYWORDS = [
 ]
 
 DISMISS_INTENT_KEYWORDS = [
-    "اذهب", "انه", "اسكت", "كف", "روحي", "اخرج", "جه", "نهي",
+    "اذهب", "انه", "اسكت", "روحي", "اخرج", "جه", "نهي",
     "ارحل", "اطرد", "رفض", "امتنع",
+    # "كف" removed 2026-10-13: it false-matched "كف راشدي" (slap on the neck)
+    # and "حناية غمسة" (كف اليد = palm of hand) — physical nouns, not dismissal.
 ]
 
 INSULT_INTENT_KEYWORDS = [
@@ -67,13 +69,24 @@ INSULT_INTENT_KEYWORDS = [
 ]
 
 THREAT_INTENT_KEYWORDS = [
-    "ضرب", "كسر", "سحق", "أبلك", "خرّب", "احترق", "طيح", "سقط",
+    "ضرب", "كسر", "سحق", "أبلك", "خرّب", "احترق",
     "خيف", "يخوف", "يرعب", "رعب", "أرعب", "تهديد",
+    # "طيح"/"سقط" removed 2026-10-13: they false-matched literal falling —
+    # "أنشدخ: سقط من مكانه الطبيعي", "صفرة: إغماء (سقط مغشياً)" — physical
+    # events, not threats. A threat needs an aggressive verb (ضرب/كسر/سحق)
+    # or fear markers.
 ]
 
 POSITIVE_TONE_KEYWORDS = [
-    "ذكي", "ذكى", "جميل", "حلو", "طيب", "حسن", "أحسن", "شكر", "حمد",
-    "ممتاز", "رائع", "كريم", "وفي", "صادق", "أمين",
+    "ذكي", "ذكى", "جميل", "طيب", "حسن", "أحسن", "حمد",
+    "ممتاز", "رائع", "وفي", "صادق", "أمين",
+    # "شكر" removed 2026-10-13: it false-matched "سكر" (sugar) in "سكر (تحلية)"
+    # — the sugar word is written with sin, not sheen, but the check text
+    # includes the meaning field. "حلو" removed: it false-matched "ماء حلو"
+    # (sweet water) — taste descriptions, not praise. "كريم" removed: it
+    # false-matched "عسكريم" (ice cream, "آيس كريم" in the meaning) — the
+    # cream noun is not the generous adjective. Keep praise detection to
+    # words that are praise in the term itself or clear praise contexts.
 ]
 
 NEGATIVE_TONE_KEYWORDS = [
@@ -100,8 +113,10 @@ CURSE_INTENT_KEYWORDS = [
 
 LOANWORD_PATTERNS = [
     (r"^أجست$", "English"),    # Adjust
-    (r"^آيدين$", "English"),   # Iodine
-    (r"^آيسي$", "English"),    # Aircon
+    (r"^آيدين$", "English"),   # Iodine — NOTE: dead in current data (term is written أيدين with plain alef)
+    (r"^أيدين$", "English"),   # Iodine (plain alef — the live form)
+    (r"^أيسي$", "English"),    # Aircon (plain alef — the live form; آيسي kept for other corpora)
+    (r"^آيسي$", "English"),    # Aircon (madda form)
     (r"^بست$", "English"),     # Bus
     (r"^بستوك$", "English"),   # Biscuit
     (r"^بوم$", "English"),     # Boom
@@ -116,7 +131,7 @@ LOANWORD_PATTERNS = [
     (r"^كاتشب$", "English"),   # Ketchup
     (r"^كيبل$", "English"),    # Cable
     (r"^كونديشن$", "English"), # Conditioner
-    (r"^كنديشن$", "English"),  # Conditioner (variant)
+    (r"^كنديشن$", "English"),  # Conditioner (variant — the live form)
     (r"^موتر$", "English"),    # Motor
     (r"^مانج$", "English"),
     (r"^روتي$", "Hindi"),
@@ -147,7 +162,6 @@ LOANWORD_PATTERNS = [
     (r"^ميكرو$", "English"),
     (r"^يوتي$", "English"),
     (r"^بيز$", "English"),
-    (r"^فن$", "English"),
     (r"^فنيلة$", "English"),
 ]
 
@@ -177,8 +191,10 @@ def detect_intent(term: str, meaning: str) -> str:
     if any(kw_in(k, text) for k in GREETING_INTENT_KEYWORDS):
         return "greeting"
 
-    if any(kw_in(k, text) for k in ["ذكي", "جميل", "حلو", "طيب", "حسن", "أحسن", "ممتاز", "رائع"]):
+    if any(kw_in(k, text) for k in ["ذكي", "جميل", "طيب", "حسن", "أحسن", "ممتاز", "رائع"]):
         return "praise"
+    # "حلو" removed from this list too 2026-10-13: taste descriptions
+    # ("ماء حلو", "ماي بيلر") are not praise.
 
     if any(kw_in(k, text) for k in CURSE_INTENT_KEYWORDS):
         return "curse"
@@ -206,11 +222,35 @@ def detect_strength(term: str, meaning: str, intent: str) -> str | None:
     return None
 
 
-def detect_origin_type(term: str) -> str | None:
-    """Detect if word is a loanword and return language or None."""
+def detect_origin_type(term: str, entry: dict | None = None) -> str | None:
+    """Detect if word is a loanword and return language or None.
+
+    Two-step (fixed 2026-10-13 after review):
+      1. Pattern match on the term itself.
+      2. FALLBACK: parse the raw `origin` field from the source dictionary
+         (e.g. "الروسية - Ctakanh" → russian). The source carries this field
+         for 55 entries; pattern-only matching recovered 29. The fallback
+         recovers the rest without inventing anything — it reads what the
+         source itself says.
+    """
     for pattern, lang in LOANWORD_PATTERNS:
         if re.search(pattern, term, re.IGNORECASE):
             return lang.lower()
+
+    if entry:
+        raw_origin = entry.get("origin") or ""
+        lang_map = [
+            ("الإنجليزية", "english"), ("الانجليزي", "english"),
+            ("الفارسية", "persian"), ("الفارسي", "persian"),
+            ("الهندية", "hindi"), ("الهندي", "hindi"),
+            ("التركية", "turkish"), ("التركي", "turkish"),
+            ("الروسية", "russian"), ("الروسي", "russian"),
+            ("الإيطالية", "italian"), ("الايطالية", "italian"),
+            ("الفرنسية", "french"),
+        ]
+        for marker, lang in lang_map:
+            if marker in raw_origin:
+                return lang
     return None
 
 
@@ -230,7 +270,7 @@ def enrich_entry(entry: dict) -> dict:
     intent = detect_intent(term, meaning)
     tone = detect_tone(term, meaning, intent)
     strength = detect_strength(term, meaning, intent)
-    origin_type = detect_origin_type(term)
+    origin_type = detect_origin_type(term, entry)
 
     usage = {
         "lexical_tone": tone,          # how the WORD sounds (positive/negative/neutral/aggressive)

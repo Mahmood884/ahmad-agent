@@ -55,48 +55,72 @@ describe the WORD, not the speaker. "أبسطه = ضربه" classifies the word;
 NOT establish that a speaker using it intends violence (could be quotation,
 joke, report, or question). Never train on these labels as intent ground truth.
 
-## Statistics (verified run, 2026-10-13)
+## Statistics (verified run, 2026-10-13, post-review fixes)
 
 - **948 unique entries** extracted from 1,896 occurrences (the raw file contains 2 identical copies)
 - Field coverage: term 948, meaning 948, examples 948, synonyms 948, dialect_region 11, origin 55, notes 5
-- Usage distribution after fixes:
-  - tone: neutral 916 / negative 18 / aggressive 7 / positive 7
-  - intent: describe 902 / insult 18 / dismiss 7 / threat 5 / curse 5 / praise 5 / question 5 / greeting 1
-  - origin_type (detected): 30 loanwords — english 21, persian 3, hindi 3, italian 2, turkish 1
+- Usage distribution after all fixes:
+  - lexical_tone: neutral 919 / negative 18 / aggressive 7 / positive 4
+  - lexical_class: describe 908 / insult 18 / dismiss 5 / curse 5 / praise 4 / question 5 / threat 2 / greeting 1
+  - origin_type (with source-field fallback): english 44, hindi 5, persian 4, french 2, italian 2, turkish 2, russian 1 = **60 total** (was 29 pattern-only)
 
-## Known fixes applied (2026-10-13)
+## Runtime access — dialect/engine.py
 
-The staged `scripts/build_enriched_yaml.py` in `ahmad-agent/scripts/` used
-plain substring matching (`k in text`), which produced mechanical false
-positives on Arabic words that *contain* a keyword:
+The review gap (no loader connecting the artifacts to the inference path) is
+closed by `engine.py`:
 
-| Entry | Meaning | Was (staged) | Now (fixed) |
-|---|---|---|---|
-| بلبله | حنفية الماء (faucet) | insult ("بله" inside "بلبله") | describe |
-| جابله | بكره/غداً (tomorrow) | insult ("بله" inside "جابله") | describe |
-| أيسي | مكيف الهواء (aircon) | question ("كيف" inside "مكيف") | describe |
-| مهلهل / منهل / هليلج | various | question ("هل" substring) | describe |
-| أدنات | يوم للوعيد والتهديد | greeting ("عيد" inside "للوعيد") | describe |
-| صيري | سلم خشب (ladder) | greeting ("سلم") | describe |
-| ونقه | أوصله بعيداً | greeting ("عيد" inside "بعيداً") | describe |
+```python
+from dialect.engine import DialectEngine
+engine = DialectEngine()                      # loads unified JSON + ontology
+engine.lookup("أبشار")                        # → entry (normalized fallback)
+engine.concept("AHMAD.CONCEPT.GOVERNANCE_LAYER")  # → concept record
+engine.enrich_context("عطني أبشار شخبارك")     # → Arabic context block for the prompt
+engine.stats()                                # → counts + distributions
+```
 
-Fix: all keyword matching now goes through `kw_in()` — Arabic word-boundary
-regex `(?<![\u0621-\u064A])kw(?![\u0621-\u064A])`. Ambiguous keywords
-("أهل", "سلم", "عيد", "وعيد", "هل", "كيف") were removed from lists where
-they collide with common words; "شيطان" added to curse markers.
+Engine capabilities: exact + normalized + synonym lookup · concept resolution
+by ID and by alias · rejected-terms guard · context-block injection ·
+per-word lexical annotation. Smoke test: `python3 engine.py "<message>"`.
 
-## Known limitations (honest)
+## Known fixes applied (2026-10-13, post-review)
 
-1. **Keyword rules ≠ semantics.** `describe` covers 902/948 entries because
+**Review round 1 (word-boundary):** plain substring matching (`k in text`)
+produced mechanical false positives on Arabic words that *contain* a keyword:
+`بلبله` (faucet) = insult, `جابله` (tomorrow) = insult, `أيسي` (aircon) =
+question, `أدنات` (day of threat) = greeting. Fix: Arabic word-boundary regex
+`(?<![\u0621-\u064A])kw(?![\u0621-\u064A])` + removal of ambiguous keywords
+("أهل", "سلم", "عيد", "وعيد", "هل", "كيف").
+
+**Review round 2 (2026-10-13):**
+
+1. `origin_type` now falls back to the source's own `origin` field (e.g.
+   "الروسية - Ctakanh" → russian) when no pattern matches — 55 entries carry
+   the field; pattern-only recovered 29, fallback recovers 60 total.
+2. Loanword patterns fixed: dead madda-form patterns (آيسي/آيدين) now have
+   plain-alef twins (أيسي/أيدين — the live forms); dead duplicates removed.
+3. Ontology dangling refs resolved: AGENT_RUNTIME, SECURE_PROTOCOL,
+   INTENT_ANNOTATION, USER_ASSISTANT are now defined concepts (20 total).
+4. `semantic_fidelity.md` §9 now marks each planned file explicitly as
+   موجود / غير موجود بعد (مخطط) — no hallucination bait.
+5. Remaining keyword errors fixed: "شكر" (matched sugar سكر), "كريم" (matched
+   ice cream عسكريم), "حلو" (matched sweet water ماي بيلر), "كف" (matched
+   palm كف اليد / slap كف راشدي), "سقط"/"طيح" (matched literal falling
+   أنشدخ/صفرة). All 8 verified clean.
+
+**Known limitations (still honest):**
+
+1. **Keyword rules ≠ semantics.** `describe` covers 908/948 entries because
    most dictionary entries are nouns/objects with no emotive markers. This is
    correct behavior — not every word carries tone. But the *boundaries* are
-   keyword-derived, not model-derived. A 1B local model or the 180 DPO pairs
+   keyword-derived, not model-derived. A 1B local model or the 188 DPO pairs
    should review edge cases before this feeds training.
 2. **`strength` only fires for threat/curse/insult.** Descriptive weakness
    ("ضعيف البنية بسبب مرض") stays `describe`, not `insult` — by design.
-3. **`dialect_region` (11) and `origin` (55) fields are sparse** in the source
+3. **`speaker_intent` is always "context-dependent"** — the dictionary
+   deliberately does not claim to know what a speaker means.
+4. **`dialect_region` (11) and `origin` (55) fields are sparse** in the source
    itself, not lost in extraction.
-4. **The 2 duplicate copies in the raw file are identical** (948 unique terms
+5. **The 2 duplicate copies in the raw file are identical** (948 unique terms
    both times) — extraction dedupes by first occurrence.
 
 ## Files

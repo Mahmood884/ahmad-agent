@@ -156,7 +156,8 @@
       "usage": {
         "lexical_tone": "neutral",
         "lexical_class": "describe",
-        "speaker_intent": "context-dependent"
+        "speaker_intent": "context-dependent",
+        "origin_type": "russian"
       },
       "category": "عامية بحرينية"
     },
@@ -378,7 +379,8 @@
       "usage": {
         "lexical_tone": "neutral",
         "lexical_class": "describe",
-        "speaker_intent": "context-dependent"
+        "speaker_intent": "context-dependent",
+        "origin_type": "hindi"
       },
       "category": "عامية بحرينية"
     },
@@ -712,7 +714,8 @@
       "usage": {
         "lexical_tone": "neutral",
         "lexical_class": "describe",
-        "speaker_intent": "context-dependent"
+        "speaker_intent": "context-dependent",
+        "origin_type": "english"
       },
       "category": "عامية بحرينية"
     },
@@ -795,9 +798,8 @@
       "notes": null,
       "usage": {
         "lexical_tone": "neutral",
-        "lexical_class": "threat",
-        "speaker_intent": "context-dependent",
-        "strength": "medium"
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
       },
       "category": "عامية بحرينية"
     },
@@ -864,7 +866,8 @@
       "usage": {
         "lexical_tone": "neutral",
         "lexical_class": "describe",
-        "speaker_intent": "context-dependent"
+        "speaker_intent": "context-dependent",
+        "origin_type": "persian"
       },
       "category": "عامية بحرينية"
     },
@@ -894,7 +897,8 @@
       "usage": {
         "lexical_tone": "neutral",
         "lexical_class": "describe",
-        "speaker_intent": "context-dependent"
+        "speaker_intent": "context-dependent",
+        "origin_type": "english"
       },
       "category": "عامية بحرينية"
     },
@@ -911,7 +915,8 @@
       "usage": {
         "lexical_tone": "neutral",
         "lexical_class": "describe",
-        "speaker_intent": "context-dependent"
+        "speaker_intent": "context-dependent",
+        "origin_type": "english"
       },
       "category": "عامية بحرينية"
     },
@@ -1302,7 +1307,8 @@
       "usage": {
         "lexical_tone": "neutral",
         "lexical_class": "describe",
-        "speaker_intent": "context-dependent"
+        "speaker_intent": "context-dependent",
+        "origin_type": "english"
       },
       "category": "عامية بحرينية"
     },
@@ -1712,7 +1718,8 @@
       "usage": {
         "lexical_tone": "neutral",
         "lexical_class": "describe",
-        "speaker_intent": "context-dependent"
+        "speaker_intent": "context-dependent",
+        "origin_type": "english"
       },
       "category": "عامية بحرينية"
     },
@@ -2058,7 +2065,8 @@
       "usage": {
         "lexical_tone": "neutral",
         "lexical_class": "describe",
-        "speaker_intent": "context-dependent"
+        "speaker_intent": "context-dependent",
+        "origin_type": "english"
       },
       "category": "عامية بحرينية"
     },
@@ -2073,7 +2081,8 @@
       "usage": {
         "lexical_tone": "neutral",
         "lexical_class": "describe",
-        "speaker_intent": "context-dependent"
+        "speaker_intent": "context-dependent",
+        "origin_type": "english"
       },
       "category": "عامية بحرينية"
     },
@@ -2231,7 +2240,8 @@
       "usage": {
         "lexical_tone": "neutral",
         "lexical_class": "describe",
-        "speaker_intent": "context-dependent"
+        "speaker_intent": "context-dependent",
+        "origin_type": "english"
       },
       "category": "عامية بحرينية"
     },
@@ -2246,7 +2256,8 @@
       "usage": {
         "lexical_tone": "neutral",
         "lexical_class": "describe",
-        "speaker_intent": "context-dependent"
+        "speaker_intent": "context-dependent",
+        "origin_type": "english"
       },
       "category": "عامية بحرينية"
     },
@@ -2297,7 +2308,8 @@
       "usage": {
         "lexical_tone": "neutral",
         "lexical_class": "describe",
-        "speaker_intent": "context-dependent"
+        "speaker_intent": "context-dependent",
+        "origin_type": "english"
       },
       "category": "عامية بحرينية"
     },
@@ -2315,7 +2327,8 @@
       "usage": {
         "lexical_tone": "neutral",
         "lexical_class": "dismiss",
-        "speaker_intent": "context-dependent"
+        "speaker_intent": "context-dependent",
+        "origin_type": "hindi"
       },
       "category": "عامية بحرينية"
     },
@@ -2749,7 +2762,8 @@
       "usage": {
         "lexical_tone": "neutral",
         "lexical_class": "describe",
-        "speaker_intent": "context-dependent"
+        "speaker_intent": "context-dependent",
+        "origin_type": "english"
       },
       "category": "عامية بحرينية"
     },
@@ -2778,7 +2792,7 @@
       "notes": null,
       "usage": {
         "lexical_tone": "neutral",
-        "lexical_class": "dismiss",
+        "lexical_class": "describe",
         "speaker_intent": "context-dependent"
       },
       "category": "عامية بحرينية"
@@ -3117,7 +3131,8 @@
       "usage": {
         "lexical_tone": "neutral",
         "lexical_class": "describe",
-        "speaker_intent": "context-dependent"
+        "speaker_intent": "context-dependent",
+        "origin_type": "turkish"
       },
       "category": "عامية بحرينية"
     },
@@ -3374,7 +3389,8 @@
       "usage": {
         "lexical_tone": "neutral",
         "lexical_class": "describe",
-        "speaker_intent": "context-dependent"
+        "speaker_intent": "context-dependent",
+        "origin_type": "english"
       },
       "category": "عامية بحرينية"
     },
@@ -3901,7 +3917,8 @@
       "usage": {
         "lexical_tone": "neutral",
         "lexical_class": "describe",
-        "speaker_intent": "context-dependent"
+        "speaker_intent": "context-dependent",
+        "origin_type": "english"
       },
       "category": "عامية بحرينية"
     },
@@ -3961,7 +3978,8 @@
       "usage": {
         "lexical_tone": "neutral",
         "lexical_class": "describe",
-        "speaker_intent": "context-dependent"
+        "speaker_intent": "context-dependent",
+        "origin_type": "english"
       },
       "category": "عامية بحرينية"
     },
@@ -5799,7 +5817,7 @@
       "origin": null,
       "notes": null,
       "usage": {
-        "lexical_tone": "positive",
+        "lexical_tone": "neutral",
         "lexical_class": "describe",
         "speaker_intent": "context-dependent"
       },
@@ -6211,9 +6229,8 @@
       "notes": null,
       "usage": {
         "lexical_tone": "neutral",
-        "lexical_class": "threat",
-        "speaker_intent": "context-dependent",
-        "strength": "medium"
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
       },
       "category": "عامية بحرينية"
     },
@@ -6383,7 +6400,8 @@
       "usage": {
         "lexical_tone": "neutral",
         "lexical_class": "describe",
-        "speaker_intent": "context-dependent"
+        "speaker_intent": "context-dependent",
+        "origin_type": "french"
       },
       "category": "عامية بحرينية"
     },
@@ -6530,9 +6548,8 @@
       "notes": null,
       "usage": {
         "lexical_tone": "neutral",
-        "lexical_class": "threat",
-        "speaker_intent": "context-dependent",
-        "strength": "medium"
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
       },
       "category": "عامية بحرينية"
     },
@@ -6673,7 +6690,8 @@
       "usage": {
         "lexical_tone": "neutral",
         "lexical_class": "describe",
-        "speaker_intent": "context-dependent"
+        "speaker_intent": "context-dependent",
+        "origin_type": "english"
       },
       "category": "عامية بحرينية"
     },
@@ -7186,7 +7204,7 @@
       "origin": null,
       "notes": null,
       "usage": {
-        "lexical_tone": "positive",
+        "lexical_tone": "neutral",
         "lexical_class": "describe",
         "speaker_intent": "context-dependent",
         "origin_type": "english"
@@ -7401,7 +7419,8 @@
       "usage": {
         "lexical_tone": "neutral",
         "lexical_class": "describe",
-        "speaker_intent": "context-dependent"
+        "speaker_intent": "context-dependent",
+        "origin_type": "english"
       },
       "category": "عامية بحرينية"
     },
@@ -8043,7 +8062,8 @@
       "usage": {
         "lexical_tone": "neutral",
         "lexical_class": "describe",
-        "speaker_intent": "context-dependent"
+        "speaker_intent": "context-dependent",
+        "origin_type": "english"
       },
       "category": "عامية بحرينية"
     },
@@ -9115,7 +9135,7 @@
       "notes": null,
       "usage": {
         "lexical_tone": "neutral",
-        "lexical_class": "dismiss",
+        "lexical_class": "describe",
         "speaker_intent": "context-dependent"
       },
       "category": "عامية بحرينية"
@@ -9290,7 +9310,8 @@
       "usage": {
         "lexical_tone": "neutral",
         "lexical_class": "describe",
-        "speaker_intent": "context-dependent"
+        "speaker_intent": "context-dependent",
+        "origin_type": "english"
       },
       "category": "عامية بحرينية"
     },
@@ -10144,8 +10165,8 @@
       "origin": null,
       "notes": null,
       "usage": {
-        "lexical_tone": "positive",
-        "lexical_class": "praise",
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
         "speaker_intent": "context-dependent",
         "origin_type": "english"
       },
@@ -11990,7 +12011,8 @@
       "usage": {
         "lexical_tone": "neutral",
         "lexical_class": "describe",
-        "speaker_intent": "context-dependent"
+        "speaker_intent": "context-dependent",
+        "origin_type": "english"
       },
       "category": "عامية بحرينية"
     },
@@ -13165,7 +13187,8 @@
       "usage": {
         "lexical_tone": "neutral",
         "lexical_class": "describe",
-        "speaker_intent": "context-dependent"
+        "speaker_intent": "context-dependent",
+        "origin_type": "english"
       },
       "category": "عامية بحرينية"
     },
@@ -13180,7 +13203,8 @@
       "usage": {
         "lexical_tone": "neutral",
         "lexical_class": "describe",
-        "speaker_intent": "context-dependent"
+        "speaker_intent": "context-dependent",
+        "origin_type": "english"
       },
       "category": "عامية بحرينية"
     },
@@ -13195,7 +13219,8 @@
       "usage": {
         "lexical_tone": "neutral",
         "lexical_class": "describe",
-        "speaker_intent": "context-dependent"
+        "speaker_intent": "context-dependent",
+        "origin_type": "french"
       },
       "category": "عامية بحرينية"
     },
@@ -13478,7 +13503,8 @@
       "usage": {
         "lexical_tone": "neutral",
         "lexical_class": "describe",
-        "speaker_intent": "context-dependent"
+        "speaker_intent": "context-dependent",
+        "origin_type": "english"
       },
       "category": "عامية بحرينية"
     },
@@ -13740,7 +13766,8 @@
       "usage": {
         "lexical_tone": "neutral",
         "lexical_class": "describe",
-        "speaker_intent": "context-dependent"
+        "speaker_intent": "context-dependent",
+        "origin_type": "english"
       },
       "category": "عامية بحرينية"
     },
@@ -13845,7 +13872,8 @@
       "usage": {
         "lexical_tone": "neutral",
         "lexical_class": "describe",
-        "speaker_intent": "context-dependent"
+        "speaker_intent": "context-dependent",
+        "origin_type": "english"
       },
       "category": "عامية بحرينية"
     },

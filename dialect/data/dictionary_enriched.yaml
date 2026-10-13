@@ -147,6 +147,7 @@ entries:
     lexical_tone: neutral
     lexical_class: describe
     speaker_intent: context-dependent
+    origin_type: russian
 - term: الأسطام
   meaning: ملعقة كبيرة تستخدم في استخراج الطعام من القدر
   examples: []
@@ -288,6 +289,7 @@ entries:
     lexical_tone: neutral
     lexical_class: describe
     speaker_intent: context-dependent
+    origin_type: hindi
 - term: أم الديفان
   meaning: حالة من التيه أو فقدان الإحساس بالمكان؛ تستخدمه الأمهات لإخافة الأطفال
   examples: []
@@ -471,6 +473,7 @@ entries:
     lexical_tone: neutral
     lexical_class: describe
     speaker_intent: context-dependent
+    origin_type: english
 - term: أنجب
   meaning: اسكت
   examples: []
@@ -515,9 +518,8 @@ entries:
   - طاح
   usage:
     lexical_tone: neutral
-    lexical_class: threat
+    lexical_class: describe
     speaker_intent: context-dependent
-    strength: medium
 - term: أنقشعي
   meaning: اذهبي (للمرأة)
   examples: []
@@ -556,6 +558,7 @@ entries:
     lexical_tone: neutral
     lexical_class: describe
     speaker_intent: context-dependent
+    origin_type: persian
 - term: أوهيه
   meaning: حرورة أو لهيب النار
   examples: []
@@ -573,6 +576,7 @@ entries:
     lexical_tone: neutral
     lexical_class: describe
     speaker_intent: context-dependent
+    origin_type: english
 - term: أيسي
   meaning: مكيف الهواء
   examples: []
@@ -583,6 +587,7 @@ entries:
     lexical_tone: neutral
     lexical_class: describe
     speaker_intent: context-dependent
+    origin_type: english
 - term: باب البحرين
   meaning: الفتحة الكبيرة بين الأسنان (خاصة مكان ضرسين)
   examples: []
@@ -716,6 +721,7 @@ entries:
     lexical_tone: neutral
     lexical_class: describe
     speaker_intent: context-dependent
+    origin_type: english
 - term: برنوص
   meaning: لحاف
   examples: []
@@ -944,6 +950,7 @@ entries:
     lexical_tone: neutral
     lexical_class: describe
     speaker_intent: context-dependent
+    origin_type: english
 - term: بيز
   meaning: قطعة قماش للتنظيف
   examples: []
@@ -1144,6 +1151,7 @@ entries:
     lexical_tone: neutral
     lexical_class: describe
     speaker_intent: context-dependent
+    origin_type: english
 - term: تلفون
   meaning: هاتف
   examples: []
@@ -1153,6 +1161,7 @@ entries:
     lexical_tone: neutral
     lexical_class: describe
     speaker_intent: context-dependent
+    origin_type: english
 - term: تمبه
   meaning: كرة (كرة القدم)
   examples: []
@@ -1231,6 +1240,7 @@ entries:
     lexical_tone: neutral
     lexical_class: describe
     speaker_intent: context-dependent
+    origin_type: english
 - term: تير
   meaning: إطار السيارة
   examples: []
@@ -1240,6 +1250,7 @@ entries:
     lexical_tone: neutral
     lexical_class: describe
     speaker_intent: context-dependent
+    origin_type: english
 - term: ثوب
   meaning: فستان
   examples: []
@@ -1270,6 +1281,7 @@ entries:
     lexical_tone: neutral
     lexical_class: describe
     speaker_intent: context-dependent
+    origin_type: english
 - term: جب
   meaning: اسكت
   examples: []
@@ -1281,6 +1293,7 @@ entries:
     lexical_tone: neutral
     lexical_class: dismiss
     speaker_intent: context-dependent
+    origin_type: hindi
 - term: جعبو
   meaning: النملة السوداء الكبيرة
   examples: []
@@ -1492,6 +1505,7 @@ entries:
     lexical_tone: neutral
     lexical_class: describe
     speaker_intent: context-dependent
+    origin_type: english
 - term: حلجة
   meaning: لعبة بالحصى الصغير
   examples: []
@@ -1506,7 +1520,7 @@ entries:
   synonyms: []
   usage:
     lexical_tone: neutral
-    lexical_class: dismiss
+    lexical_class: describe
     speaker_intent: context-dependent
 - term: حنطور
   meaning: عربة يجرها حصان
@@ -1682,6 +1696,7 @@ entries:
     lexical_tone: neutral
     lexical_class: describe
     speaker_intent: context-dependent
+    origin_type: turkish
 - term: خنفروش
   meaning: حلاوة معروفة
   examples: []
@@ -1833,6 +1848,7 @@ entries:
     lexical_tone: neutral
     lexical_class: describe
     speaker_intent: context-dependent
+    origin_type: english
 - term: دخل
   meaning: دخل
   examples: []
@@ -2118,6 +2134,7 @@ entries:
     lexical_tone: neutral
     lexical_class: describe
     speaker_intent: context-dependent
+    origin_type: english
 - term: رتن
   meaning: تحدث بلغة غير مفهومة
   examples: []
@@ -2151,6 +2168,7 @@ entries:
     lexical_tone: neutral
     lexical_class: describe
     speaker_intent: context-dependent
+    origin_type: english
 - term: رطبة
   meaning: رطبة (تمر)
   examples: []
@@ -3144,7 +3162,7 @@ entries:
   synonyms:
   - سكر
   usage:
-    lexical_tone: positive
+    lexical_tone: neutral
     lexical_class: describe
     speaker_intent: context-dependent
 - term: شلاخ
@@ -3367,9 +3385,8 @@ entries:
   synonyms: []
   usage:
     lexical_tone: neutral
-    lexical_class: threat
+    lexical_class: describe
     speaker_intent: context-dependent
-    strength: medium
 - term: صفرية
   meaning: قدر الطبخ (إناء)
   examples: []
@@ -3462,6 +3479,7 @@ entries:
     lexical_tone: neutral
     lexical_class: describe
     speaker_intent: context-dependent
+    origin_type: french
 - term: صهاريج
   meaning: خزانات ماء
   examples: []
@@ -3529,9 +3547,8 @@ entries:
   - أغمي عليه
   usage:
     lexical_tone: neutral
-    lexical_class: threat
+    lexical_class: describe
     speaker_intent: context-dependent
-    strength: medium
 - term: طاح حظك
   meaning: سقط حظك (دعاء بالسوء)
   examples: []
@@ -3622,6 +3639,7 @@ entries:
     lexical_tone: neutral
     lexical_class: describe
     speaker_intent: context-dependent
+    origin_type: english
 - term: طرفة
   meaning: طرفة
   examples: []
@@ -3896,7 +3914,7 @@ entries:
   examples: []
   synonyms: []
   usage:
-    lexical_tone: positive
+    lexical_tone: neutral
     lexical_class: describe
     speaker_intent: context-dependent
     origin_type: english
@@ -4014,6 +4032,7 @@ entries:
     lexical_tone: neutral
     lexical_class: describe
     speaker_intent: context-dependent
+    origin_type: english
 - term: عمود
   meaning: عمود
   examples: []
@@ -4359,6 +4378,7 @@ entries:
     lexical_tone: neutral
     lexical_class: describe
     speaker_intent: context-dependent
+    origin_type: english
 - term: فوق
   meaning: فوق
   examples: []
@@ -4938,7 +4958,7 @@ entries:
   synonyms: []
   usage:
     lexical_tone: neutral
-    lexical_class: dismiss
+    lexical_class: describe
     speaker_intent: context-dependent
 - term: كفه
   meaning: وعاء صغير من الخوص
@@ -5037,6 +5057,7 @@ entries:
     lexical_tone: neutral
     lexical_class: describe
     speaker_intent: context-dependent
+    origin_type: english
 - term: كوتشينة
   meaning: سيارة صغيرة
   examples: []
@@ -5496,8 +5517,8 @@ entries:
   examples: []
   synonyms: []
   usage:
-    lexical_tone: positive
-    lexical_class: praise
+    lexical_tone: neutral
+    lexical_class: describe
     speaker_intent: context-dependent
     origin_type: english
 - term: متخربط
@@ -6489,6 +6510,7 @@ entries:
     lexical_tone: neutral
     lexical_class: describe
     speaker_intent: context-dependent
+    origin_type: english
 - term: منعرج
   meaning: منعرج
   examples: []
@@ -7119,6 +7141,7 @@ entries:
     lexical_tone: neutral
     lexical_class: describe
     speaker_intent: context-dependent
+    origin_type: english
 - term: نوط
   meaning: عملة ورقية
   examples: []
@@ -7128,6 +7151,7 @@ entries:
     lexical_tone: neutral
     lexical_class: describe
     speaker_intent: context-dependent
+    origin_type: english
 - term: نول
   meaning: أجرة النقل
   examples: []
@@ -7137,6 +7161,7 @@ entries:
     lexical_tone: neutral
     lexical_class: describe
     speaker_intent: context-dependent
+    origin_type: french
 - term: نيس
   meaning: نيس
   examples: []
@@ -7315,6 +7340,7 @@ entries:
     lexical_tone: neutral
     lexical_class: describe
     speaker_intent: context-dependent
+    origin_type: english
 - term: هريج
   meaning: هراء (بلا هريج = بلا كلام فارغ)
   examples: []
@@ -7472,6 +7498,7 @@ entries:
     lexical_tone: neutral
     lexical_class: describe
     speaker_intent: context-dependent
+    origin_type: english
 - term: هي
   meaning: ذهب وانطلق
   examples: []
@@ -7513,6 +7540,7 @@ entries:
     lexical_tone: neutral
     lexical_class: describe
     speaker_intent: context-dependent
+    origin_type: english
 - term: ودام
   meaning: اللحم أو السمك أو الدجاج بعد طهوه
   examples: []

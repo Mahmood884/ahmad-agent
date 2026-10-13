@@ -135,10 +135,13 @@ def analyze_usage(term: str, meaning: str, origin_field: str | None = None) -> d
     if strength:
         usage["strength"] = strength
 
-    # origin_type: from the source's own origin field, or category markers
+    # origin_type: from the source's own origin field, or category markers.
+    # The academic source embeds origins inside the MEANING text
+    # ("محطة — من الإنجليزية station", "خزانة — من الهندية"), so the marker
+    # scan runs over the meaning too, not only the origin field.
     origin_type = None
     for marker, lang in ORIGIN_MARKERS:
-        if origin_field and marker in origin_field:
+        if (origin_field and marker in origin_field) or (meaning and marker in meaning):
             origin_type = lang
             break
     if origin_type:

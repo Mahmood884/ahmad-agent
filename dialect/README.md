@@ -33,9 +33,9 @@ raw/bahraini_dictionary_raw.txt   (499KB — FOUR sources, see below)
         │            data/greeting_warmth_curated.yaml  (11 entries — HIGHEST precedence)
         │
         └─ source 4: WhatsApp-group corpus "قاموس أهل البحرين" (2026-10-13)
-                     data/whatsapp_corpus_curated.yaml    (68 entries from 4 batches, +62 net-new, incl. 8 proverbs)
+                     data/whatsapp_corpus_curated.yaml    (128 entries from 6 batches, +121 net-new, incl. 8 proverbs)
                                     ▼
-        data/bahraini_dictionary_unified.json  (1370 = 948 + 351 + 11 + 62 net-new)
+        data/bahraini_dictionary_unified.json  (1429 = 948 + 351 + 11 + 121 net-new)
 ```
 
 Run all steps:
@@ -99,12 +99,14 @@ or question). Never train on these labels as intent ground truth.
 - **Primary source:** 948 unique entries from 1,896 occurrences (2 identical copies)
 - **Secondary source (antigravity):** 835 entries → **+351 new**
 - **Curated warmth scale (user):** 11 entries (1 overrides primary `هلا`)
-- **WhatsApp corpus (4 batches):** ~750 pairs parsed → ~688 already covered → **+62 net-new** (68 written, incl. 8 proverbs)
+- **WhatsApp corpus (6 batches):** ~1,150 pairs parsed → ~1,029 already covered → **+121 net-new** (128 written, incl. 8 proverbs)
 - Batch 1: 263 pairs → 87% coverage → +26 net-new
 - Batch 2 (مصطلحات بحرانية): +25 net-new (طمبل، تنكه، ثقيل طينه، صمايل، لوفري...)
 - Batch 3 (forum comments): pure noise — 0 terms extracted (filtered)
 - Batch 4 (Instagram + صحيفة الوسط): 9/9 terms already covered → +3 net-new (أمبهبل، رحت ملح، فقحة) + 8 proverbs
-- **Unified total:** **1370 entries** · **0 null fields** (sparse fields omitted, not null)
+- Batch 5 (academic: شعبية/أعجمية/يومية): 41% coverage → +24 net-new (استيشن، اسويج، بَس، تُجورِي، جاكليت، برواز، واركوت...)
+- Batch 6 (huge list): 223 pairs → 83% coverage → +37 net-new (البيالة، التجمبح، بوخفنة، تهردم، تحنقل...)
+- **Unified total:** **1429 entries** · **0 null fields** (sparse fields omitted, not null)
 - Field coverage: term 1335, meaning 1335, examples (source-carried), synonyms (source-carried),
   dialect_region 11, origin 55, notes 5
 - Usage distribution:
@@ -219,8 +221,8 @@ dialect/
     ├── dictionary_enriched.yaml       # 948 entries + usage, 7155 lines
     ├── antigravity_entries.json       # 835 secondary-source entries (351 new merged in)
     ├── greeting_warmth_curated.yaml   # 11 curated warmth-scale entries (user — HIGHEST precedence)
-    ├── whatsapp_corpus_curated.yaml   # 68 entries from 4 batches (+62 net-new, incl. 8 proverbs)
-    └── bahraini_dictionary_unified.json  # 1370 entries, unified product
+    ├── whatsapp_corpus_curated.yaml   # 128 entries from 6 batches (+121 net-new, incl. 8 proverbs)
+    └── bahraini_dictionary_unified.json  # 1429 entries, unified product
 ```
 
 Related: `../prompts/semantic_fidelity.md` — the agent system prompt built

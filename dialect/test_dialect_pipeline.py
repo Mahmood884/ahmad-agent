@@ -142,7 +142,7 @@ def test_ontology_has_no_dangling_refs():
 def test_schema_consistency():
     doc = json.loads(DICT.read_text(encoding="utf-8"))
     entries = doc["entries"]
-    assert doc["metadata"]["entry_count"] == len(entries) == 1370
+    assert doc["metadata"]["entry_count"] == len(entries) == 1429
     for e in entries:
         u = e.get("usage") or {}
         assert u.get("lexical_tone") in TONE_ENUM, (e["term"], u)
@@ -270,3 +270,53 @@ def test_batch3_terms_present():
               "اللي ما يعرف الصقر يشويه", "تيتي تيتي مثل ما رحتي جيتي",
               "أبوي ما يقدر إلا على أمي", "أربط صبعك والكل ينعتلك دوا"]:
         assert t in idx, t
+
+
+# ── 11) batches 5-6 + origin-from-meaning ───────────────────────────────────
+
+def test_academic_batch_terms_present():
+    """مصطلحات الدفعة الأكاديمية — مقارنة بالصيغة المطبّعة (المصدر يحمل تشكيلاً)."""
+    import re
+
+    doc = json.loads(DICT.read_text(encoding="utf-8"))
+    idx = {e["term"] for e in doc["entries"]}
+
+    def norm(x):
+        x = re.sub(r"[\u064B-\u0652\u0640]", "", x.strip())
+        x = re.sub(r"[إأآا]", "ا", x)
+        x = re.sub(r"[ىي]", "ي", x)
+        return re.sub(r"ة$", "ه", x)
+
+    idx_norm = {norm(t) for t in idx}
+    for t in ["أي حزة", "استيشن", "اسويج", "برواز", "بَس", "تُجورِي", "جاكليت",
+              "واركوت", "وَهَّقتني", "يهاوش", "ينخش", "يترس", "دِشْ", "سَمِّت",
+              "كَفَخَه", "انحاش", "اشوية"]:
+        assert norm(t) in idx_norm, t
+
+
+def test_big_batch_terms_present():
+    doc = json.loads(DICT.read_text(encoding="utf-8"))
+    idx = {e["term"] for e in doc["entries"]}
+    for t in ["البيالة", "التجمبح", "الخيرزانة", "القايلة", "اللي يحوش", "الينون",
+              "بوخفنة", "تحنقل", "تعلبق", "تهردم", "حامي", "حذاي", "دقمة", "دورفة",
+              "سبعه", "شبص", "شبه", "صلت يابهتك", "لايث", "ما ينبغه", "مافيني بتك",
+              "مبلتع", "مهتمل", "هوه", "من العازة", "اغلقه", "اشعداله"]:
+        assert t in idx, t
+
+
+def test_origin_type_from_meaning_text():
+    """المصدر الأكاديمي يدمج الأصل في نص المعنى — يجب أن يُقرأ."""
+    doc = json.loads(DICT.read_text(encoding="utf-8"))
+    idx = {e["term"]: e for e in doc["entries"]}
+    assert idx["استيشن"]["usage"].get("origin_type") == "english"
+    assert idx["اسويج"]["usage"].get("origin_type") == "english"
+    assert idx["برواز"]["usage"].get("origin_type") == "persian"
+    assert idx["بَس"]["usage"].get("origin_type") == "hindi"
+    assert idx["تُجورِي"]["usage"].get("origin_type") == "hindi"
+    assert idx["جاكليت"]["usage"].get("origin_type") == "english"
+
+
+def test_multiword_expressions_match_as_phrases():
+    e = _engine()
+    for phrase in ["اهو ناولني", "عطني ام قفاك", "مافيني بتك"]:
+        assert phrase in _terms(e.enrich_context(phrase)), phrase

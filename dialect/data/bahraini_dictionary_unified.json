@@ -12849,7 +12849,8 @@
       "usage": {
         "lexical_tone": "neutral",
         "lexical_class": "describe",
-        "speaker_intent": "context-dependent"
+        "speaker_intent": "context-dependent",
+        "origin_type": "english"
       },
       "category": "عامية بحرينية",
       "origin": "Chance"
@@ -13756,7 +13757,8 @@
       "usage": {
         "lexical_tone": "neutral",
         "lexical_class": "describe",
-        "speaker_intent": "context-dependent"
+        "speaker_intent": "context-dependent",
+        "origin_type": "english"
       },
       "category": "عامية بحرينية",
       "origin": "Chassis"
@@ -13853,7 +13855,8 @@
       "usage": {
         "lexical_tone": "neutral",
         "lexical_class": "describe",
-        "speaker_intent": "context-dependent"
+        "speaker_intent": "context-dependent",
+        "origin_type": "english"
       },
       "category": "عامية بحرينية",
       "origin": "Cheque"
@@ -14109,7 +14112,8 @@
       "usage": {
         "lexical_tone": "neutral",
         "lexical_class": "describe",
-        "speaker_intent": "context-dependent"
+        "speaker_intent": "context-dependent",
+        "origin_type": "english"
       },
       "category": "عامية بحرينية",
       "origin": "Orange juice"
@@ -14897,7 +14901,8 @@
       "usage": {
         "lexical_tone": "neutral",
         "lexical_class": "describe",
-        "speaker_intent": "context-dependent"
+        "speaker_intent": "context-dependent",
+        "origin_type": "english"
       },
       "category": "عامية بحرينية",
       "origin": "Air conditioner"
@@ -15537,7 +15542,8 @@
       "usage": {
         "lexical_tone": "neutral",
         "lexical_class": "describe",
-        "speaker_intent": "context-dependent"
+        "speaker_intent": "context-dependent",
+        "origin_type": "english"
       },
       "category": "عامية بحرينية",
       "origin": "Nervous"

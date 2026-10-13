@@ -320,3 +320,13 @@ def test_multiword_expressions_match_as_phrases():
     e = _engine()
     for phrase in ["اهو ناولني", "عطني ام قفاك", "مافيني بتك"]:
         assert phrase in _terms(e.enrich_context(phrase)), phrase
+
+
+# ── 12) origin_type from latin gloss ────────────────────────────────────────
+
+def test_origin_type_from_latin_gloss():
+    """مدخل معناه يحمل لمسة لاتينية (Chassis) → english تلقائياً."""
+    doc = json.loads(DICT.read_text(encoding="utf-8"))
+    idx = {e["term"]: e for e in doc["entries"]}
+    for t in ["جنس", "شاصي", "شيك", "عرجوش", "كونديشن", "نرفز"]:
+        assert idx[t]["usage"].get("origin_type") == "english", t

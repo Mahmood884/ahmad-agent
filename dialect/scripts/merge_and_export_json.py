@@ -105,6 +105,9 @@ ORIGIN_MARKERS = [
     ("الفرنسية", "french"),
 ]
 
+# A latin gloss in parentheses inside a meaning: "(Chassis)", "(Orange juice)"
+_LATIN_GLOSS_RE = re.compile(r"\(([A-Za-z][A-Za-z\s]{2,})\)")
+
 
 def analyze_usage(term: str, meaning: str, origin_field: str | None = None) -> dict:
     """Single-schema usage analysis: lexical_tone / lexical_class / strength / origin_type."""
@@ -139,11 +142,16 @@ def analyze_usage(term: str, meaning: str, origin_field: str | None = None) -> d
     # The academic source embeds origins inside the MEANING text
     # ("محطة — من الإنجليزية station", "خزانة — من الهندية"), so the marker
     # scan runs over the meaning too, not only the origin field.
+    # Loanwords carrying a LATIN GLOSS in parentheses — "شاصي: قاعدة
+    # السيارة (Chassis)" — are tagged by pattern where no language marker
+    # exists; every latin gloss in the corpus is English.
     origin_type = None
     for marker, lang in ORIGIN_MARKERS:
         if (origin_field and marker in origin_field) or (meaning and marker in meaning):
             origin_type = lang
             break
+    if origin_type is None and meaning and _LATIN_GLOSS_RE.search(meaning):
+        origin_type = "english"
     if origin_type:
         usage["origin_type"] = origin_type
 

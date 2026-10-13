@@ -30,10 +30,10 @@ entries:
       speaker_intent: context-dependent
 
   - term: دهريز
-    meaning: "النفق الصغير الطويل في البيوت القديمة المؤدي إلى طابق أسفل المنزل"
-    notes: "تصحيح محمود 2026-10-13: (تقدير المستخدم من سياق البيوت القديمة)"
+    meaning: "الدهليز — النفق الذي يكون قبل السرداب"
+    notes: "تصحيح محمود 2026-10-13: النفق الممتد قبل السرداب في البيوت القديمة"
     examples: []
-    synonyms: []
+    synonyms: [الدهريز, الدهليز]
     usage:
       lexical_tone: neutral
       lexical_class: describe

@@ -359,7 +359,7 @@ def test_user_corrections_override_everything():
     assert "مظلم" in idx["خندريس"]["meaning"]
     assert "الزرنوق" in idx["خندريس"]["meaning"] or "الزرنوق" in (idx["خندريس"].get("notes") or "")
     assert "سكانه مرته" in idx["سكان"]["meaning"]
-    assert "أسفل" in idx["دهريز"]["meaning"]
+    assert "السرداب" in idx["دهريز"]["meaning"]
     assert "همة" in idx["همش"]["meaning"]
 
 

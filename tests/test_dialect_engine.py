@@ -57,18 +57,31 @@ def test_every_term_resolves_to_itself(engine):
     # A term whose surface carries a pronunciation gloss — "مطعم (بضم الميم)" —
     # is indexed under its bare key ("مطعم"), so scanning its own (gloss-stripped)
     # tokens returns the bare entry when both exist. That is the intended
-    # canonicalization: the user typing "مطعم" gets the plain entry. Accepted:
-    # the first hit is the term itself OR its paren-stripped twin.
+    # canonicalization: the user typing "مطعم" gets the plain entry.
+    # A declared SYNONYM ("الدهليز" of "دهريز") resolves to its canonical entry.
+    # Synonym comparison is NORMALIZED: the stored synonym may be an
+    # orthographic variant ("ام طرة" vs "أم طرة", "قطاوه" vs "قطاوة").
     missed = []
     for term in engine._entries:
-        toks = engine_mod.tokenize(engine_mod._PAREN_RE.sub(" ", term))
+        cleaned = engine_mod._PAREN_RE.sub(" ", term).strip()
+        if not cleaned:
+            continue
+        toks = engine_mod.tokenize(cleaned)
+        if not toks:
+            continue
         hits = engine._scan(toks, engine._term_phrases, engine._term_lengths, True)
         if not hits:
             missed.append(term)
             continue
+        hit_term = hits[0]["term"]
         bare = engine_mod._PAREN_RE.sub("", term).strip()
-        if hits[0]["term"] != term and hits[0]["term"] != bare:
-            missed.append(term)
+        if hit_term == term or hit_term == bare:
+            continue
+        # is `term` a declared synonym of the hit? (normalized both sides)
+        syn_norm = {engine_mod.normalize_term(s) for s in (hits[0].get("synonyms") or [])}
+        if engine_mod.normalize_term(term) in syn_norm or engine_mod.normalize_term(bare) in syn_norm:
+            continue
+        missed.append(term)
     assert missed == []
 
 

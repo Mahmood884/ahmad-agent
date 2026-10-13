@@ -134,6 +134,12 @@ class DialectEngine:
             self._norm_index[normalize_term(term)] = e
             for syn in e.get("synonyms") or []:
                 self._synonym_index.setdefault(syn, e)
+                # synonyms are ALSO indexed for phrase matching: "الدهليز" must
+                # match in a message exactly like the canonical "دهريز" —
+                # otherwise a declared surface form is invisible to enrich_context.
+                syn_key = _phrase_key(syn)
+                if syn_key and syn_key not in self._term_phrases:
+                    self._term_phrases[syn_key] = e
             key = _phrase_key(term)
             if key:
                 # prefer the bare term over a parenthesized variant:

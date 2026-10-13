@@ -377,3 +377,12 @@ def test_user_corrections_have_no_null_fields():
     for t in ["خندريس", "سكان", "دهريز", "همش", "سمادة", "الدفنة"]:
         for k, v in idx[t].items():
             assert v is not None, (t, k)
+
+
+# ── 15) synonyms match in messages (not just lookup) ────────────────────────
+
+def test_synonym_surface_forms_match():
+    """الصيغ المعلنة كمرادفات (الدهليز) لازم تتطابق في الرسالة زي الأصل."""
+    e = _engine()
+    for msg in ["الدهليز قبل السرداب", "مرّ من الدهليز", "الدهريز قبل السرداب"]:
+        assert "دهريز" in _terms(e.enrich_context(msg)), msg

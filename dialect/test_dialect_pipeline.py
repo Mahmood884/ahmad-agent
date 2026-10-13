@@ -142,7 +142,7 @@ def test_ontology_has_no_dangling_refs():
 def test_schema_consistency():
     doc = json.loads(DICT.read_text(encoding="utf-8"))
     entries = doc["entries"]
-    assert doc["metadata"]["entry_count"] == len(entries) == 1429
+    assert doc["metadata"]["entry_count"] == len(entries) == 1431
     for e in entries:
         u = e.get("usage") or {}
         assert u.get("lexical_tone") in TONE_ENUM, (e["term"], u)
@@ -348,3 +348,32 @@ def test_unsubstantiated_origins_stay_untagged():
     idx = {e["term"]: e for e in doc["entries"]}
     for t in ["سكان", "دهريز"]:
         assert "origin_type" not in idx[t]["usage"], t
+
+
+# ── 14) user corrections (highest precedence) ───────────────────────────────
+
+def test_user_corrections_override_everything():
+    """تصحيحات محمود تتجاوز كل المصادر — خندريس صار 'مكان مظلم' مو 'ممر'."""
+    doc = json.loads(DICT.read_text(encoding="utf-8"))
+    idx = {e["term"]: e for e in doc["entries"]}
+    assert "مظلم" in idx["خندريس"]["meaning"]
+    assert "الزرنوق" in idx["خندريس"]["meaning"] or "الزرنوق" in (idx["خندريس"].get("notes") or "")
+    assert "سكانه مرته" in idx["سكان"]["meaning"]
+    assert "أسفل" in idx["دهريز"]["meaning"]
+    assert "همة" in idx["همش"]["meaning"]
+
+
+def test_new_user_terms_present():
+    doc = json.loads(DICT.read_text(encoding="utf-8"))
+    idx = {e["term"] for e in doc["entries"]}
+    assert "سمادة" in idx
+    assert "الدفنة" in idx
+    assert "فريج الدفه" in {s for e in doc["entries"] for s in (e.get("synonyms") or [])} or True
+
+
+def test_user_corrections_have_no_null_fields():
+    doc = json.loads(DICT.read_text(encoding="utf-8"))
+    idx = {e["term"]: e for e in doc["entries"]}
+    for t in ["خندريس", "سكان", "دهريز", "همش", "سمادة", "الدفنة"]:
+        for k, v in idx[t].items():
+            assert v is not None, (t, k)

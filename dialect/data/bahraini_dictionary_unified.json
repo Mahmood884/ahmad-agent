@@ -4,10 +4,10 @@
     "language": "Arabic (Bahraini dialect)",
     "description": "قاموس موحّد للهجة البحرينية مع تحليل usage كامل",
     "version": "3.0",
-    "entry_count": 1429,
+    "entry_count": 1431,
     "sources": [
       "dictionary_enriched.yaml (948 entries, usage-filled)",
-      "antigravity_entries.json (+471 new, usage-filled with same schema)"
+      "antigravity_entries.json (+473 new, usage-filled with same schema)"
     ],
     "schema": {
       "entry": {
@@ -30,6 +30,92 @@
     }
   },
   "entries": [
+    {
+      "term": "خندريس",
+      "meaning": "أي مكان مظلم — حتى بيت مهجور يُقال عنه خندريس (الممر الضيق نفسه اسمه الزرنوق)",
+      "examples": [
+        "هالبيت المهجور صار خندريس"
+      ],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية",
+      "notes": "تصحيح محمود 2026-10-13: المجتمع ما عرف معناها لأنها تُستخدم على النحو التالي — [همش] من 'همة' بشدة على الميم (الميم بداية 'امشي' والألف تختفي في الكلام) أي 'حرك/تعال'؛ فالخندريس صار اسم المكان المظلم (يُمارس فيه الجنس في الظلام قديماً) ثم أُطلق على أي مكان مظلم. تنبيه: الممر الضيق بين البيوت = الزرنوق، والخندريس = المكان المظلم"
+    },
+    {
+      "term": "سكان",
+      "meaning": "مقود السيارة — مثال: هذا سكانه مرته",
+      "examples": [
+        "هذا سكانه مرته"
+      ],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية",
+      "notes": "تصحيح محمود 2026-10-13: بالنسبة للتشكيل ما يفرق — موقع الكلمة في الجملة ينبّه على المعنى من السياق"
+    },
+    {
+      "term": "دهريز",
+      "meaning": "النفق الصغير الطويل في البيوت القديمة المؤدي إلى طابق أسفل المنزل",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية",
+      "notes": "تصحيح محمود 2026-10-13: (تقدير المستخدم من سياق البيوت القديمة)"
+    },
+    {
+      "term": "همش",
+      "meaning": "تعال أو حرك — من 'همة' بشدة على الميم (الميم بداية 'امشي' والألف تختفي في الكلام)",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية",
+      "notes": "تصحيح محمود 2026-10-13: أصلها مرتبط بخندريس — تُقال للشخص ليتحرك أو يتعال"
+    },
+    {
+      "term": "سمادة",
+      "meaning": "المكان الذي يُلقى فيه المخلفات — وقديمًا حتى أواخر السبعينات كان هو أيضًا المكان الذي يقضي فيه أهل المنطقة حاجتهم (السبب: الفقر؛ وبعد البترول بُنيت الحمامات)",
+      "examples": [],
+      "synonyms": [],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية",
+      "notes": "تصحيح محمود 2026-10-13"
+    },
+    {
+      "term": "الدفنة",
+      "meaning": "كل منطقة كانت بحرًا فدُفنت (رُدمت) — كمثل 'فريج الدفة' في المحرق",
+      "examples": [
+        "فريج الدفة"
+      ],
+      "synonyms": [
+        "الدفه"
+      ],
+      "usage": {
+        "lexical_tone": "neutral",
+        "lexical_class": "describe",
+        "speaker_intent": "context-dependent"
+      },
+      "category": "عامية بحرينية",
+      "notes": "تصحيح محمود 2026-10-13: في المحرق حي يُسمى بالدارج 'فريج الدفة'، وكذلك في المنامة"
+    },
     {
       "term": "هلا",
       "meaning": "مرحباً — تحية مجردة، أدنى درجة حفاوة",
@@ -2715,19 +2801,6 @@
         "speaker_intent": "context-dependent"
       },
       "category": "عامية بحرينية"
-    },
-    {
-      "term": "خندريس",
-      "meaning": "لم يتم اكتشاف معنى لها بعد",
-      "examples": [],
-      "synonyms": [],
-      "usage": {
-        "lexical_tone": "neutral",
-        "lexical_class": "describe",
-        "speaker_intent": "context-dependent"
-      },
-      "category": "عامية بحرينية",
-      "notes": "المجتمع نفسه يقول: 'حتى الآن لم يتم اكتشاف معنى لهذه الكلمة والبحث ما زال جارياً' — مدخل يحفظ الكلمة مع الاعتراف بالجهل"
     },
     {
       "term": "خنه",
@@ -11364,18 +11437,6 @@
       "category": "عامية بحرينية"
     },
     {
-      "term": "همش",
-      "meaning": "تعال (بكسر الهاء)",
-      "examples": [],
-      "synonyms": [],
-      "usage": {
-        "lexical_tone": "neutral",
-        "lexical_class": "describe",
-        "speaker_intent": "context-dependent"
-      },
-      "category": "عامية بحرينية"
-    },
-    {
       "term": "هميج",
       "meaning": "عيش لين (طري)",
       "examples": [],
@@ -16705,19 +16766,6 @@
       "category": "عامية بحرينية"
     },
     {
-      "term": "سكان",
-      "meaning": "مقوّد السيارة",
-      "examples": [],
-      "synonyms": [],
-      "usage": {
-        "lexical_tone": "neutral",
-        "lexical_class": "describe",
-        "speaker_intent": "context-dependent"
-      },
-      "category": "عامية بحرينية",
-      "notes": "أصل الكلمة غير موثّق في المصدر — بعض المراجعين يقولون هندية/فارسية، لا شاهد قاطع"
-    },
-    {
       "term": "وين دلف",
       "meaning": "وين راح",
       "examples": [],
@@ -16801,19 +16849,6 @@
         "speaker_intent": "context-dependent"
       },
       "category": "عامية بحرينية"
-    },
-    {
-      "term": "دهريز",
-      "meaning": "مدخل البيت",
-      "examples": [],
-      "synonyms": [],
-      "usage": {
-        "lexical_tone": "neutral",
-        "lexical_class": "describe",
-        "speaker_intent": "context-dependent"
-      },
-      "category": "عامية بحرينية",
-      "notes": "أصل الكلمة غير موثّق في المصدر"
     },
     {
       "term": "إحبيبة",

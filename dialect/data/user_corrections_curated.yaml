@@ -1,0 +1,71 @@
+# مصدر مُنسَّق — تصحيحات محمود المباشرة (2026-10-13)
+#
+# المستخدم أعطى المعنى الصحيح لثلاثة مصطلحات كانت غامضة أو ناقصة في
+# المصادر السابقة. علمه المباشر = أعلى أولوية (أعلى من المصدر الأساسي).
+#
+# الأولوية: الأعلى — يحدّث المعاني الموجودة.
+
+entries:
+
+  - term: خندريس
+    meaning: "أي مكان مظلم — حتى بيت مهجور يُقال عنه خندريس (الممر الضيق نفسه اسمه الزرنوق)"
+    notes: "تصحيح محمود 2026-10-13: المجتمع ما عرف معناها لأنها تُستخدم على النحو التالي — [همش] من 'همة' بشدة على الميم (الميم بداية 'امشي' والألف تختفي في الكلام) أي 'حرك/تعال'؛ فالخندريس صار اسم المكان المظلم (يُمارس فيه الجنس في الظلام قديماً) ثم أُطلق على أي مكان مظلم. تنبيه: الممر الضيق بين البيوت = الزرنوق، والخندريس = المكان المظلم"
+    examples:
+      - هالبيت المهجور صار خندريس
+    synonyms: []
+    usage:
+      lexical_tone: neutral
+      lexical_class: describe
+      speaker_intent: context-dependent
+
+  - term: سكان
+    meaning: "مقود السيارة — مثال: هذا سكانه مرته"
+    notes: "تصحيح محمود 2026-10-13: بالنسبة للتشكيل ما يفرق — موقع الكلمة في الجملة ينبّه على المعنى من السياق"
+    examples:
+      - هذا سكانه مرته
+    synonyms: []
+    usage:
+      lexical_tone: neutral
+      lexical_class: describe
+      speaker_intent: context-dependent
+
+  - term: دهريز
+    meaning: "النفق الصغير الطويل في البيوت القديمة المؤدي إلى طابق أسفل المنزل"
+    notes: "تصحيح محمود 2026-10-13: (تقدير المستخدم من سياق البيوت القديمة)"
+    examples: []
+    synonyms: []
+    usage:
+      lexical_tone: neutral
+      lexical_class: describe
+      speaker_intent: context-dependent
+
+  - term: همش
+    meaning: "تعال أو حرك — من 'همة' بشدة على الميم (الميم بداية 'امشي' والألف تختفي في الكلام)"
+    notes: "تصحيح محمود 2026-10-13: أصلها مرتبط بخندريس — تُقال للشخص ليتحرك أو يتعال"
+    examples: []
+    synonyms: []
+    usage:
+      lexical_tone: neutral
+      lexical_class: describe
+      speaker_intent: context-dependent
+
+  - term: سمادة
+    meaning: "المكان الذي يُلقى فيه المخلفات — وقديمًا حتى أواخر السبعينات كان هو أيضًا المكان الذي يقضي فيه أهل المنطقة حاجتهم (السبب: الفقر؛ وبعد البترول بُنيت الحمامات)"
+    notes: "تصحيح محمود 2026-10-13"
+    examples: []
+    synonyms: []
+    usage:
+      lexical_tone: neutral
+      lexical_class: describe
+      speaker_intent: context-dependent
+
+  - term: الدفنة
+    meaning: "كل منطقة كانت بحرًا فدُفنت (رُدمت) — كمثل 'فريج الدفة' في المحرق"
+    notes: "تصحيح محمود 2026-10-13: في المحرق حي يُسمى بالدارج 'فريج الدفة'، وكذلك في المنامة"
+    examples:
+      - فريج الدفة
+    synonyms: [الدفه]
+    usage:
+      lexical_tone: neutral
+      lexical_class: describe
+      speaker_intent: context-dependent

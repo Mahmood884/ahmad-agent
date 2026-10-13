@@ -302,20 +302,50 @@ def load_whatsapp_corpus(path: Path) -> dict[str, dict]:
     return out
 
 
-# ── Merge & export ────────────────────────────────────────────────────────────
-def merge(primary: dict, secondary: dict, curated: dict, whatsapp: dict | None = None) -> dict:
-    """Curated wins on conflict; then primary; then secondary/whatsapp fill gaps.
+# ── Source 0c: user corrections (highest precedence — the user's own knowledge)
+def load_user_corrections(path: Path) -> dict[str, dict]:
+    """Load the user's direct corrections. These OVERRIDE everything — the
+    user's knowledge of his own dialect outranks any pasted source."""
+    data = yaml.safe_load(path.read_text(encoding="utf-8"))
+    out = {}
+    for e in data.get("entries", []):
+        key = normalize_term(e["term"])
+        if key not in out:
+            out[key] = {
+                "term": e["term"],
+                "meaning": e.get("meaning", ""),
+                "examples": e.get("examples", []),
+                "synonyms": e.get("synonyms", []),
+                "usage": e.get("usage", {}),
+                "category": "عامية بحرينية",
+            }
+            if e.get("notes"):
+                out[key]["notes"] = e["notes"]
+    return out
 
-    Order: curated entries first (the user's explicit scale), then primary
-    in source order, then secondary additions, then whatsapp additions.
+
+# ── Merge & export ────────────────────────────────────────────────────────────
+def merge(primary: dict, secondary: dict, curated: dict, whatsapp: dict | None = None,
+          user_corrections: dict | None = None) -> dict:
+    """Precedence: user_corrections > curated > primary > secondary > whatsapp.
+
+    The user's direct knowledge of his own dialect outranks every pasted
+    source; the curated warmth scale next; then the primary dictionary,
+    then gap-fillers.
     """
     whatsapp = whatsapp or {}
+    user_corrections = user_corrections or {}
     merged: dict[str, dict] = {}
-    # curated first (highest precedence — overrides هلا from primary)
-    for key, entry in curated.items():
+    # user corrections first (HIGHEST precedence)
+    for key, entry in user_corrections.items():
         merged[key] = entry
+    uc_override = sum(1 for k in user_corrections if k in primary)
+    # curated next
+    for key, entry in curated.items():
+        if key not in merged:
+            merged[key] = entry
     curated_override = sum(1 for k in curated if k in primary)
-    # primary next (skip keys already claimed by curated)
+    # primary next (skip keys already claimed)
     for key, entry in primary.items():
         if key not in merged:
             merged[key] = entry
@@ -338,6 +368,7 @@ def merge(primary: dict, secondary: dict, curated: dict, whatsapp: dict | None =
             # term that already exists from a higher-precedence source.
             merged[key]["notes"] = entry["notes"]
             wa_notes += 1
+    print(f"[merge] user corrections: {len(user_corrections)} entries ({uc_override} override primary)")
     print(f"[merge] curated: {len(curated)} entries ({curated_override} override primary)")
     print(f"[merge] primary: {len(primary)} entries")
     print(f"[merge] secondary: {len(secondary)} entries")
@@ -422,6 +453,14 @@ def main():
     else:
         print("[load] greeting_warmth_curated.yaml not found — skipping curated source")
 
+    user_corrections = {}
+    corrections_yaml = base / "data" / "user_corrections_curated.yaml"
+    if corrections_yaml.exists():
+        user_corrections = load_user_corrections(corrections_yaml)
+        print(f"[load] user corrections: {len(user_corrections)} entries")
+    else:
+        print("[load] user_corrections_curated.yaml not found — skipping corrections source")
+
     whatsapp = {}
     whatsapp_yaml = base / "data" / "whatsapp_corpus_curated.yaml"
     if whatsapp_yaml.exists():
@@ -437,7 +476,7 @@ def main():
     else:
         print("[load] antigravity_entries.json not found — skipping secondary source")
 
-    merged = merge(primary, secondary, curated, whatsapp)
+    merged = merge(primary, secondary, curated, whatsapp, user_corrections)
     added = len(merged) - len(primary) - len(curated) + sum(1 for k in curated if k in primary)
     export_json(merged, out_path, len(primary), added)
 
